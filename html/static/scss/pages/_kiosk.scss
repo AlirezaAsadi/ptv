@@ -1,0 +1,104 @@
+@mixin time-item{
+    height: 40px;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff;
+    margin: 5px;
+    text-align: center;
+    width: 80%;
+    float: right;
+	font-size:130%;
+
+}
+$bus-color: #fd8203;
+$tram-color: #78b921;
+
+body{
+	overflow: hidden;
+}
+.index{
+	
+	.header{
+		
+
+		.banner{
+			background-color: #373737;
+			width: 100%;
+			height: 40px;
+		}
+
+
+	}
+
+	.main-content{
+
+		.box-timetable-left{
+			border-right: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+			padding: 10px;
+		}
+		.box-timetable-right{
+			border-right: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+			padding: 10px;
+		}
+
+		.bus-time-item{
+
+		    background-color: $bus-color;
+		    @include time-item;
+
+		}
+		.tram-time-item{
+
+		    background-color: $tram-color;
+		    @include time-item;
+
+		}
+
+		.big-box{
+			height: 180px;
+			.time-table{
+				padding-top: 35px;
+			}
+			.vih-pic{
+				padding-top: 25px;
+			}
+		}
+
+		.small-box{
+			height: 110px;
+			.bus-time-item{
+				width: 50%;
+				margin:auto;
+			}
+			.tram-time-item{
+				width: 50%;
+				margin:auto;
+			}
+			.tram-time-button{
+				padding-top: 15px;
+			}
+		}
+	}
+
+    .footer-row{
+        position: fixed;
+        bottom:0px;
+        height: 60px;
+        
+        .footer{
+            .main-footer{
+                background-color: #373737;
+                width: 100%;
+                height: 58px;
+                position: fixed;
+            }
+            .footer-font{
+                color:#fff;
+                font-size: 18px;
+                padding-top: 14px;
+            }
+        }
+    }
+}

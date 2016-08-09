@@ -1,0 +1,46 @@
+
+$animation-time: all 3s ease;
+body.no-animate{
+    .animate {
+        transition: none !important;
+    }
+}
+
+.animate {
+  -webkit-transition: $animation-time;
+  -moz-transition: $animation-time;
+  -o-transition: $animation-time;
+  -ms-transition: $animation-time;
+  transition: $animation-time;
+  position: absolute;
+  left: 0; /*or bottom, top, right*/
+  width: 200%;
+  
+  
+  &.move{
+    margin-left: -100%; /*or bottom, top, right */
+  }
+  &.reset{
+    transition: all 0s ease !important;
+    margin-left: 0% !important; /*or bottom, top, right */
+  }
+}
+
+
+// .box{
+//     width: 100px;
+//     height: 50px;
+//     position: absolute;
+//     left: 0px;
+//     top: 50%;
+//     background-color: red;
+    
+    
+//    transition: all 1s ease;
+    
+//     &.move{
+//         left: 50%;
+//     background-color: blue;
+//     }
+// }
+

@@ -1,0 +1,25 @@
+{
+  "name": "PTVServer",
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "description": "This is PTV server app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlirezaAsadi/ptv.git"
+  },
+  "author": "Alireza Asadi",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.4.2",
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.4.2",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mysql": "^2.11.1",
+    "node-uuid": "^1.4.7",
+    "sequelize": "^3.23.3",
+    "sha1": "^1.1.1"
+  },
+  "keywords": []
+}

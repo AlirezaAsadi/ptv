@@ -1,0 +1,144 @@
+﻿<% include partials/header %>
+
+<body class="kiosk">
+
+<textarea style="display:none" id="schema_bus">
+
+	<!-- Start of bus block -->
+	<div class="col-lg-12 box-timetable-right big-box">
+		<div class="col-lg-6 no-padding ">
+
+			<div class="col-lg-3 no-padding">
+
+				<img src="static/img/bus.jpg" class="responsive vih-pic">
+
+			</div>
+
+			<div class="col-lg-9 time-table">
+
+				<h4 style="font-size: 1.5em">{TITLE}</h4>
+				<p>{INFO}</p>
+
+			</div>
+
+		</div>
+
+		<div class="col-lg-6">
+			{TIME}
+		</div>
+	</div>
+	<!-- End of bus block -->
+
+</textarea>
+
+
+<textarea style="display:none" id="schema_tram">
+	<!-- Start of tram block -->
+	<div class="col-lg-12  box-timetable-left big-box">
+		<div class="col-lg-6 no-padding ">
+
+			<div class="col-lg-3 no-padding">
+
+				<img src="static/img/tram.png" class="responsive vih-pic">
+
+			</div>
+
+			<div class="col-lg-9 time-table">
+
+				<h4 style="font-size: 1.5em">{TITLE}</h4>
+				<p>{INFO}</p>
+
+			</div>
+
+		</div>
+
+		<div class="col-lg-6 tram-time-button">
+			{TIME}
+		</div>
+	</div>
+	<!-- End of tram block -->
+</textarea>
+
+
+
+
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="header">
+					<div class="banner">
+
+					</div>
+				</div>
+
+			</div>
+		
+		</div>
+
+        <!--<div class="row">
+            <div class="box">BOX</div>
+        </div>-->
+		<div class="row">
+
+			<div class="main-content animate">
+
+				<div class="col-lg-12 time-table-parents">
+
+						<div class="col-lg-3 main-column col-1"></div>
+
+						<div class="col-lg-3 main-column col-2"></div>
+
+						<div class="col-lg-3 main-column col-3"></div>
+						
+						<div class="col-lg-3 main-column col-4"></div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+
+		<div class="row footer-row">
+
+			<div class="col-lg-12">
+
+				<div class="footer">
+
+					<div class="main-footer">
+
+						<!--<div class="col-lg-6">
+
+							<div class="col-lg-1">
+								<img src="static/img/glider.png">
+							</div>
+
+							<div class="col-lg-11 footer-font">
+								<p>Glider is coming in the next 6 mins.</p>
+							</div>
+						</div>-->
+
+						<div class="col-lg-12">
+							<marquee>
+									<p class="footer-font" style="padding-top: 0px;"><img src="static/img/latroube-footer.png" style="vertical-align: middle;"> Welcome to La Trobe University Open Day 2016!</p>
+							</marquee>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+
+  <!-- Scripts-->
+  <script type="text/javascript" src="/static/js/config.js"></script>
+  <script type="text/javascript" data-main="modules/kiosk/init" src="/static/js/vendors/r.js"></script>
+
+	</body>
+</html>
