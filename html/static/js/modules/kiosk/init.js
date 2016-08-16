@@ -43,9 +43,16 @@ define([
             }
 
             function compare(a, b) {
-                if (a.dest_code < b.dest_code)
+                if (parseInt(a.dest_code) < parseInt(b.dest_code))
                     return -1;
-                if (a.dest_code > b.dest_code)
+                if (parseInt(a.dest_code) > parseInt(b.dest_code))
+                    return 1;
+                return 0;
+            }
+            function compare_stops(a, b) {
+                if (parseInt(a.time) < parseInt(b.time))
+                    return -1;
+                if (parseInt(a.time) > parseInt(b.time))
                     return 1;
                 return 0;
             }
@@ -64,8 +71,10 @@ define([
 
                     $(".time-table-parents .main-column").html("");
                     for (var i in items) {
+                        items[i].stops.sort(compare_stops);
                         iCounter++;
                         var itm = items[i];
+
                         var sHTML = $("#schema_bus").val();
                         if (itm.transport_type == "tram")
                             sHTML = $("#schema_tram").val();
@@ -79,7 +88,7 @@ define([
                             var stop = itm.stops[j];
                             var strTimeString = (Math.floor(stop.time) <= 0) ? "Now" : (Math.floor(stop.time) + ' Minute');
                             var font_color = (Math.floor(stop.time) < 5) ? "red" : "";
-                            stops += '<div class="' + itm.transport_type + '-time-item" style="background-color:' + font_color + '">' + getWords(stop.name.replace("La Trobe Uni ", "")) + ' : <strong>' + strTimeString + '</strong></div>';
+                            stops += '<div class="' + itm.transport_type + '-time-item" style="background-color:' + font_color + '">' + getWords(stop.name.replace("La Trobe Uni ", "").replace("La Trobe University", "")) + ' : <strong>' + strTimeString + '</strong></div>';
                         }
 
                         sHTML = sHTML.replace("{TITLE}", (itm.dest_code + " - To " + itm.dest_name));

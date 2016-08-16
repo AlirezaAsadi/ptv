@@ -9,11 +9,15 @@ module.exports = function (api) {
     var lon = 145.046309;
     var max_stop_near_by = 6;
     var pt = api.ptv.createClient({ devId: developerId, key: key });
-    var result = [];
+    var result;
+    var curDateTime;
 
     var _getData = function (req, callback) {
         var promises = [];
         var i = 0;
+        result = [];
+        curDateTime = (new Date()).getTime();
+
         pt.stopsNearby(lat, lon, function (errStopsNearby, dataStopsNearby) {
             dataStopsNearby.forEach(function (topNearStop) {
 
@@ -48,9 +52,9 @@ module.exports = function (api) {
 
                         var foundInStop = false;
                         newItems[i].stops.forEach(function (stop) {
-                            if (stop.id === item.stop_id && 
-                                stop.name === item.location_name && 
-                                stop.time === item.depMin && 
+                            if (stop.id === item.stop_id &&
+                                stop.name === item.location_name &&
+                                stop.time === item.depMin &&
                                 stop.dep === item.depTime) {
                                 foundInStop = true;
                             }
@@ -104,7 +108,7 @@ module.exports = function (api) {
         dataNextDeps.forEach(function (dataNextDep) {
             var depDT = new Date(dataNextDep.time_realtime_utc || dataNextDep.time_timetable_utc);
             var depTime = depDT.getTime();
-            var depMin = Math.round(Math.abs(((new Date()).getTime() - depDT.getTime()) / (60 * 1000), 2));
+            var depMin = Math.round(Math.abs((curDateTime - depDT.getTime()) / (60 * 1000), 2));
             if (depMin < 120) {
                 var found = false;
 
@@ -114,13 +118,26 @@ module.exports = function (api) {
                     if (foundItem.dest_name === dataNextDep.platform.direction.direction_name &&
                         foundItem.dest_code === dataNextDep.platform.direction.line.line_number) {
                         found = true;
-                        result[i].stops.push({
-                            "id": topNearStop.stop_id,
-                            "name": topNearStop.location_name,
-                            "time": depMin,
-                            "now": new Date(),
-                            "dep": depTime
+
+                        var foundInStop = false;
+                        result[i].stops.forEach(function (stop) {
+                            if (stop.id === topNearStop.stop_id &&
+                                stop.name === topNearStop.location_name &&
+                                stop.time === depMin &&
+                                stop.dep === depTime) {
+                                foundInStop = true;
+                            }
                         });
+                        if (!foundInStop) {
+                            result[i].stops.push({
+                                "id": topNearStop.stop_id,
+                                "name": topNearStop.location_name,
+                                "time": depMin,
+                                "now": new Date(),
+                                "dep": depTime
+                            });
+                        }
+
                     }
                     i++;
                 });
