@@ -53,8 +53,8 @@ define([
 
             // Get data from server-side
             var updateData = function () {
-                $.get("/ptv.php", "", function (data) {
-                    var items = JSON.parse(data);
+                $.post("/services/kiosk/getData", "", function (data) {
+                    var items = data;
 
                     // Sort by dest code
                     items.sort(compare);
