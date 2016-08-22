@@ -13,4 +13,16 @@ module.exports = function (app) {
         res.render('next5');
     });
 
+    app.get('/plan_journey', function (req, res) {
+        res.render('plan_journey');
+    });
+
+    app.get('/map', function (req, res) {
+        res.render('map');
+    });
+
+    app.get('/about', function (req, res) {
+        res.render('about');
+    });
+
 };
