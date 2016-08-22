@@ -1,4 +1,4 @@
-body{
+body:not(#kiosk){
     
     padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
 
