@@ -5,25 +5,26 @@
 <textarea style="display:none" id="schema_bus">
 
 	<!-- Start of bus block -->
-	<div class="col-sm-12 box-timetable-right big-box">
-		<div class="col-sm-6 no-padding ">
+	<div class="col-lg-12 box-timetable-right big-box">
+		<div class="col-lg-5 display_table no-padding ">
 
-			<div class="col-sm-3 no-padding">
-
-				<img src="static/img/bus.jpg" class="responsive vih-pic">
-
+			<div class="col-lg-4 display_table no-padding">
+				<div class="display_cell">
+					<img src="static/img/bus.jpg" class="responsive vih-pic">
+				</div>
 			</div>
 
-			<div class="col-sm-9 time-table">
-
-				<h4 style="font-size: 1.5em">{TITLE}</h4>
-				<p>{INFO}</p>
-
+			<div class="col-lg-8 display_table time-table">
+				<div class="display_cell">
+					<h4 class="trans_code">{CODE}</h4>
+					<h5 class="trans_title">{TITLE}</h4>
+					<p class="trans_info">{INFO}</p>
+				</div>
 			</div>
 
 		</div>
 
-		<div class="col-sm-6">
+		<div class="col-lg-7">
 			{TIME}
 		</div>
 	</div>
@@ -34,25 +35,26 @@
 
 <textarea style="display:none" id="schema_tram">
 	<!-- Start of tram block -->
-	<div class="col-sm-12  box-timetable-left big-box">
-		<div class="col-sm-6 no-padding ">
+	<div class="col-lg-12  box-timetable-left big-box">
+		<div class="col-lg-5  display_table no-padding ">
 
-			<div class="col-sm-3 no-padding">
-
-				<img src="static/img/tram.png" class="responsive vih-pic">
-
+			<div class="col-lg-4 display_table no-padding">
+				<div class="display_cell">
+					<img src="static/img/tram.png" class="responsive vih-pic">
+				</div>
 			</div>
 
-			<div class="col-sm-9 time-table">
-
-				<h4 style="font-size: 1.5em">{TITLE}</h4>
-				<p>{INFO}</p>
-
+			<div class="col-lg-8 display_table time-table">
+				<div class="display_cell">
+					<h4 class="trans_code">{CODE}</h4>
+					<h5 class="trans_title">{TITLE}</h4>
+					<p class="trans_info">{INFO}</p>
+				</div>
 			</div>
 
 		</div>
 
-		<div class="col-sm-6 tram-time-button">
+		<div class="col-lg-7 tram-time-button">
 			{TIME}
 		</div>
 	</div>
@@ -63,7 +65,7 @@
 
 
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-lg-12">
 
 				<div class="header">
 					<div class="banner">
@@ -82,15 +84,15 @@
 
 			<div class="main-content animate">
 
-				<div class="col-sm-12 time-table-parents">
+				<div class="col-lg-12 time-table-parents">
 
-						<div class="col-sm-3 main-column col-1"></div>
+						<div class="col-lg-3 main-column col-1"></div>
 
-						<div class="col-sm-3 main-column col-2"></div>
+						<div class="col-lg-3 main-column col-2"></div>
 
-						<div class="col-sm-3 main-column col-3"></div>
+						<div class="col-lg-3 main-column col-3"></div>
 						
-						<div class="col-sm-3 main-column col-4"></div>
+						<div class="col-lg-3 main-column col-4"></div>
 
 				</div>
 
@@ -103,24 +105,24 @@
 
 		<div class="row footer-row">
 
-			<div class="col-sm-12">
+			<div class="col-lg-12">
 
 				<div class="footer">
 
 					<div class="main-footer">
 
-						<!--<div class="col-sm-6">
+						<!--<div class="col-lg-6">
 
-							<div class="col-sm-1">
+							<div class="col-lg-1">
 								<img src="static/img/glider.png">
 							</div>
 
-							<div class="col-sm-11 footer-font">
+							<div class="col-lg-11 footer-font">
 								<p>Glider is coming in the next 6 mins.</p>
 							</div>
 						</div>-->
 
-						<div class="col-sm-12">
+						<div class="col-lg-12">
 							<marquee>
 									<p class="footer-font" style="padding-top: 0px;"><img src="static/img/latroube-footer.png" style="vertical-align: middle;"> Welcome to La Trobe University Open Day 2016!</p>
 							</marquee>

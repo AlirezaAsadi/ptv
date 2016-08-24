@@ -18,3 +18,11 @@
 }
 
 
+.display_table{
+	display: table;
+	height: 100%;
+	.display_cell{
+		display: table-cell;
+		vertical-align: middle;
+	}
+}

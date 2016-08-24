@@ -5,7 +5,7 @@
     color: #fff;
     margin: 5px;
     text-align: center;
-    width: 80%;
+    width: 100%;
     float: right;
 	font-size:130%;
 
@@ -38,6 +38,12 @@ body#kiosk{
 
 	.main-content{
 
+		.trans_code{
+			font-size: 1.8em;
+		}
+		.trans_title{
+			font-size: 1.2em;
+		}
 		.box-timetable-left{
 			border-right: 1px solid #ccc;
 			border-bottom: 1px solid #ccc;
@@ -64,12 +70,6 @@ body#kiosk{
 
 		.big-box{
 			height: 180px;
-			.time-table{
-				padding-top: 35px;
-			}
-			.vih-pic{
-				padding-top: 25px;
-			}
 		}
 
 		.small-box{

@@ -44,3 +44,19 @@ body.no-animate{
 //     }
 // }
 
+
+.blinking {
+   animation-duration: 300ms;
+   animation-name: blink;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+}
+@keyframes blink {
+   from {
+      opacity: 1;
+   }
+   to {
+      opacity: 0;
+      color: #fff;
+   }
+ }

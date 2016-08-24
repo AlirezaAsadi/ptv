@@ -11,8 +11,8 @@ define([
         $(document).ready(function () {
 
             // Animation
-            var SLIDER_TIMER = 30000;
-            var REQ_TIMER = 60000;
+            var SLIDER_TIMER = 150000;
+            var REQ_TIMER = 300000;
             var slideShow = function () {
                 $(".animate").removeClass("reset");
                 $(".animate").addClass("move");
@@ -69,7 +69,7 @@ define([
                     var iCounter = 0;
                     var iColId = 1;
 
-                    $(".time-table-parents .main-column").html("");
+                    $(".time-table-parents .main-column").html('');
                     for (var i in items) {
                         items[i].stops.sort(compare_stops);
                         iCounter++;
@@ -87,11 +87,12 @@ define([
                                 break;
                             var stop = itm.stops[j];
                             var strTimeString = (Math.floor(stop.time) <= 0) ? "Now" : (Math.floor(stop.time) + ' Minute');
-                            var font_color = (Math.floor(stop.time) < 5) ? "red" : "";
-                            stops += '<div class="' + itm.transport_type + '-time-item" style="background-color:' + font_color + '">' + getWords(stop.name.replace("La Trobe Uni ", "").replace("La Trobe University", "")) + ' : <strong>' + strTimeString + '</strong></div>';
+                            var extra_icon = (Math.floor(stop.time) < 5) ? ' <span class="glyphicon glyphicon-time blinking" aria-hidden="true" style="color:red;"></span>' : '';
+                            stops += '<div class="' + itm.transport_type + '-time-item">' + getWords(stop.name.replace("La Trobe Uni ", "").replace("La Trobe University", "")) + ' : <strong>' + strTimeString + extra_icon + '</strong></div>';
                         }
 
-                        sHTML = sHTML.replace("{TITLE}", (itm.dest_code + " - To " + itm.dest_name));
+                        sHTML = sHTML.replace("{CODE}", (itm.dest_code));
+                        sHTML = sHTML.replace("{TITLE}", (itm.dest_name));
                         sHTML = sHTML.replace("{INFO}", "");
                         sHTML = sHTML.replace("{TIME}", stops);
 
