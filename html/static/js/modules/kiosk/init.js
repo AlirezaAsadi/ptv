@@ -7,12 +7,11 @@ define([
     angular,
     app
 ) {
-
         $(document).ready(function () {
 
             // Animation
-            var SLIDER_TIMER = 150000;
-            var REQ_TIMER = 300000;
+            var SLIDER_TIMER = 15000;
+            var REQ_TIMER = 30000;
             var slideShow = function () {
                 $(".animate").removeClass("reset");
                 $(".animate").addClass("move");
