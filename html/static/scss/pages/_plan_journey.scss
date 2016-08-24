@@ -1,4 +1,60 @@
+.center{
+    text-align: center;
+}
 body#plan_journey {
+$bus-color: #fd8203;
+$tram-color: #78b921;
 
 
+	.main-content{
+
+		.box-timetable-left{
+			border-right: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+			padding: 10px;
+		}
+		.box-timetable-right{
+			border-right: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+			padding: 10px;
+		}
+
+		.bus-time-item{
+
+		    background-color: $bus-color;
+		    @include time-item;
+
+		}
+		.tram-time-item{
+
+		    background-color: $tram-color;
+		    @include time-item;
+
+		}
+
+		.big-box{
+			height: 180px;
+			.time-table{
+				padding-top: 35px;
+			}
+			.vih-pic{
+				padding-top: 25px;
+			}
+		}
+
+		.small-box{
+			height: 110px;
+			.bus-time-item{
+				width: 50%;
+				margin:auto;
+			}
+			.tram-time-item{
+				width: 50%;
+				margin:auto;
+			}
+			.tram-time-button{
+				padding-top: 15px;
+			}
+		}
+	}
 }

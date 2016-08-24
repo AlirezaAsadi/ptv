@@ -1,4 +1,37 @@
 body#next5 {
 
+.center{
+    text-align: center;
+}
+.tabs{
+
+    .tabs-list{
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        text-align: center;
+
+        li{
+           border: 1px solid #bbb;
+           border-radius: 4px;
+           display: inline-block;
+           text-align: center;
+           padding: 10px 5px;
+           width: 100px; 
+        }
+    }
+}
+.btn-depart{
+    width: 200px;
+}
+.alarm-content{
+    padding-top: 20px;
+    padding-left: 45px;
+}
+.btn-dropdown{
+    width: 400px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
 
 }
