@@ -1,5 +1,6 @@
 <% include partials/header %>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <body id="home">
 
     <!-- Navigation -->
@@ -29,15 +30,24 @@
 
         <!-- Heading Row -->
         <div class="row">
-            <div class="col-md-8">
-                <img class="img-responsive img-rounded" src="/static/img/LaTrobeCampus.jpg" alt="">
+            <div class="contents" style="max-width: 1150px; max-height: 800px; margin-top: 50px">
+                <img class="mySlides w3-animate-fading" src="/static/img/2014_0006_070.jpg" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="/static/img/Agora-in-Winter.jpg" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="/static/img/img142-1.jpg" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="/static/img/Lims-La-Trobe-University-Molecular-Science-Building-Lyons-Architects-3.jpg" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="/static/img/maxresdefault.jpg" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="/static/img/SetWidth1000-130725_lims_4.jpg" style="width:100%">
             </div>
+            
+            </div>
+            <div class="row" style="margin-top: 50px">
             <!-- /.col-md-8 -->
             <div class="col-md-4">
                 <h1>Travel  to La Trobe?</h1>
                 <p>Public Transport Victoria (PTV) is a statutory authority that manages Victoria’s train, tram and bus services. Public Transport Victoria (PTV) is a statutory authority that manages Victoria’s train, tram and bus services. </p>
                 <a class="btn btn-primary btn-lg" href="#">Plan Journey?</a>
             </div>
+            <div class="col-md-12 center" id="mapContainer" style="align: right; margin-left: 50px; margin-right: 10px; height: 400px; width: 710px"></div>
             <!-- /.col-md-4 -->
         </div>
         <!-- /.row -->
@@ -46,7 +56,7 @@
 
         <!-- Call to Action Well -->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col">
                 <div class="well text-center">
                     <img src="/static/img/glider.png" />
                     You want to catch the  next Glider? Just goto Glider next departure page.
@@ -90,12 +100,37 @@
 
     </div>
     <!-- /.container -->
+    <script>
+            var myIndex = 0;
+            carousel();
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                   x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) {myIndex = 1}
+                x[myIndex-1].style.display = "block";
+                setTimeout(carousel, 9000);
+            }
+            var map;
+          function iniMap() {
+            map = new google.maps.Map(document.getElementById('mapContainer'), {
+              center: {lat: -37.721185, lng: 145.048395},
+              zoom: 16
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrzOfCzSnWmWbqGGdpM0p9FJAq152ORww&callback=iniMap"
+        async defer></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+      <!-- Scripts-->
+      <script type="text/javascript" src="/static/js/config.js"></script>
+      <script type="text/javascript" data-main="modules/map/init" src="/static/js/vendors/r.js"></script>
+
+  
 
 </body>
 
