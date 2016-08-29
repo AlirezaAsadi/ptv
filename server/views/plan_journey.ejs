@@ -187,11 +187,28 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+	 <script src="/static/js/vendors/jquery-2.1.1.min.js"></script>
+   
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/static/js/vendors/bootstrap.min.js"></script>
 
 </body>
 
 </html>
+
+
+<script>
+$(document).ready(function(){
+
+    var param = {
+                    "keyword" : "north richmond",
+                    "name" : "north richmond"
+                };
+	$.post("/services/kiosk/testMethod", param, function(data){
+
+		console.log(data);
+	});
+});
+
+</script>

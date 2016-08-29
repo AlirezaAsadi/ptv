@@ -9,5 +9,17 @@ module.exports = function (api) {
         });
 
     });
+	
+	
+    api.app.post('/services/kiosk/testMethod', function (req, res) {
+        controller.testMethod(req, function (result) {
+            res.send(result);
+        });
+
+    });
+	
+	
+	
+	
 
 };

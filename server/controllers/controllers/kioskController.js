@@ -171,9 +171,22 @@ module.exports = function (api) {
         });
         return item;
     };
+	
+	var testMethod = function(req, callback){
+        //"/v2/nearme/latitude/-37.817993/longitude/144.981916"
+		var keyword = req.body.keyword; // $_POST["keyword"]
+		var name = req.body.name; // $_POST["keyword"]
+        pt.search(keyword, function(err , result){
+            if(err){
+                throw err;
+            }
+            callback(result);
+        });
+	};
 
     return {
-        getData: _getData
+        getData: _getData,
+		testMethod: testMethod
     };
 
 };
