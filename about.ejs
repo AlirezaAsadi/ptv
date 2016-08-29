@@ -1,0 +1,406 @@
+<% include partials/header %>
+
+<!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+    <script src="static/js/vendors/bootstrap-toolkit.js"></script>
+	
+	<!-- STICKY BAR -->
+	<script>
+	/*Expandable Sticky Bar (Initial: Nov 1st, 2010)
+     * This notice must stay intact for usage 
+     * Author: Dynamic Drive at http://www.dynamicdrive.com/
+     * Visit http://www.dynamicdrive.com/ for full source code
+     */
+
+jQuery.noConflict()
+
+function expstickybar(usersetting){
+	var setting=jQuery.extend({position:'bottom', peekamount:30, revealtype:'mouseover', speed:200}, usersetting)
+	var thisbar=this
+	var cssfixedsupport=!document.all || document.all && document.compatMode=="CSS1Compat" && window.XMLHttpRequest //check for CSS fixed support
+	if (!cssfixedsupport || window.opera)
+		return
+	jQuery(function($){ //on document.ready
+		if (setting.externalcontent){
+			thisbar.$ajaxstickydiv=$('<div id="ajaxstickydiv_'+setting.id+'"></div>').appendTo(document.body) //create blank div to house sticky bar DIV
+			thisbar.loadcontent($, setting)
+			}
+		else
+			thisbar.init($, setting)
+	})
+}
+
+expstickybar.prototype={
+
+	loadcontent:function($, setting){
+		var thisbar=this
+		var ajaxfriendlyurl=setting.externalcontent.replace(/^http:\/\/[^\/]+\//i, "http://"+window.location.hostname+"/") 
+		$.ajax({
+			url: ajaxfriendlyurl, //path to external content
+			async: true,
+			dataType: 'html',
+			error:function(ajaxrequest){
+				alert('Error fetching Ajax content.<br />Server Response: '+ajaxrequest.responseText)
+			},
+			success:function(content){
+				thisbar.$ajaxstickydiv.html(content)
+				thisbar.init($, setting)
+			}
+		})
+
+	},
+
+	showhide:function(keyword, anim){
+		var thisbar=this, $=jQuery
+		var finalpx=(keyword=="show")? 0 : -(this.height-this.setting.peekamount)
+		var positioncss=(this.setting.position=="bottom")? {bottom:finalpx} : {top:finalpx}
+		this.$stickybar.stop().animate(positioncss, (anim)? this.setting.speed : 0)
+		
+		thisbar.currentstate=keyword
+	},
+
+	toggle:function(){
+		var state=(this.currentstate=="show")? "hide" : "show"
+		this.showhide(state, true)
+	},
+
+	init:function($, setting){
+		var thisbar=this
+		this.$stickybar=$('#'+setting.id).css('visibility', 'visible')
+		this.height=this.$stickybar.outerHeight()
+		this.currentstate="hide"
+		setting.peekamount=Math.min(this.height, setting.peekamount)
+		this.setting=setting
+		if (setting.revealtype=="mouseover")
+			this.$stickybar.bind("mouseenter mouseleave", function(e){
+				thisbar.showhide((e.type=="mouseenter")? "show" : "hide", true)
+		})
+		thisbar.toggle()
+		
+		setTimeout(function(){
+			thisbar.height=thisbar.$stickybar.outerHeight() //refetch height of bar after 1 second (last change to properly get height of sticky bar)
+		}, 1000)
+		this.showhide("hide")
+	}
+}
+
+
+/////////////Initialization code://///////////////////////////
+var mystickybar= new expstickybar({
+	id: "stickybar", //id of sticky bar DIV
+	position:'bottom', //'top' or 'bottom'
+	revealtype:'mouseover', //'mouseover' or 'manual'
+	peekamount:35, //number of pixels to reveal when sticky bar is closed
+	externalcontent:'', //path to sticky bar content file on your server, or "" if content is defined inline on the page
+	speed:200 //duration of animation (in millisecs)
+})
+	</script>
+	
+	<!-- Bootstrap Core JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.css">
+
+	<script>
+	(function($, viewport){
+    $(document).ready(function() {
+	
+	var mystickybar= new expstickybar({
+	id: "stickybar", //id of sticky bar DIV
+	position:'bottom', //'top' or 'bottom'
+	revealtype:'mouseover', //'mouseover' or 'manual'
+	peekamount:35, //number of pixels to reveal when sticky bar is closed
+	externalcontent:'', //path to sticky bar content file on your server, or "" if content is defined inline on the page
+	speed:200 //duration of animation (in millisecs)
+})
+	
+	///////------ RESIZING IMAGES ------///////
+        // Executes only in XS breakpoint
+        if(viewport.is('xs')) {
+		    $('#glyphi1').css('margin-bottom', '20px');
+			$('#glyphi2').css('margin-bottom', '20px');
+            $('#img2').css('display', 'none');
+			$('#img3').css('display', 'none');
+			$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+        }
+
+        // Executes in SM
+        if(viewport.is('sm')) {
+                    $('#img2').css('display', 'initial');
+					$('#img3').css('display', 'none');
+					$('#img1').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+					$('#img2').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+                    $('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+				}
+
+        // Execute code each time window size changes
+        $(window).resize(		
+            viewport.changed(function() {
+                if(viewport.is('xs')) {
+			        $('#glyphi1').css('margin-bottom', '20px');
+			        $('#glyphi2').css('margin-bottom', '20px');
+                    $('#img2').css('display', 'none');
+					$('#img3').css('display', 'none');
+					$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+
+                }
+				if(viewport.is('sm')) {
+                    //$('#img2').css('display', 'initial');
+					$('#img3').css('display', 'none');
+					$('#img2').fadeIn();
+					$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+
+					$('#img1').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+					$('#img2').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+                }
+				if(viewport.is('>sm')) {
+                    //$('#img2').css('display', 'initial');
+					//$('#img3').css('display', 'initial');
+					$('#img2').fadeIn();
+					$('#img3').fadeIn();
+					$('#mainBody').css({'border-bottom': 'none', 'border-right': '1px solid darkgrey'});
+                }
+            })
+        );
+	///////------- CONTACT US VALIDATION ------///////
+	$('#contact_form').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            first_name: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Please supply your first name'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your email address'
+                    },
+                    emailAddress: {
+                        message: 'Please supply a valid email address'
+                    }
+                }
+            },
+            comment: {
+                validators: {
+                      stringLength: {
+                        min: 10,
+                        max: 500,
+                        message:'Please enter at least 10 characters and no more than 500'
+                    },
+                    notEmpty: {
+                        message: 'Please supply a comment'
+                    }
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function(e) {
+            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+                $('#contact_form').data('bootstrapValidator').resetForm();
+
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+            }, 'json');
+			
+			var Name = $("input#Name").val();
+            var Email = $("input#Email").val();
+            var Message = $("textarea#Message").val();
+        });
+    });
+})(jQuery, ResponsiveBootstrapToolkit);
+</script>
+<body id="home">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="/static/img/logo.png" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <% include partials/menu %>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+  
+<div class="container text-center">
+  <div class="row">
+    <div id="img1" class="col-xs-12 col-sm-4 col-md-4">
+      <img src="static/img/img1.jpg" style="width:100%" alt="Image">
+    </div>
+    <div id="img2" class="col-xs-12 col-sm-4 col-md-4">
+      <img src="static/img/img2.jpg" style="width:100%" alt="Image">
+    </div>
+    <div id="img3" class="col-xs-12 col-sm-4 col-md-4">
+      <img src="static/img/img3.jpg" style="width:100%" alt="Image">
+    </div>
+    </div>
+  </div>
+</div>
+<br/>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div id="mainBody" class="col-md-8" style="border-right: 1px solid darkgrey;">
+          <h3>About Travel La Trobe</h3>
+		  <h4>And how we help you</h4>
+		  <p>
+				    Travel La Trobe's services are designed to get students to and from campus in a quick and efficient manner. By utilising 
+				    live data from Public Transport Victoria, we are able to provide students with highly accurate schedules, timetables and 
+				    service location information. 
+				</p>
+				<p>
+                    As a project originally conceived and developed by La Trobe ICT students, Travel La Trobe was created with 3 tenants in mind:				
+				</p>
+				<p>&nbsp;</p>
+				<div class="row text-center">
+				   <div id="glyphi1" class="col-xs-12 col-sm-4 col-md-4">
+				   <p><span style="font-size:5em" class="glyphicon glyphicon-time"></span></p><p style="text-align:center;">Deliver timely and accurate information</p>
+				   </div>
+				   <div id="glyphi2" class="col-xs-12 col-sm-4 col-md-4">
+				   <p><span style="font-size:5em" class="glyphicon glyphicon-screenshot"></span></p><p style="text-align:center;">Target student specific transport needs</p>
+				   </div>
+				   <div id="glyphi3" class="col-xs-12 col-sm-4 col-md-4">
+				   <p><span style="font-size:5em" class="glyphicon glyphicon-phone"></span></p><p style="text-align:center;">Make the service accessible and user-friendly</p>
+				   </div>
+				</div>
+				<p>&nbsp;</p>
+				<p>We hope you enjoy using the service as much as we had creating it. We welcome your feedback; please leave us comments, suggestions or queries and we will respond promptly.</p>
+	    </div>
+	    <div class="col-md-4">
+	      <h3>Contact Us</h3>
+		  
+	
+                    <form class="form-vertical" action="" method="post" id="contact_form" enctype="multipart/form-data">
+                        <fieldset>
+
+                            <!-- Name -->
+							<div class="form-group">
+								<label class="col-md-4 control-label input-sm">Name</label>  
+									<div class="col-md-12 inputGroupContainer">
+										<div class="input-group" style="padding-right:15px;">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+											<input name="first_name" id="first_name" placeholder="First Name" class="form-control input-sm" type="text">
+										</div>
+									</div>
+							</div>
+
+							<!-- Email-->
+							<div class="form-group">
+								<label class="col-md-4 control-label input-sm">E-Mail</label>  
+									<div class="col-md-12 inputGroupContainer">
+										<div class="input-group" style="padding-right:15px;">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+											<input name="email" id="email" placeholder="E-Mail Address" class="form-control input-sm" type="text" data-error="Please enter a valid e-mail address">
+										</div>
+									</div>
+							</div>
+
+							<!-- Comments Area -->
+							<div class="form-group">
+								<label class="col-md-4 control-label input-sm">Comments</label>
+									<div class="col-md-12 inputGroupContainer">
+										<div class="input-group" style="padding-right:15px;">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+											<textarea class="form-control input-sm" name="comment" id="comment" placeholder="Comment" rows="10"></textarea>
+										</div>
+									</div>
+							</div>
+
+							<!-- Send Button -->
+							<div class="form-group">
+								<label class="col-md-4 control-label"></label>
+									<div class="col-md-12">
+										<button type="submit" class="btn btn-info" >Send <span class="glyphicon glyphicon-send"></span></button>
+									</div>
+							</div>
+
+						</fieldset>
+					</form><br/>
+				<!-- Success message -->
+							<div class="text-center alert alert-success" style="margin: 0 auto; width:99%; display:none;" role="alert" id="success_message"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Thank you for contacting Travel La Trobe. We will reply shortly.</div>
+		  
+	    </div>
+      </div>
+        <!-- Footer -->
+		
+    </div>
+<!-- FOOTER SPACER -->
+<div style="position:absolute;width:99.5%;height:4.5%;">
+&nbsp;
+</div>
+	<div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
+		<div class ="navbar-inverse" style="text-align:center;padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
+
+			<div class="row" style="margin-left:10px;margin-top:10px;">
+
+				<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+					<h4 style="color:#FF9900;">SERVICES</h4>
+						<ul style="list-style: none;">
+							<li><a href="#" style="color: white;">Plan Journey</a></li>
+							<li><a href="#" style="color: white;">Next 5</a></li>
+							<li><a href="#" style="color: white;">Next Glider</a></li>
+							<li><a href="#" style="color: white;">Campus Map</a></li>
+							<li><a href="#" style="color: white;">Kiosk</a></li>
+						</ul>
+				</div>
+
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">INFORMATION</h4>
+				<ul style="list-style: none;">
+					<li><a href="/myki" style="color: white;">Myki for Students</a></li>
+					<li><a href="https://lms.latrobe.edu.au/login/" style="color: white;">LMS</a></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">ABOUT</h4>
+				<ul style="list-style: none;">
+					<li><a href="#" style="color:white;">About Us</a></li>
+					<li><a href="#" style="color:white;">Contact Us</a></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color: #FF9900;">STAFF</h4>
+				<ul style="list-style: none;">
+					<li><a href="#" style="color: white;">Admin</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,395 @@
+    <% include partials/header %>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+    <script src="static/js/vendors/bootstrap-toolkit.js"></script>
+
+<script>
+jQuery(document).ready(function()
+{
+    jQuery('.campusSelect').click(function()
+ {    
+     jQuery('#serviceColumns').css('display', 'none').fadeIn(350);
+ })
+});
+</script>
+	<!-- STICKY BAR -->
+	<script>
+	/*Expandable Sticky Bar (Initial: Nov 1st, 2010)
+     * This notice must stay intact for usage 
+     * Author: Dynamic Drive at http://www.dynamicdrive.com/
+     * Visit http://www.dynamicdrive.com/ for full source code
+     */
+jQuery.noConflict()
+
+function expstickybar(usersetting){
+	var setting=jQuery.extend({position:'bottom', peekamount:30, revealtype:'mouseover', speed:200}, usersetting)
+	var thisbar=this
+	var cssfixedsupport=!document.all || document.all && document.compatMode=="CSS1Compat" && window.XMLHttpRequest //check for CSS fixed support
+	if (!cssfixedsupport || window.opera)
+		return
+	jQuery(function($){ //on document.ready
+		if (setting.externalcontent){
+			thisbar.$ajaxstickydiv=$('<div id="ajaxstickydiv_'+setting.id+'"></div>').appendTo(document.body) //create blank div to house sticky bar DIV
+			thisbar.loadcontent($, setting)
+			}
+		else
+			thisbar.init($, setting)
+	})
+}
+
+expstickybar.prototype={
+
+	loadcontent:function($, setting){
+		var thisbar=this
+		var ajaxfriendlyurl=setting.externalcontent.replace(/^http:\/\/[^\/]+\//i, "http://"+window.location.hostname+"/") 
+		$.ajax({
+			url: ajaxfriendlyurl, //path to external content
+			async: true,
+			dataType: 'html',
+			error:function(ajaxrequest){
+				alert('Error fetching Ajax content.<br />Server Response: '+ajaxrequest.responseText)
+			},
+			success:function(content){
+				thisbar.$ajaxstickydiv.html(content)
+				thisbar.init($, setting)
+			}
+		})
+
+	},
+
+	showhide:function(keyword, anim){
+		var thisbar=this, $=jQuery
+		var finalpx=(keyword=="show")? 0 : -(this.height-this.setting.peekamount)
+		var positioncss=(this.setting.position=="bottom")? {bottom:finalpx} : {top:finalpx}
+		this.$stickybar.stop().animate(positioncss, (anim)? this.setting.speed : 0)
+		
+		thisbar.currentstate=keyword
+	},
+
+	toggle:function(){
+		var state=(this.currentstate=="show")? "hide" : "show"
+		this.showhide(state, true)
+	},
+
+	init:function($, setting){
+		var thisbar=this
+		this.$stickybar=$('#'+setting.id).css('visibility', 'visible')
+		this.height=this.$stickybar.outerHeight()
+		this.currentstate="hide"
+		setting.peekamount=Math.min(this.height, setting.peekamount)
+		this.setting=setting
+		if (setting.revealtype=="mouseover")
+			this.$stickybar.bind("mouseenter mouseleave", function(e){
+				thisbar.showhide((e.type=="mouseenter")? "show" : "hide", true)
+		})
+		thisbar.toggle()
+		
+		setTimeout(function(){
+			thisbar.height=thisbar.$stickybar.outerHeight() //refetch height of bar after 1 second (last change to properly get height of sticky bar)
+		}, 1000)
+		this.showhide("hide")
+	}
+}
+
+
+/////////////Initialization code://///////////////////////////
+var mystickybar= new expstickybar({
+	id: "stickybar", //id of sticky bar DIV
+	position:'bottom', //'top' or 'bottom'
+	revealtype:'mouseover', //'mouseover' or 'manual'
+	peekamount:35, //number of pixels to reveal when sticky bar is closed
+	externalcontent:'', //path to sticky bar content file on your server, or "" if content is defined inline on the page
+	speed:200 //duration of animation (in millisecs)
+})
+	</script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.css">
+
+	<script>
+	(function($, viewport){
+    $(document).ready(function() {
+	
+	var mystickybar= new expstickybar({
+	id: "stickybar", //id of sticky bar DIV
+	position:'bottom', //'top' or 'bottom'
+	revealtype:'mouseover', //'mouseover' or 'manual'
+	peekamount:35, //number of pixels to reveal when sticky bar is closed
+	externalcontent:'', //path to sticky bar content file on your server, or "" if content is defined inline on the page
+	speed:200 //duration of animation (in millisecs)
+})
+	
+	///////------ RESIZING IMAGES ------///////
+        // Executes only in XS breakpoint
+        if(viewport.is('xs')) {
+		    $('#glyphi1').css('margin-bottom', '20px');
+			$('#glyphi2').css('margin-bottom', '20px');
+            $('#img2').css('display', 'none');
+			$('#img3').css('display', 'none');
+			$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+        }
+
+        // Executes in SM
+        if(viewport.is('sm')) {
+                    $('#img2').css('display', 'initial');
+					$('#img3').css('display', 'none');
+					$('#img1').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+					$('#img2').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+                    $('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+				}
+
+        // Execute code each time window size changes
+        $(window).resize(		
+            viewport.changed(function() {
+                if(viewport.is('xs')) {
+			        $('#glyphi1').css('margin-bottom', '20px');
+			        $('#glyphi2').css('margin-bottom', '20px');
+                    $('#img2').css('display', 'none');
+					$('#img3').css('display', 'none');
+					$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+
+                }
+				if(viewport.is('sm')) {
+                    //$('#img2').css('display', 'initial');
+					$('#img3').css('display', 'none');
+					$('#img2').fadeIn();
+					$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
+
+					$('#img1').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+					$('#img2').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
+                }
+				if(viewport.is('>sm')) {
+                    //$('#img2').css('display', 'initial');
+					//$('#img3').css('display', 'initial');
+					$('#img2').fadeIn();
+					$('#img3').fadeIn();
+					$('#mainBody').css({'border-bottom': 'none', 'border-right': '1px solid darkgrey'});
+                }
+            })
+        );
+	///////------- CONTACT US VALIDATION ------///////
+	$('#contact_form').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            first_name: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Please supply your first name'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your email address'
+                    },
+                    emailAddress: {
+                        message: 'Please supply a valid email address'
+                    }
+                }
+            },
+            comment: {
+                validators: {
+                      stringLength: {
+                        min: 10,
+                        max: 500,
+                        message:'Please enter at least 10 characters and no more than 500'
+                    },
+                    notEmpty: {
+                        message: 'Please supply a comment'
+                    }
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function(e) {
+            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+                $('#contact_form').data('bootstrapValidator').resetForm();
+
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+            }, 'json');
+			
+			var Name = $("input#Name").val();
+            var Email = $("input#Email").val();
+            var Message = $("textarea#Message").val();
+        });
+    });
+})(jQuery, ResponsiveBootstrapToolkit);
+</script>
+
+	
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <body id="map">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="/static/img/logo.png" alt="">
+                    </a>
+
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <% include partials/menu %>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <hr>
+
+            <!-- Content Row -->
+            <div class="row">
+                <h2>Explore Your Campus</h2>
+                <h4 style="margin-left: 25px">Enter the location you want to search.</h4>            
+                <form id = "Search" style= "margin-left: 50px">
+                <input type="text" name="search" placeholder="Search.." style="margin-bottom: 10px">
+                </form>
+                    
+                <div class="col-md-12 center" id="mapContainer" style="margin-left: 50px; margin-right: 10px; height: 400px; width: 500px"></div>
+                <div class="col-md-13 center" id="street-view" style="height: 400px; width: 500px"></div>
+
+                <h3>Attractions around you</h3>
+
+                <div class="content" style="max-width:700px ; margin-left: 50px">
+
+                        <img class="mySlides w3-animate-fading" src="/static/img/2014_0006_070.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/Agora-in-Winter.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/img142-1.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/Lims-La-Trobe-University-Molecular-Science-Building-Lyons-Architects-3.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/maxresdefault.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/SetWidth1000-130725_lims_4.jpg" style="width:100%">
+
+                </div>
+
+            </div> 
+            <!-- /.row -->
+
+            <!-- Footer -->
+            <div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
+		<div class ="navbar-inverse" style="text-align:center;padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
+
+			<div class="row" style="margin-left:10px;margin-top:10px;">
+
+				<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+					<h4 style="color:#FF9900;">SERVICES</h4>
+						<ul style="list-style: none;">
+							<li><a href="#" style="color: white;">Plan Journey</a></li>
+							<li><a href="#" style="color: white;">Next 5</a></li>
+							<li><a href="#" style="color: white;">Next Glider</a></li>
+							<li><a href="#" style="color: white;">Campus Map</a></li>
+							<li><a href="#" style="color: white;">Kiosk</a></li>
+						</ul>
+				</div>
+
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">INFORMATION</h4>
+				<ul style="list-style: none;">
+					<li><a href="/myki" style="color: white;">Myki for Students</a></li>
+					<li><a href="https://lms.latrobe.edu.au/login/" style="color: white;">LMS</a></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">ABOUT</h4>
+				<ul style="list-style: none;">
+					<li><a href="#" style="color:white;">About Us</a></li>
+					<li><a href="#" style="color:white;">Contact Us</a></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color: #FF9900;">STAFF</h4>
+				<ul style="list-style: none;">
+					<li><a href="#" style="color: white;">Admin</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+	</div>
+
+        </div>
+
+        
+        <script>
+            var myIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                   x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) {myIndex = 1}
+                x[myIndex-1].style.display = "block";
+                setTimeout(carousel, 9000);
+            }
+
+
+          var map;
+          function initMap() {
+            map = new google.maps.Map(document.getElementById('mapContainer'), {
+              center: {lat: -37.721185, lng: 145.048395},
+              zoom: 16
+            });
+            panorama = new google.maps.StreetViewPanorama(
+                document.getElementById('street-view'),
+                {
+                  position: {lat: -37.720861, lng: 145.046487},
+                  pov: {heading: 180, pitch: 0},
+                  zoom: 1
+                  });
+            var marker = new google.maps.Marker({
+              position: {lat: -37.720861, lng: 145.046487},
+              map: map,
+              title: 'bus stop' 
+              });     
+            
+          }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrzOfCzSnWmWbqGGdpM0p9FJAq152ORww&callback=initMap"
+        async defer></script>
+
+      <!-- Scripts-->
+      <script type="text/javascript" src="/static/js/config.js"></script>
+      <script type="text/javascript" data-main="modules/map/init" src="/static/js/vendors/r.js"></script>
+
+
+    </body>
+
+    </html>
