@@ -113,54 +113,6 @@ var mystickybar= new expstickybar({
 	speed:200 //duration of animation (in millisecs)
 })
 	
-	///////------ RESIZING IMAGES ------///////
-        // Executes only in XS breakpoint
-        if(viewport.is('xs')) {
-		    $('#glyphi1').css('margin-bottom', '20px');
-			$('#glyphi2').css('margin-bottom', '20px');
-            $('#img2').css('display', 'none');
-			$('#img3').css('display', 'none');
-			$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
-        }
-
-        // Executes in SM
-        if(viewport.is('sm')) {
-                    $('#img2').css('display', 'initial');
-					$('#img3').css('display', 'none');
-					$('#img1').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
-					$('#img2').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
-                    $('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
-				}
-
-        // Execute code each time window size changes
-        $(window).resize(		
-            viewport.changed(function() {
-                if(viewport.is('xs')) {
-			        $('#glyphi1').css('margin-bottom', '20px');
-			        $('#glyphi2').css('margin-bottom', '20px');
-                    $('#img2').css('display', 'none');
-					$('#img3').css('display', 'none');
-					$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
-
-                }
-				if(viewport.is('sm')) {
-                    //$('#img2').css('display', 'initial');
-					$('#img3').css('display', 'none');
-					$('#img2').fadeIn();
-					$('#mainBody').css({'border-right': 'none', 'border-bottom': '1px solid darkgrey'});
-
-					$('#img1').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
-					$('#img2').removeClass('col-xs-12 col-sm-4 col-md-4').addClass('col-xs-12 col-sm-6 col-md-4');
-                }
-				if(viewport.is('>sm')) {
-                    //$('#img2').css('display', 'initial');
-					//$('#img3').css('display', 'initial');
-					$('#img2').fadeIn();
-					$('#img3').fadeIn();
-					$('#mainBody').css({'border-bottom': 'none', 'border-right': '1px solid darkgrey'});
-                }
-            })
-        );
 	///////------- CONTACT US VALIDATION ------///////
 	$('#contact_form').bootstrapValidator({
         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
@@ -251,54 +203,15 @@ var mystickybar= new expstickybar({
         </div>
         <!-- /.container -->
     </nav>
-  
-<div class="container text-center">
-  <div class="row">
-    <div id="img1" class="col-xs-12 col-sm-4 col-md-4">
-      <img src="static/img/img1.jpg" style="width:100%" alt="Image">
-    </div>
-    <div id="img2" class="col-xs-12 col-sm-4 col-md-4">
-      <img src="static/img/img2.jpg" style="width:100%" alt="Image">
-    </div>
-    <div id="img3" class="col-xs-12 col-sm-4 col-md-4">
-      <img src="static/img/img3.jpg" style="width:100%" alt="Image">
-    </div>
-    </div>
-  </div>
-</div>
+ 
 <br/>
     <!-- Page Content -->
-    <div class="container">
-      <div class="row">
-        <div id="mainBody" class="col-md-8" style="border-right: 1px solid darkgrey;">
-          <h3>About Travel La Trobe</h3>
-		  <h4>And how we help you</h4>
-		  <p>
-				    Travel La Trobe's services are designed to get students to and from campus in a quick and efficient manner. By utilising 
-				    live data from Public Transport Victoria, we are able to provide students with highly accurate schedules, timetables and 
-				    service location information. 
-				</p>
-				<p>
-                    As a project originally conceived and developed by La Trobe ICT students, Travel La Trobe was created with 3 tenants in mind:				
-				</p>
-				<p>&nbsp;</p>
-				<div class="row text-center">
-				   <div id="glyphi1" class="col-xs-12 col-sm-4 col-md-4">
-				   <p><span style="font-size:5em" class="glyphicon glyphicon-time"></span></p><p style="text-align:center;">Deliver timely and accurate information</p>
-				   </div>
-				   <div id="glyphi2" class="col-xs-12 col-sm-4 col-md-4">
-				   <p><span style="font-size:5em" class="glyphicon glyphicon-screenshot"></span></p><p style="text-align:center;">Target student specific transport needs</p>
-				   </div>
-				   <div id="glyphi3" class="col-xs-12 col-sm-4 col-md-4">
-				   <p><span style="font-size:5em" class="glyphicon glyphicon-phone"></span></p><p style="text-align:center;">Make the service accessible and user-friendly</p>
-				   </div>
-				</div>
-				<p>&nbsp;</p>
-				<p>We hope you enjoy using the service as much as we had creating it. We welcome your feedback; please leave us comments, suggestions or queries and we will respond promptly.</p>
-	    </div>
-	    <div class="col-md-4">
+	<div class="container">
+	    <div class="col-md-12">
 	      <h3>Contact Us</h3>
-		  
+		  <p>
+		     Use the form below to contact Travel La Trobe. We will repond within 3 working days.
+		  </p>
 	
                     <form class="form-vertical" action="" method="post" id="contact_form" enctype="multipart/form-data">
                         <fieldset>
@@ -313,7 +226,6 @@ var mystickybar= new expstickybar({
 										</div>
 									</div>
 							</div>
-
 							<!-- Email-->
 							<div class="form-group">
 								<label class="col-md-4 control-label input-sm">E-Mail</label>  
@@ -347,13 +259,11 @@ var mystickybar= new expstickybar({
 						</fieldset>
 					</form><br/>
 				<!-- Success message -->
-							<div class="text-center alert alert-success" style="margin: 0 auto; width:99%; display:none;" role="alert" id="success_message"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Thank you for contacting Travel La Trobe. We will reply shortly.</div>
+				<div class="text-center alert alert-success" style="margin: 0 auto; width:99%; display:none;" role="alert" id="success_message"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Thank you for contacting Travel La Trobe. We will reply shortly.</div>
 		  
 	    </div>
-      </div>
+	</div>
         <!-- Footer -->
-		
-    </div>
 <!-- FOOTER SPACER -->
 <div style="position:absolute;width:99.5%;height:4.5%;">
 &nbsp;

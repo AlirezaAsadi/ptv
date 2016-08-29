@@ -1,0 +1,332 @@
+<% include partials/header %>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+    <script src="static/js/vendors/bootstrap-toolkit.js"></script>
+	
+    <!-- Bootstrap Core JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.css">
+    
+	<!-- Accordion -->
+	<script>
+    function toggle_visibility(id) 
+    {
+      var icon = document.getElementById(id + "Icon");
+      if (icon.innerHTML == "+")
+      {
+         icon.innerHTML = "-";
+      }
+      else
+      {
+         icon.innerHTML = "+";
+      }
+	  jQuery("#" + id + "Info").slideToggle();
+    }
+	
+	// LOAD PTV MYKI IFRAME ON BTN CLICK ONLY
+    $(document).ready(function()
+	{
+	   var active = 0;
+	   var imgSrc = "static/img/img1.jpg";
+
+	    jQuery('#locationBtn').bind('click', function()
+	    {
+		    if (active == 0)
+			{
+	           jQuery('#locationIFrame').attr('src', 'http://ptv.vic.gov.au/application/mykimapV3/index.html');
+			   active = 1;
+	        }
+			else
+			{
+			   active = 0;
+			}
+	    });
+		
+		//CHANGE CAMPUS MYKI MAP FOR EACH CAMPUS
+	    jQuery('#campusMelb').click(function()
+	    {
+		    imgSrc = "/static/img/img1.jpg";
+		    jQuery('#campusPic').attr('src', 'imgSrc');
+	    });
+	    jQuery('#campusCity').click(function()
+	    {
+		    imgSrc = "static/img/img2.jpg";
+		    jQuery('#campusPic').attr('src', 'imgSrc');
+	    });
+		jQuery('#campusAlbury').click(function()
+	    {
+		    imgSrc = "static/img/img3.jpg";
+		    jQuery('#campusPic').attr('src', 'imgSrc');
+	    });
+		jQuery('#campusSydney').click(function()
+	    {
+		    imgSrc = "static/img/img4.jpg";
+		    jQuery('#campusPic').attr('src', 'imgSrc');
+	    });
+		jQuery('#campusBendigo').click(function()
+	    {
+		    imgSrc = "static/img/img5.jpg";
+		    jQuery('#campusPic').attr('src', 'imgSrc');
+	    });	
+	});
+</script>
+	
+	<!-- STICKY BAR -->
+	<script>
+	/*Expandable Sticky Bar (Initial: Nov 1st, 2010)
+     * This notice must stay intact for usage 
+     * Author: Dynamic Drive at http://www.dynamicdrive.com/
+     * Visit http://www.dynamicdrive.com/ for full source code
+     */
+
+jQuery.noConflict()
+
+function expstickybar(usersetting){
+	var setting=jQuery.extend({position:'bottom', peekamount:30, revealtype:'mouseover', speed:200}, usersetting)
+	var thisbar=this
+	var cssfixedsupport=!document.all || document.all && document.compatMode=="CSS1Compat" && window.XMLHttpRequest //check for CSS fixed support
+	if (!cssfixedsupport || window.opera)
+		return
+	jQuery(function($){ //on document.ready
+		if (setting.externalcontent){
+			thisbar.$ajaxstickydiv=$('<div id="ajaxstickydiv_'+setting.id+'"></div>').appendTo(document.body) //create blank div to house sticky bar DIV
+			thisbar.loadcontent($, setting)
+			}
+		else
+			thisbar.init($, setting)
+	})
+}
+
+expstickybar.prototype={
+
+	loadcontent:function($, setting){
+		var thisbar=this
+		var ajaxfriendlyurl=setting.externalcontent.replace(/^http:\/\/[^\/]+\//i, "http://"+window.location.hostname+"/") 
+		$.ajax({
+			url: ajaxfriendlyurl, //path to external content
+			async: true,
+			dataType: 'html',
+			error:function(ajaxrequest){
+				alert('Error fetching Ajax content.<br />Server Response: '+ajaxrequest.responseText)
+			},
+			success:function(content){
+				thisbar.$ajaxstickydiv.html(content)
+				thisbar.init($, setting)
+			}
+		})
+
+	},
+
+	showhide:function(keyword, anim){ 
+		var thisbar = this, $=jQuery
+		var finalpx = (keyword == "show")? 0 : -(this.height-this.setting.peekamount)
+		var positioncss = (this.setting.position == "bottom")? {bottom:finalpx} : {top:finalpx}
+		this.$stickybar.stop().animate(positioncss, (anim)? this.setting.speed : 0)
+		
+		thisbar.currentstate=keyword
+	},
+
+	toggle:function(){
+		var state = (this.currentstate == "show")? "hide" : "show"
+		this.showhide(state, true)
+	},
+
+	init:function($, setting){
+		var thisbar = this
+		this.$stickybar = $('#'+setting.id).css('visibility', 'visible')
+		this.height = this.$stickybar.outerHeight()
+		this.currentstate = "hide"
+		setting.peekamount = Math.min(this.height, setting.peekamount)
+		this.setting = setting
+		if (setting.revealtype == "mouseover")
+			this.$stickybar.bind("mouseenter mouseleave", function(e){
+				thisbar.showhide((e.type == "mouseenter")? "show" : "hide", true)
+		})
+		thisbar.toggle()
+		
+		setTimeout(function(){
+			thisbar.height = thisbar.$stickybar.outerHeight() //refetch height of bar after 1 second (last change to properly get height of sticky bar)
+		}, 1000)
+		this.showhide("hide")
+	}
+}
+
+
+/////////////Initialization code://///////////////////////////
+var mystickybar = new expstickybar({
+	id: "stickybar", //id of sticky bar DIV
+	position:'bottom', //'top' or 'bottom'
+	revealtype:'mouseover', //'mouseover' or 'manual'
+	peekamount:35, //number of pixels to reveal when sticky bar is closed
+	externalcontent:'', //path to sticky bar content file on your server, or "" if content is defined inline on the page
+	speed:200 //duration of animation (in millisecs)
+})
+	</script>
+	
+	<!-- INITIALISE STICKY BAR -->
+	<script>
+	(function($, viewport){
+    $(document).ready(function() {
+	
+	var mystickybar= new expstickybar({
+	id: "stickybar", //id of sticky bar DIV
+	position:'bottom', //'top' or 'bottom'
+	revealtype:'mouseover', //'mouseover' or 'manual'
+	peekamount:35, //number of pixels to reveal when sticky bar is closed
+	externalcontent:'', //path to sticky bar content file on your server, or "" if content is defined inline on the page
+	speed:200 //duration of animation (in millisecs)
+})
+})});
+	
+</script>
+
+<body id="home">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="/static/img/logo.png" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <% include partials/menu %>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+  
+<div class="container text-center">
+  <div class="row">
+    
+  </div>
+</div>
+<br/>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div id="heading" class="col-xs-12 col-md-12">
+		<img width="98%" src="static/img/newBus.png" class="img-rounded img-responsive" alt="New Bus from Reservoir Station direct to La Trobe Bundoora Campus" />
+          <h2>Myki for Students</h2>
+		    <p>
+		     When travelling on Melbourne's metropolitan public transport network, all travelers 
+			 are required to use a Myki card as their ticket to travel. These reusable cards are 
+			 to be topped-up to ensure sufficient funds are available, and touched-on and touched-off each time you travel.
+			 For full details about Myki please visit <a href="http://ptv.vic.gov.au/tickets/myki/">
+			 the official PTV webpage</a>.
+			 </p><br/>
+		</div>
+		<div class="col-xs-12 col-md-12">
+			 <p><button onclick="toggle_visibility('purchase')" style="padding: 10px; outline: 0px; border: currentColor; transition:0.4s; border-image: none; width: 98%; text-align: left; color: rgb(255, 255, 255); font-size: 15px; font-weight: bold; cursor: pointer; background-color: #303030;">Purchasing & Topping-Up<span id="purchaseIcon" style="font-size: 1.3em; float: right; display: block;">+</span></button></p>
+
+             <div id="purchaseInfo" style="overflow: hidden; display: none;">
+			 <p>
+			 All travellers are able to purchase Myki cards at Myki machines, staffed train stations and selected top-up locations
+             including 7-Eleven stores.
+			 </p>
+			  <p><strong>Topping-Up:</strong> The most convenient way to top-up your Myki is through <a href="https://ptv.vic.gov.au/application/MYKIcvm/topup/index.html"> an online top-up</a> or
+			 at any Myki Machine located on campus.</p>
+			 <p>
+			 <strong>Fees and Costs:</strong> Myki fares and travel expenses can be calculated by using the <a href="http://ptv.vic.gov.au/tickets/metropolitan-myki-fares-2016/">PTV fare calculator</a>.
+			 </p><br/>
+			 <h4>Domestic Students</h4>
+			 <p>
+			 If you are a domestic La Trobe student studying full-time, you are eligible to apply for a VPT Tertiary Concession Card.
+			 The application for this form is automatically emailed to your registered student email address at the start of the year.
+			 To access this form simply <a href="https://estudent.latrobe.edu.au/T1SMPRD/WebApps/eStudent/login.aspx?ReturnUrl=%2ft1smPRD%2fwebapps%2feStudent%2fdefault.aspx">
+			 log in to Student Online</a>, select 'documents' and seach for 'VPT'.
+			 </p><br/>
+			 <h4>International Students</h4>
+			 <p>
+			 If you are an international or New Zealand undergraduate La Trobe student studying full-time at the Melbourne or Bendigo campuses, you 
+			 are eligible to purchase a zone 1 + 2 iUSEpass, a zone 2 iUSEpass only, or a zone 13 iUSEpass for use in Bendigo. These passes enable half-price 
+			 travel along these zones and last for 365 days. <a href="http://www.latrobe.edu.au/students/international/iusepass">Click here</a> to apply for 
+			 a La Trobe iUSEpass.
+			 </p>
+			 </div>
+		</div>
+		<div class="col-xs-12 col-md-12">
+			 <p><button id="locationBtn" onclick="toggle_visibility('locationFinder')" style="padding: 10px; outline: 0px; border: currentColor; transition:0.4s; border-image: none; width: 98%; text-align: left; color: rgb(255, 255, 255); font-size: 15px; font-weight: bold; cursor: pointer; background-color: #303030;">Find Your Nearest Myki Sales & Top-Up Location<span id="locationFinderIcon" style="font-size: 1.3em; float: right; display: block;">+</span></button></p>
+
+             <div id="locationFinderInfo" style="overflow: hidden; display: none; width:100%;">
+			 <iframe id="locationIFrame" src="" height="600px" width="98%" frameborder="0" scrolling="no" style="min-width: auto;">
+             <p>Your browser does not support this feature.</p></iframe>
+             </div>
+	    </div>
+		<div class="col-xs-12 col-md-12">
+			 <p><button onclick="toggle_visibility('campusFinder')" style="padding: 10px; outline: 0px; border: currentColor; transition:0.4s; border-image: none; width: 98%; text-align: left; color: rgb(255, 255, 255); font-size: 15px; font-weight: bold; cursor: pointer; background-color: #303030;">Myki on Campus<span id="campusFinderIcon" style="font-size: 1.3em; float: right; display: block;">+</span></button></p>
+
+             <div id="campusFinderInfo" style="overflow: hidden; display: none;">
+			 
+			 <nav class="navbar navbar-inverse" style="width:98%">
+			    <div class="container-fluid">
+				   <ul class="nav navbar-nav">
+				      <li id="campusMelb" class="active"><a href="#">Bundoora</a></li>
+					  <li id="campusCity"><a href="#">City</a></li>
+					  <li id="campusAlbury"><a href="#">Albury-Wodonga</a></li>
+					  <li id="campusSydney"><a href="#">Sydney</a></li>
+					  <li id="campusBendigo"><a href="#">Bendigo</a></li>
+				   </ul>
+				</div>
+			 </nav>
+			 <div style="min-width:auto;">
+			 <img id="campusPic" src="static/img/img1.jpg" alt="Myki locations on campus" />
+			 </div>
+		     </div>
+		</div>
+	  </div>
+	</div>
+<!-- FOOTER SPACER -->
+<div style="position:absolute;width:99.5%;height:4.5%;">
+&nbsp;
+</div>
+
+<div id="stickybar" style="position:fixed;color: white;padding: 5px;right:0;left:0;visibility:hidden;background: #303030;z-index: 10000;width:auto;font-weight:bold;">
+<div style="text-align:center;padding-top:3px">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
+
+<div class="row" style="margin-left:10px;margin-top:10px">
+
+<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+	<b>Services</b>
+	<ul>
+	<li><a href="#" style="color:white;text-decoration:underline;">Plan Journey</a></li>
+	<li><a href="#" style="color:white;text-decoration:underline;">Next 5</a></li>
+	<li><a href="#" style="color:white;text-decoration:underline;">Next Glider</a></li>
+	<li><a href="#" style="color:white;text-decoration:underline;">Campus Map</a></li>
+	<li><a href="#" style="color:white;text-decoration:underline;">Kiosk</a></li>
+	</ul>
+</div>
+
+<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+	<b>Information</b>
+	<ul>
+	<li><a href="#" style="color:white;text-decoration:underline;">Myki for Students</a></li>
+	</ul>
+</div>
+
+<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+	<b>About</b>
+	<ul>
+	<li><a href="#" style="color:white;text-decoration:underline;">About Us</a></li>
+	<li><a href="#" style="color:white;text-decoration:underline;">Contact Us</a></li>
+	</ul>
+</div>
+
+<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+	<ul><br/>
+	<li><a href="#" style="color:white;text-decoration:underline;">Admin</a></li>
+	</ul>
+</div>
+
+</div>
+
+</div>
+	</body>
+</html>
