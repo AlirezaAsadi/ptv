@@ -21,6 +21,10 @@ module.exports = function (app) {
         res.render('map');
     });
 
+    app.get('/glider', function (req, res) {
+        res.render('glider');
+    });
+
     app.get('/about', function (req, res) {
         res.render('about');
     });
