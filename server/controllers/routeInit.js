@@ -29,7 +29,7 @@ module.exports = function (app) {
         res.render('about');
     });
     
-    app.get('/contactUs', function (req, res) {
+    app.get('/contact', function (req, res) {
         res.render('contact');
     });
 
