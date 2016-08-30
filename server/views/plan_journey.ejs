@@ -1,5 +1,14 @@
 <% include partials/header %>
 
+<style>
+.border {
+    border: solid 0.01px #d4afaf;
+    background-color: cornsilk;
+    display:none;
+}
+</style>
+
+
 <body id="plan_journy">
 
     <!-- Navigation -->
@@ -42,7 +51,13 @@
                                 <label><input type="radio" name="optradio">Landmarks</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Station,stop,address">
+                                <input list="departureDropdown" type="text" name="departure" class="form-control" placeholder="Station,stop,address">
+									 
+									<datalist id="departureDropdown">
+										<option value="small"/>
+										<option value="medium"/>
+										<option value="large"/>
+									</datalist>
                             </div>
                             <h4>Going to</h4>
                             <div class="radio">
@@ -51,7 +66,7 @@
                                 <label><input type="radio" name="optradio">Landmarks</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Station,stop,address">
+                                <input type="text" name="arrival" class="form-control" placeholder="Station,stop,address">
                             </div>
                             <!-- <div class="dropdown">
                                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Depart
@@ -81,7 +96,7 @@
                                     <input type="date"></input>
                                 </div>
 
-                                <button type="button" class="btn btn-primary">Show journey</button>
+                                <button name="showJourney" type="button" class="btn btn-primary">Show journey</button>
                         </form>
                     </div>
                 </div> 
@@ -95,29 +110,23 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><h5>Select your journey options</h5></div>
                     <div class="panel-body">
-                        <h5>Leaving from :</h5>
-                        <h5>Going to :</h5>
+                        <h5>Leaving from :<span style="font-weight:bold" name="leavingFrom"></span></h5>
+                        <h5>Going to :<span style="font-weight:bold" name="goingTo"></span></h5>
                         <h5>Departing after :</h5>
-
+                            <div name="journeyOptions">
                                 <!-- Start of bus block -->
-                                <div class="col-sm-12 box-timetable-right big-box">
+                                <div class="col-sm-12 box-timetable-right big-box border">
                                     <div class="col-sm-7 no-padding ">
-
                                         <div class="col-sm-3 no-padding">
-
                                             <img src="static/img/bus.jpg" class="responsive vih-pic">
-
                                         </div>
-
-                                        <div class="col-sm-9 time-table">
-
-                                            <h4 style="font-size: 1.2em">546- To Kew</h4>
-                                            <p>Via kew</p>
-
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/bus.jpg" class="responsive vih-pic">
                                         </div>
-
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/bus.jpg" class="responsive vih-pic">
+                                        </div>
                                     </div>
-
                                     <div class="col-sm-5">
                                         <BR>
                                         10 Minutes
@@ -126,31 +135,78 @@
                                 <!-- End of bus block -->
 
                                 <!-- Start of tram block -->
-                                <div class="col-sm-12  box-timetable-left big-box">
+                                <div class="col-sm-12  box-timetable-left big-box border">
+                                        
                                     <div class="col-sm-7 no-padding ">
-
                                         <div class="col-sm-3 no-padding">
-
-                                            <img src="static/img/tram.png" class="responsive vih-pic">
-
+                                            <img src="static/img/bus.png" class="responsive vih-pic">
                                         </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/bus.png" class="responsive vih-pic">
+                                        </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/tram.png" class="responsive vih-pic">
+                                        </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/iconWalk.png" class="responsive vih-pic">
+                                        </div>
+                                    </div>
 
-                                        <div class="col-sm-9 time-table">
-
-                                            <h4 style="font-size: 1.2em">350 - To city</h4>
-                                            <p>Via highway</p>
-
+                                    <div class="col-sm-5 tram-time-button">
+                                        <BR>
+                                        13 Minutes
+                                    </div>
+                                </div>
+                                <!-- End of tram block -->
+                                  <!-- Start of tram block -->
+                                <div class="col-sm-12  box-timetable-left big-box border">
+                                        
+                                    <div class="col-sm-7 no-padding ">
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/tram.png" class="responsive vih-pic">
+                                        </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/bus.png" class="responsive vih-pic">
+                                        </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/bus.png" class="responsive vih-pic">
                                         </div>
 
                                     </div>
 
                                     <div class="col-sm-5 tram-time-button">
                                         <BR>
-                                        11 Minutes
+                                        14 Minutes
                                     </div>
                                 </div>
                                 <!-- End of tram block -->
+                                  <!-- Start of tram block -->
+                                <div class="col-sm-12  box-timetable-left big-box border">
+                                        
+                                    <div class="col-sm-7 no-padding ">
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/tram.png" class="responsive vih-pic">
+                                        </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/tram.png" class="responsive vih-pic">
+                                        </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/bus.png" class="responsive vih-pic">
+                                        </div>
+                                        <div class="col-sm-3 no-padding">
+                                            <img src="static/img/iconWalk.png" class="responsive vih-pic">
+                                        </div>
 
+                                    </div>
+
+                                    <div class="col-sm-5 tram-time-button">
+                                        <BR>
+                                        12 Minutes
+                                    </div>
+                                </div>
+                                <!-- End of tram block -->
+								
+                        </div>
                     </div>
                 </div> 
             </div>
@@ -199,16 +255,88 @@
 
 
 <script>
+var app={};
+
+app.constants={
+    inputDepart : $('[name="departure"]'),
+    inputArrival: $('[name="arrival"]'),
+    showJourneybtn :$('button[name="showJourney"]')
+}
+app.functions={
+    apiCalls:{
+        searchLoc:function(loc,direction)
+        {
+         var param = {"keyword" : loc};
+
+            $.post("/services/kiosk/testMethod", param, function(data){
+		        //console.log(data);
+                if(direction=='depart')
+                {
+                for(var i=0;i<$(data).length;i++)
+                {
+                
+                  if($(data)[i].result.transport_type=='tram')
+                  {
+                  console.log(i,$('datalist#departureDropdown'));
+                  $('datalist#departureDropdown').append('<option val="1">'+$(data)[i].result.location_name+'</option>');
+                  }
+                  else if($(data)[i].result.transport_type=='train') {
+                   console.log(i,$('datalist#departureDropdown'));
+                  $('datalist#departureDropdown').append('<option val="1">'+$(data)[i].result.line_name+'</option>');
+                  }
+                }
+                    //$('datalist[name="departureDropdown"]')
+                }
+                else{
+                    //$('datalist[name="departureDropdown"]')
+                }
+	        });
+        }
+    },
+    
+    bindingFunctions:{
+        departureload:function(){
+            $(app.constants.inputDepart).focusout(function(){
+             var val=$(this).val();
+             app.functions.apiCalls.searchLoc(val,'depart');
+            }); 
+        },
+        arrivalLoad:function(){
+            $(app.constants.inputArrival).focusout(function(){
+             var val=$(this).val();
+             app.functions.apiCalls.searchLoc(val,'arrival');
+            }); 
+        },
+        showJourneyclick:function(){
+            $(app.constants.showJourneybtn).click(function(){
+            var leavingfrom=$('input[name="departure"]').val();
+            var goingTo=$('input[name="arrival"]').val();
+               $('span[name="leavingFrom"]').html(leavingfrom);
+               $('span[name="goingTo"]').html(goingTo);
+               $('.border').show(); 
+            });
+        }   
+    }
+}
+
 $(document).ready(function(){
 
+app.functions.bindingFunctions.departureload();
+app.functions.bindingFunctions.arrivalLoad();
+app.functions.bindingFunctions.showJourneyclick();
+
+
+
+/*
     var param = {
-                    "keyword" : "north richmond",
-                    "name" : "north richmond"
+                    "keyword" : "north richmond"
                 };
 	$.post("/services/kiosk/testMethod", param, function(data){
 
 		console.log(data);
 	});
+
+*/
 });
 
 </script>
