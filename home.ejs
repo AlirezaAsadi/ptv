@@ -1,12 +1,13 @@
 <% include partials/header %>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- jQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
-    <script src="static/js/vendors/bootstrap-toolkit.js"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+<script src="static/js/vendors/bootstrap-toolkit.js"></script>
 	
-	
-	<script>
+
+<script>
 jQuery(document).ready(function()
 {
     jQuery('.campusSelect').click(function()
@@ -15,6 +16,8 @@ jQuery(document).ready(function()
  })
 });
 </script>
+
+
 	<!-- STICKY BAR -->
 	<script>
 	/*Expandable Sticky Bar (Initial: Nov 1st, 2010)
@@ -109,6 +112,7 @@ var mystickybar= new expstickybar({
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.css">
 
+	<!-- STICKY BAR -->
 	<script>
 	(function($, viewport){
     $(document).ready(function() {
@@ -240,54 +244,55 @@ var mystickybar= new expstickybar({
 </script>
 
 <style>
-body{
-	background: -moz-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / ff3.6+ /
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(154,23,15,1)), color-stop(100%, rgba(234,109,34,1))); / safari4+,chrome /
-	background: -webkit-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / safari5.1+,chrome10+ /
-	background: -o-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / opera 11.10+ /
-	background: -ms-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / ie10+ /
-	background: linear-gradient(0deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / w3c /
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a170f', endColorstr='#ea6d22',GradientType=0 ); / ie6-9 /
-	height: 100%;
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-.campus li a{	
-	color: #FF9900;
-	font-size: 1.30em;
-}
-
-.campus li a:visited {
-	background-color: #990000;
-}
-
-.campus li a:hover{
-	background-color: #990000;
-    color: #FFFFFF;
-}
-
-.service ul {
-	font-size:1.30em; 
-	list-style: none;
-}
-
-.nServices h2{
-	width: 100%; 
-	height: 50px; 
-	color: #FF9900;
-	padding: 10px;" 
-}
-
-.nServices h4{
-	background-color: #262626; 
-	width: 100%; 
-	color: #FF9900;
-	padding: 10px;
-	align = "left"
-}
+	body{
+		background: -moz-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / ff3.6+ /
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(154,23,15,1)), color-stop(100%, rgba(234,109,34,1))); / safari4+,chrome /
+		background: -webkit-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / safari5.1+,chrome10+ /
+		background: -o-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / opera 11.10+ /
+		background: -ms-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / ie10+ /
+		background: linear-gradient(0deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / w3c /
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a170f', endColorstr='#ea6d22',GradientType=0 ); / ie6-9 /
+		height: 100%;
+		margin: 0;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+	
+	.campus li a{	
+		color: #FF9900;
+		font-size: 1.30em;
+	}
+	
+	.campus li a:visited {
+		background-color: #990000;
+	}
+	
+	.campus li a:hover{
+		background-color: #990000;
+		color: #FFFFFF;
+	}
+	
+	.service ul {
+		font-size:1.20em; 
+		list-style: none;
+	}
+	
+	.nServices h2{
+		width: 100%; 
+		height: 50px; 
+		color: #FF9900;
+		padding: 10px;" 
+	}
+	
+	.nServices h4{
+		background-color: #262626; 
+		width: 100%; 
+		color: #FF9900;
+		padding: 10px;
+		align = "left"
+	}
 </style>
+
 
 <body id="home">
     <!-- Navigation -->
@@ -302,7 +307,7 @@ body{
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="/static/img/logo.png" alt="">
+                <img src="/static/img/logo.png" alt="">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -316,137 +321,498 @@ body{
     <div class="container img-rounded" style = "background-color: #F5F2E3; padding: 5px;">
 
 	
-	<!-- Heading Row -->
+		<!-- Heading Row -->
         <div class="row">
             <div class="col-md-8">
-				<img class="img-responsive img-rounded" src="/static/img/LaTrobeEntrance.png" style="width: 100%; height: 100%; padding: 10px;">
+			<img class="img-responsive img-rounded" src="/static/img/LaTrobeEntrance.png" style="width: 100%; height: 100%; padding: 10px;">
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
                 <h1>Travelling to La Trobe?</h1>
-                <p>La Trobe has been one of Australia's pioneering universities for over forty-five years. Discover our unique history, including our motto and coat of arms.<br>
+				<p>La Trobe has been one of Australia's pioneering universities for over forty-five years. Discover our unique history, including our motto and coat of arms.<br>
 				In 1967, 552 students enrolled at La Trobe University, the third University to open in Victoria.<br>
 				<br>
-                <a class="btn btn-primary btn-lg" style="" href="#">Plan Journey?</a>
+				<a class="btn btn-primary btn-lg" style="" href="#">Plan Journey</a>
             </div>
             <!-- /.col-md-4 -->
         </div>
         <!-- /.row -->
-		<!--box-shadow: 5px 5px 2px #000000;background-color: #e6e6e6;  -->
-	<div class="row">
-		<div class ="Nearby container" style ="border-radius: 7px;padding: 10px;">
-   <div class="Navigationbackground">
-    <div class="nServices">
-     <h2 style="background-image: url(/static/img/pnav.png);" align = "right"><b>Nearby Services</b></h2>
-     <h4><b>Select A Campus:</b></h4>
-    </div>
-    <div class="Navbar">
-     <nav>
-      <ul class="nav nav-justified campus" style ="width: 100%; border-top: 1px solid black; border-bottom: 1px solid black; background-color: #262626;" >
-       <li class="campusSelect"><a href="#">Melbourne</a></li>
-       <li class="campusSelect"><a href="#">Bendigo</a></li>
-       <li class="campusSelect"><a href="#">Albury-Wodonga</a></li>
-       <li class="campusSelect"><a href="#">Melbourne City Campus</a></li>
-       <li class="campusSelect"><a href="#">Franklin St</a></li>
-       <li class="campusSelect"><a href="#">Mildura</a></li>
-       <li class="campusSelect"><a href="#">Shepparton</a></li>
-       <li class="campusSelect"><a href="#">Sydney</a></li>
-      </ul>
-     </nav>
-    </div>
-   </div>
-   
-   <div style="padding: 10px;">
-   <!-- Content Row -->
-        <div class="row" id="serviceColumns" style="display:none;">
-            <div class="col-md-4 intro-small-section service">
-                <h4><img src="/static/img/bus.png" style="width: 45px; height: 40px;"/> Bus Services</h4>
-     <ul>
-      <li>250 - To City (Queen St)</li>
-      <li>301 - To Reservoir Station</li>
-      <li>381 - To Whittlesea/Diamond Creek</li>
-      <li>548 - To Kew</li>
-      <li>550 - To Northland SC</li>
-     </ul>
+		
+		<div class="row">
+			<div class="container">
+			<!-- Panels are textured with a grey gradient which is located in the background-image -->
+				<div class="panel-group" id="accordion">
+				
+					<!-- Nearby Services Panel -->
+					<div class="panel panel-default" >
+						<div class="panel-heading">
+							<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#NearbyCollapse">
+							Nearby Services</a>
+							</h4>
+						</div>
+						<div id="NearbyCollapse" class="panel-collapse collapse">
+							<div class="panel-body" ><!--style="background-color: green;">-->
+								
+									<h4><b>Select A Campus:</b></h4>
+								
+								<div class="Navbar">
+									<hr>
+										<ul class="nav nav-justified campus" style ="width: 100%;" >
+											<li class="campusSelect"><a href="#">Melbourne</a></li>
+											<li class="campusSelect"><a href="#">Bendigo</a></li>
+											<li class="campusSelect"><a href="#">Albury-Wodonga</a></li>
+											<li class="campusSelect"><a href="#">Melbourne City Campus</a></li>
+											<li class="campusSelect"><a href="#">Franklin St</a></li>
+											<li class="campusSelect"><a href="#">Mildura</a></li>
+											<li class="campusSelect"><a href="#">Shepparton</a></li>
+											<li class="campusSelect"><a href="#">Sydney</a></li>
+										</ul>
+									<hr>
+								</div>
+								<div style="padding: 10px;">
+								<!-- Content Row -->
+									<div class="row" id="serviceColumns" style="display:none;">
+										<!-- /.col-md-4 -->
+										<div class="col-md-4 intro-small-section service panel-title">
+											<h4><a data-toggle="collapse" data-parent="#NearbyCollapse" href="#BRCollapse" style="font-size: 1.30em; color: black;">
+												<img src="/static/img/bus.png" style="width: 45px; height: 40px;"/> Nearby Bus Services</a></h4>
+											<div id="BRCollapse" class="panel-collapse collapse">
+												<ul>
+													<li><a>250 - To City (Queen St)</a></li>
+													<hr>
+													<li><a>301 - To Reservoir Station</a></li>
+													<hr>
+													<li><a>381 - To Whittlesea/Diamond Creek</a></li>
+													<hr>
+													<li><a>548 - To Kew</a></li>
+													<hr>
+													<li><a>550 - To Northland SC</a></li>
+												</ul>
+											</div>
+										</div>
+										
+										<!-- /.col-md-4 -->
+										<div class="col-md-4 intro-small-section service panel-title">
+											<h4><a data-toggle="collapse" data-parent="#NearbyCollapse" href="#TMCollapse" style="font-size: 1.30em; color: black;">
+												<img src="/static/img/tram.png" style="width: 45px; height: 40px"/> Nearby Tram Services</a></h4>
+											<div id="TMCollapse" class="panel-collapse collapse">	
+												<ul>
+													<li><a>86 - To Bundoora RMIT</a></li>
+													<hr>
+													<li><a>86 - To Waterfront City Docklands</a></li>
+													<hr>
+													<li><a>86 - To Bundoora RMIT</a></li>
+													<hr>
+													<li><a>86 - To Waterfront City Docklands</a></li>
+													<hr>
+													<li><a>86 - To Bundoora RMIT</a></li>
+												</ul>
+											</div>
+										</div>
+										
+										<!-- /.col-md-4 -->
+										<div class="col-md-4 intro-small-section service panel-title">
+											<h4><a data-toggle="collapse" data-parent="#NearbyCollapse" href="#TRCollapse" style="font-size: 1.30em; color: black;">
+												<img src="/static/img/train.png" style="width: 40px; height: 40px"/> Nearby Train Services</a></h4>
+											<div id="TRCollapse" class="panel-collapse collapse">
+												<ul>
+													<li><a>South Morang - Flinders Street </a></li>
+													<hr>
+													<li><a>South Morang - Flinders Street </a></li>
+													<hr>
+													<li><a>South Morang - Parliament</a></li> 
+													<hr>
+													<li><a>South Morang - Parliament</a></li>  
+													<hr>
+													<li><a>South Morang - Flinders Street </a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Journey Planner Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#JourneyPlannerCollapse">
+							Journey Planner</a>
+							</h4>
+						</div>
+						<div id="JourneyPlannerCollapse" class="panel-collapse collapse">
+							<div class="panel-body">
+							
+							<!-- Begin Journey Planner Section -->
+								<div class="panel panel-default">
+									
+										<div class="panel-body">
+										<h3>Enter your journey details</h3>
+										<hr>
+										<h4>Leaving from</h4>
+										<form>
+											<div class="radio">
+												<label><input type="radio" name="optradio">Stops</label>
+												<label><input type="radio" name="optradio">Addresses</label>
+												<label><input type="radio" name="optradio">Landmarks</label>
+											</div>
+											<div class="form-group">
+												<input type="text" class="form-control" placeholder="Station,stop,address">
+											</div>
+											<h4>Going to</h4>
+											<div class="radio">
+												<label><input type="radio" name="optradio">Stops</label>
+												<label><input type="radio" name="optradio">Addresses</label>
+												<label><input type="radio" name="optradio">Landmarks</label>
+											</div>
+											<div class="form-group">
+												<input type="text" class="form-control" placeholder="Station,stop,address">
+											</div>
+											<div class="dropdown">
+												<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Depart
+												<span class="caret"></span></button>
+												<ul class="dropdown-menu">
+													<li><a href="#">Arrive</a></li>
+													<li><a href="#">Depart</a></li>
+												</ul>
+												<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Date
+												<span class="caret"></span></button>
+												<ul class="dropdown-menu">
+													<li><a href="#">01</a></li>
+													<li><a href="#">02</a></li>
+													<li><a href="#">03</a></li>
+												</ul>
+												<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Month-Year
+												<span class="caret"></span></button>
+												<ul class="dropdown-menu">
+													<li><a href="#">January-16</a></li>
+													<li><a href="#">febraury-16</a></li>
+													<li><a href="#">March-16</a></li>
+												</ul>
+											</div>
+                                <div class="form-group">
+                                    <input type="date"></input>
+                                </div>
 
-   </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4 intro-small-section service">
-                <h4><img src="/static/img/tram.png" style="width: 45px; height: 40px"/> Tram Services</h4>
-    <ul>
-      <li>86 - To Bundoora RMIT</li>
-      <li>86 - To Waterfront City Docklands</li>
-      <li>86 - To Bundoora RMIT</li>
-      <li>86 - To Waterfront City Docklands</li>
-      <li>86 - To Bundoora RMIT</li>
-     </ul>
-            
+                                <button type="button" class="btn btn-primary">Show journey</button>
+                        </form>
+                    </div>
+                </div> 	
+				<div class="panel panel-default">
+                    <div class="panel-heading"><h5>Select your journey options</h5></div>
+                    <div class="panel-body">
+                        <h5>Leaving from :</h5>
+                        <h5>Going to :</h5>
+                        <h5>Departing after :</h5>
+
+                                <!-- Start of bus block -->
+                                <div class="col-sm-12 box-timetable-right big-box">
+                                    <div class="col-sm-7 no-padding ">
+
+                                        <div class="col-sm-3 no-padding">
+
+                                            <img src="static/img/bus.png" class="responsive vih-pic">
+
+                                        </div>
+
+                                        <div class="col-sm-9 time-table">
+
+                                            <h4 style="font-size: 1.2em">546- To Kew</h4>
+                                            <p>Via kew</p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <BR>
+                                        10 Minutes
+                                    </div>
+                                </div>
+                                <!-- End of bus block -->
+
+                                <!-- Start of tram block -->
+                                <div class="col-sm-12  box-timetable-left big-box">
+                                    <div class="col-sm-7 no-padding ">
+
+                                        <div class="col-sm-3 no-padding">
+
+                                            <img src="static/img/tram.png" class="responsive vih-pic">
+
+                                        </div>
+
+                                        <div class="col-sm-9 time-table">
+
+                                            <h4 style="font-size: 1.2em">350 - To city</h4>
+                                            <p>Via highway</p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-5 tram-time-button">
+                                        <BR>
+                                        11 Minutes
+                                    </div>
+                                </div>
+                                <!-- End of tram block -->
+								
+
+                    </div>
+                </div>
+				
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h5>View your journey result</h5></div>
+                    <div class="panel-body">
+                    <h4><span class="label label-success">Option 3: 16min Zones: 1</span></h4>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">First option</a>
+                            <a href="#" class="list-group-item">Second option</a>
+                            <a href="#" class="list-group-item">Third option</a>
+                        </div>
+
+
+                </div> 
             </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4 intro-small-section service">
-                <h4><img src="/static/img/train.png" style="width: 40px; height: 40px"/> Train Services</h4>
-    <ul>
-      <li>South Morang - Flinders Street </li>
-      <li>South Morang - Flinders Street </li>
-      <li>South Morang - Parliament </li>
-      <li>South Morang - Parliament</li>
-      <li>South Morang - Flinders Street </li>
-     </ul>
-            </div>
-            <!-- /.col-md-4 -->
+				
+				
+				
+				
+				
+				
+				
+							</div>
+						</div>
+					</div>
+					
+					<!-- Map Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#MapCollapse">
+							Explore La Trobe</a>
+							</h4>
+						</div>
+						<div id="MapCollapse" class="panel-collapse collapse">
+							<div class="panel-body">
+							
+							
+			<div class="container">
+
+            <hr>
+
+            <!-- Content Row -->
+            <div class="row">
+                <h2>Explore Your Campus</h2>
+                <h4 style="margin-left: 25px">Enter the location you want to search.</h4>            
+                <form id = "Search" style= "margin-left: 50px">
+                <input type="text" name="search" placeholder="Search.." style="margin-bottom: 10px">
+                </form>
+                    
+                <div class="col-md-12 center" id="mapContainer" style="margin-left: 50px; margin-right: 10px; height: 400px; width: 500px"></div>
+                <div class="col-md-13 center" id="street-view" style="height: 400px; width: 500px"></div>
+
+                <h3>Attractions around you</h3>
+
+                <div class="content" style="max-width:700px ; margin-left: 50px">
+
+                        <img class="mySlides w3-animate-fading" src="/static/img/2014_0006_070.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/Agora-in-Winter.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/img142-1.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/Lims-La-Trobe-University-Molecular-Science-Building-Lyons-Architects-3.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/maxresdefault.jpg" style="width:100%">
+                        <img class="mySlides w3-animate-fading" src="/static/img/SetWidth1000-130725_lims_4.jpg" style="width:100%">
+
+                </div>
+
+            </div> 
+			
+			
+            <!-- /.row -->
         </div>
-   </div>
-  </div>
+		
+		
+							</div>
+						</div>
+					</div>
+					
+					<!-- Kiosk Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#KioskCollapse">
+							Kiosk</a>
+							</h4>
+						</div>
+						<div id="KioskCollapse" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>This will be the slide for the kiosk</p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Glider Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#GliderCollapse">
+							La Trobe Glider</a>
+							</h4>
+						</div>
+						<div id="GliderCollapse" class="panel-collapse collapse">
+							<div class="panel-body">
+								This will be the slide for the glider
+							</div>
+						</div>
+					</div>
+					
+					<!-- About Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#AboutCollapse">
+							About Us</a>
+							</h4>
+						</div>
+						<div id="AboutCollapse" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div id="mainBody" class="col-md-8" style="border-right: 1px solid darkgrey;">
+									<h3>About Travel La Trobe</h3>
+									<h4>And how we help you</h4>
+									<p>
+										Travel La Trobe's services are designed to get students to and from campus in a quick and efficient manner. By utilising 
+										live data from Public Transport Victoria, we are able to provide students with highly accurate schedules, timetables and 
+										service location information. 
+									</p>
+									<p>
+										As a project originally conceived and developed by La Trobe ICT students, Travel La Trobe was created with 3 tenants in mind:				
+									</p>
+									<p>&nbsp;</p>
+									<div class="row text-center">
+										<div id="glyphi1" class="col-xs-12 col-sm-4 col-md-4">
+											<p><span style="font-size:5em" class="glyphicon glyphicon-time"></span></p><p style="text-align:center;">Deliver timely and accurate information</p>
+										</div>
+										<div id="glyphi2" class="col-xs-12 col-sm-4 col-md-4">
+											<p><span style="font-size:5em" class="glyphicon glyphicon-screenshot"></span></p><p style="text-align:center;">Target student specific transport needs</p>
+										</div>
+										<div id="glyphi3" class="col-xs-12 col-sm-4 col-md-4">
+											<p><span style="font-size:5em" class="glyphicon glyphicon-phone"></span></p><p style="text-align:center;">Make the service accessible and user-friendly</p>
+										</div>
+									</div>
+									<p>&nbsp;</p>
+									<p>We hope you enjoy using the service as much as we had creating it. We welcome your feedback; please leave us comments, suggestions or queries and we will respond promptly.</p>
+								</div>
+								<div class="col-md-4">
+									<h3>Contact Us</h3>
+									<form class="form-vertical" action="" method="post" id="contact_form" enctype="multipart/form-data">
+									<fieldset>
+			
+									<!-- Name -->
+									<div class="form-group">
+										<label class="col-md-4 control-label input-sm">Name</label>  
+											<div class="col-md-12 inputGroupContainer">
+												<div class="input-group" style="padding-right:15px;">
+													<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+													<input name="first_name" id="first_name" placeholder="First Name" class="form-control input-sm" type="text">
+												</div>
+											</div>
+									</div>
+							
+									<!-- Email-->
+									<div class="form-group">
+										<label class="col-md-4 control-label input-sm">E-Mail</label>  
+											<div class="col-md-12 inputGroupContainer">
+												<div class="input-group" style="padding-right:15px;">
+													<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+													<input name="email" id="email" placeholder="E-Mail Address" class="form-control input-sm" type="text" data-error="Please enter a valid e-mail address">
+												</div>
+											</div>
+									</div>
+							
+									<!-- Comments Area -->
+									<div class="form-group">
+										<label class="col-md-4 control-label input-sm">Comments</label>
+											<div class="col-md-12 inputGroupContainer">
+												<div class="input-group" style="padding-right:15px;">
+													<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+													<textarea class="form-control input-sm" name="comment" id="comment" placeholder="Comment" rows="10"></textarea>
+												</div>
+											</div>
+									</div>
+							
+									<!-- Send Button -->
+									<div class="form-group">
+										<label class="col-md-4 control-label"></label>
+											<div class="col-md-12">
+												<button type="submit" class="btn btn-info" >Send <span class="glyphicon glyphicon-send"></span></button>
+											</div>
+									</div>
+							
+									</fieldset>
+									</form><br/>
+									<!-- Success message -->
+									<div class="text-center alert alert-success" style="margin: 0 auto; width:99%; display:none;" role="alert" id="success_message">
+										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+										Thank you for contacting Travel La Trobe. We will reply shortly.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+			</div>
 		</div>
+		
 		<br>
-        <!-- Footer -->
-<!-- FOOTER SPACER -->
-	<div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
-		<div class ="navbar-inverse" style="text-align:center;padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
-
-			<div class="row" style="margin-left:10px;margin-top:10px;">
-
-				<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-					<h4 style="color:#FF9900;">SERVICES</h4>
+		
+		<!--Comment Out for Footer -->
+		
+		<!-- FOOTER SPACER -->
+		<!--
+		<div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
+			<div class ="navbar-inverse" style="text-align:center;padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
+				<div class="row" style="margin-left:10px;margin-top:10px;">
+					<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+						<h4 style="color:#FF9900;">SERVICES</h4>
+							<ul style="list-style: none;">
+								<li><a href="#" style="color: white;">Plan Journey</a></li>
+								<li><a href="#" style="color: white;">Next 5</a></li>
+								<li><a href="#" style="color: white;">Next Glider</a></li>
+								<li><a href="#" style="color: white;">Campus Map</a></li>
+								<li><a href="#" style="color: white;">Kiosk</a></li>
+							</ul>
+						</div> 
+						
+					<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+						<h4 style="color:#FF9900;">INFORMATION</h4>
 						<ul style="list-style: none;">
-							<li><a href="#" style="color: white;">Plan Journey</a></li>
-							<li><a href="#" style="color: white;">Next 5</a></li>
-							<li><a href="#" style="color: white;">Next Glider</a></li>
-							<li><a href="#" style="color: white;">Campus Map</a></li>
-							<li><a href="#" style="color: white;">Kiosk</a></li>
+							<li><a href="/myki" style="color: white;">Myki for Students</a></li>
+							<li><a href="https://lms.latrobe.edu.au/login/" style="color: white;">LMS</a></li>
 						</ul>
-				</div>
-
-			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-				<h4 style="color:#FF9900;">INFORMATION</h4>
-				<ul style="list-style: none;">
-					<li><a href="/myki" style="color: white;">Myki for Students</a></li>
-					<li><a href="https://lms.latrobe.edu.au/login/" style="color: white;">LMS</a></li>
-				</ul>
+					</div>
+		
+					<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+						<h4 style="color:#FF9900;">ABOUT</h4>
+						<ul style="list-style: none;">
+							<li><a href="#" style="color:white;">About Us</a></li>
+							<li><a href="#" style="color:white;">Contact Us</a></li>
+						</ul>
+					</div>
+			
+					<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+						<h4 style="color: #FF9900;">STAFF</h4>
+						<ul style="list-style: none;">
+							<li><a href="#" style="color: white;">Admin</a></li>
+						</ul>
+					</div> 
+				</div> 
 			</div>
-
-			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-				<h4 style="color:#FF9900;">ABOUT</h4>
-				<ul style="list-style: none;">
-					<li><a href="#" style="color:white;">About Us</a></li>
-					<li><a href="#" style="color:white;">Contact Us</a></li>
-				</ul>
-			</div>
-
-			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-				<h4 style="color: #FF9900;">STAFF</h4>
-				<ul style="list-style: none;">
-					<li><a href="#" style="color: white;">Admin</a></li>
-				</ul>
-			</div>
-
-		</div>
-
-	</div>
-</div>
-
+		</div> 
     </div>
-	
+	-->
 	
     <!-- /.container -->
     <script>
@@ -472,15 +838,52 @@ body{
             });
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrzOfCzSnWmWbqGGdpM0p9FJAq152ORww&callback=iniMap"
-        async defer></script>
+    
+	
+	<script>
+            var myIndex = 0;
+            carousel();
 
-      <!-- Scripts-->
-      <script type="text/javascript" src="/static/js/config.js"></script>
-      <script type="text/javascript" data-main="modules/map/init" src="/static/js/vendors/r.js"></script>
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                   x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) {myIndex = 1}
+                x[myIndex-1].style.display = "block";
+                setTimeout(carousel, 9000);
+            }
 
- 
-  
+
+          var map;
+          function initMap() {
+            map = new google.maps.Map(document.getElementById('mapContainer'), {
+              center: {lat: -37.721185, lng: 145.048395},
+              zoom: 16
+            });
+            panorama = new google.maps.StreetViewPanorama(
+                document.getElementById('street-view'),
+                {
+                  position: {lat: -37.720861, lng: 145.046487},
+                  pov: {heading: 180, pitch: 0},
+                  zoom: 1
+                  });
+            var marker = new google.maps.Marker({
+              position: {lat: -37.720861, lng: 145.046487},
+              map: map,
+              title: 'bus stop' 
+              });     
+            
+          }
+        </script>
+
+    <!-- Scripts-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrzOfCzSnWmWbqGGdpM0p9FJAq152ORww&callback=iniMap" async defer></script>
+    <script type="text/javascript" src="/static/js/config.js"></script>
+    <script type="text/javascript" data-main="modules/map/init" src="/static/js/vendors/r.js"></script>
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
