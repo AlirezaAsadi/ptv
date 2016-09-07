@@ -5,6 +5,10 @@ module.exports = function (app) {
         res.render('kiosk');
     });
 
+    app.get('/kiosk2', function (req, res) {
+        res.render('kiosk2');
+    });
+
     app.get('/', function (req, res) {
         res.render('home');
     });
