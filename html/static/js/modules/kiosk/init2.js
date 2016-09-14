@@ -40,6 +40,21 @@ define([
 
                         // Sort by dest code
                         items.sort(compare);
+                        
+                        // Put tram at the end
+                        var trams = [];
+                        var buses = [];
+                        for(var i = 0;i < items.length;i++){
+                            var itm = items[i];
+                            if (itm.transport_type == "tram"){
+                                trams.push(itm);
+                            }else if (itm.transport_type == "bus"){
+                                buses.push(itm);
+                            }
+                        }
+                        items = [];
+                        items = items.concat(buses);
+                        items = items.concat(trams);
 
                         var iCounter = 0;
                         var iColId = 1;
@@ -49,6 +64,7 @@ define([
                         setTimeout(function () {
                             $('.banner').html("Last update : " + (new Date()).toLocaleTimeString());
                             $(".time-table-parents .main-column").html('');
+                            
                             for (var i in items) {
                                 items[i].stops.sort(compare_stops);
                                 iCounter++;
@@ -92,7 +108,7 @@ define([
             updateData();
             setInterval(function () {
                 updateData();
-            }, 10000);
+            }, 30000);
 
 
 
