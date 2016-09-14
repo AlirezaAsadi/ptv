@@ -5,6 +5,28 @@ module.exports = function (api) {
     var key = "d4d21114-10d3-11e6-a65e-029db85e733b";
     var developerId = 1000755;
 
+    var train_stops = [
+        {
+            distance: 0.00000538514,
+            lat: -37.71689,
+            location_name: "Reservoir Station",
+            lon: 145.006989,
+            route_type: 0,
+            stop_id: 1161,
+            suburb: "Reservoir",
+            transport_type: "train"
+        },
+        {
+            distance: 0.00000424370228,
+            lat: -37.72601,
+            location_name: "Macleod Railway Station",
+            lon: 145.069153,
+            route_type: 0,
+            stop_id: 1117,
+            suburb: "Macleod",
+            transport_type: "train",
+        }
+    ];
     var lat = -37.720616;
     var lon = 145.046309;
     var max_stop_near_by = 6;
@@ -27,6 +49,11 @@ module.exports = function (api) {
                 }
                 i++;
 
+            });
+
+            // Add train stops
+            train_stops.forEach(function (train_stop) {
+                promises.push(broadNextDeparturesSync(api.ptv.mode.train, train_stop, 2));
             });
 
             return Promise.all(promises).then(function (allResult) {
@@ -171,22 +198,22 @@ module.exports = function (api) {
         });
         return item;
     };
-	
-	var testMethod = function(req, callback){
+
+    var testMethod = function (req, callback) {
         //"/v2/nearme/latitude/-37.817993/longitude/144.981916"
-		var keyword = req.body.keyword; // $_POST["keyword"]
-		var name = req.body.name; // $_POST["keyword"]
-        pt.search(keyword, function(err , result){
-            if(err){
+        var keyword = req.body.keyword; // $_POST["keyword"]
+        var name = req.body.name; // $_POST["keyword"]
+        pt.search(keyword, function (err, result) {
+            if (err) {
                 throw err;
             }
             callback(result);
         });
-	};
+    };
 
     return {
         getData: _getData,
-		testMethod: testMethod
+        testMethod: testMethod
     };
 
 };

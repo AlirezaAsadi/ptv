@@ -9,6 +9,9 @@ define([
 ) {
         $(document).ready(function () {
 
+            setInterval(function(){
+                $('.banner span').html("Now : " + (new Date()).toLocaleTimeString());
+            },1000);
 
             function getWords(str) {
                 return str.replace("/", " ").split(/\s+/).slice(0, 3).join(" ");
@@ -32,7 +35,7 @@ define([
 
             // Get data from server-side
             var updateData = function () {
-                $('.banner').html("Updating..");
+                $('.banner').html("Updating...");
                 
                 $.post("/services/kiosk/getData", "", function (data) {
                     if (data) {
@@ -44,17 +47,21 @@ define([
                         // Put tram at the end
                         var trams = [];
                         var buses = [];
+                        var trains = [];
                         for(var i = 0;i < items.length;i++){
                             var itm = items[i];
                             if (itm.transport_type == "tram"){
                                 trams.push(itm);
                             }else if (itm.transport_type == "bus"){
                                 buses.push(itm);
+                            }else if (itm.transport_type == "train"){
+                                trains.push(itm);
                             }
                         }
                         items = [];
                         items = items.concat(buses);
                         items = items.concat(trams);
+                        items = items.concat(trains);
 
                         var iCounter = 0;
                         var iColId = 1;
@@ -62,7 +69,7 @@ define([
                         $(".time-table-parents .main-column").fadeOut(300);
 
                         setTimeout(function () {
-                            $('.banner').html("Last update : " + (new Date()).toLocaleTimeString());
+                            $('.banner').html("<span></span> Last update : " + (new Date()).toLocaleTimeString());
                             $(".time-table-parents .main-column").html('');
                             
                             for (var i in items) {
@@ -73,6 +80,8 @@ define([
                                 var sHTML = $("#schema_bus").val();
                                 if (itm.transport_type == "tram")
                                     sHTML = $("#schema_tram").val();
+                                else if (itm.transport_type == "train")
+                                    sHTML = $("#schema_train").val();
 
                                 var stops = "";
                                 var iLimitNoOfStops = 0;
@@ -108,7 +117,7 @@ define([
             updateData();
             setInterval(function () {
                 updateData();
-            }, 30000);
+            }, 10000);
 
 
 

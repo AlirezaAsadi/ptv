@@ -5,7 +5,7 @@
 <textarea style="display:none" id="schema_bus">
 
 	<!-- Start of bus block -->
-	<div class="col-lg-12 box-timetable-right big-box">
+	<div class="col-sm-12 col-lg-12 box-timetable-right big-box">
 		<div class="col-lg-5 display_table no-padding ">
 
 			<div class="col-lg-4 display_table no-padding">
@@ -35,7 +35,7 @@
 
 <textarea style="display:none" id="schema_tram">
 	<!-- Start of tram block -->
-	<div class="col-lg-12  box-timetable-left big-box">
+	<div class="col-sm-12 col-lg-12  box-timetable-left big-box">
 		<div class="col-lg-5  display_table no-padding ">
 
 			<div class="col-lg-4 display_table no-padding">
@@ -62,10 +62,37 @@
 </textarea>
 
 
+<textarea style="display:none" id="schema_train">
+	<!-- Start of train block -->
+	<div class="col-lg-12  box-timetable-left big-box">
+		<div class="col-lg-5  display_table no-padding ">
+
+			<div class="col-lg-4 display_table no-padding">
+				<div class="display_cell">
+					<img src="static/img/train.png" class="responsive vih-pic">
+				</div>
+			</div>
+
+			<div class="col-lg-8 display_table time-table">
+				<div class="display_cell">
+					<h4 class="trans_code small">{CODE}</h4>
+					<h5 class="trans_title">{TITLE}</h4>
+					<p class="trans_info">{INFO}</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-lg-7 train-time-button">
+			{TIME}
+		</div>
+	</div>
+	<!-- End of train block -->
+</textarea>
 
 
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-sm-12 col-lg-12">
 
 				<div class="header">
 					<div class="banner">
@@ -84,13 +111,13 @@
 
 			<div class="main-content">
 
-				<div class="col-lg-12 time-table-parents">
+				<div class="col-sm-12 col-lg-12 time-table-parents">
 
-						<div class="col-lg-4 main-column col-1"></div>
+						<div class="col-sm-12 col-lg-4 main-column col-1"></div>
 
-						<div class="col-lg-4 main-column col-2"></div>
+						<div class="col-sm-12 col-lg-4 main-column col-2"></div>
 
-						<div class="col-lg-4 main-column col-3"></div>
+						<div class="col-sm-12 col-lg-4 main-column col-3"></div>
 
 				</div>
 
@@ -99,11 +126,23 @@
 		</div>
 
 
+		<div class="row glider-row">
+			<div>1- Plenty Road</div>
+			<div>2- Thomas Cherry</div>
+			<div class="active">3- Union</div>
+			<div>4- Barnes Way</div>
+			<div>5- AgriBio</div>
+			<div>6- Terraces</div>
+			<div>7- Uni Lodge</div>
+			<div>8- Gresswell</div>
+			<div>9- Graduate House</div>
+			<div>10- Polaris</div>
+		</div>
 
 
 		<div class="row footer-row">
 
-			<div class="col-lg-12">
+			<div class="col-sm-12 col-lg-12">
 
 				<div class="footer">
 
@@ -120,7 +159,7 @@
 							</div>
 						</div>-->
 
-						<div class="col-lg-12">
+						<div class="col-sm-12 col-lg-12">
 							<marquee>
 									<p class="footer-font" style="padding-top: 0px;"><img src="static/img/latroube-footer.png" style="vertical-align: middle;"> Welcome to La Trobe University Open Day 2016!</p>
 							</marquee>
