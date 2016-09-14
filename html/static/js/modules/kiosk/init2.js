@@ -32,10 +32,10 @@ define([
 
             // Get data from server-side
             var updateData = function () {
+                $('.banner').html("Updating..");
+                
                 $.post("/services/kiosk/getData", "", function (data) {
                     if (data) {
-                        $('.banner').html("Last update : " + (new Date()).toLocaleTimeString());
-
                         var items = data;
 
                         // Sort by dest code
@@ -44,39 +44,46 @@ define([
                         var iCounter = 0;
                         var iColId = 1;
 
-                        $(".time-table-parents .main-column").html('');
-                        for (var i in items) {
-                            items[i].stops.sort(compare_stops);
-                            iCounter++;
-                            var itm = items[i];
+                        $(".time-table-parents .main-column").fadeOut(300);
 
-                            var sHTML = $("#schema_bus").val();
-                            if (itm.transport_type == "tram")
-                                sHTML = $("#schema_tram").val();
+                        setTimeout(function () {
+                            $('.banner').html("Last update : " + (new Date()).toLocaleTimeString());
+                            $(".time-table-parents .main-column").html('');
+                            for (var i in items) {
+                                items[i].stops.sort(compare_stops);
+                                iCounter++;
+                                var itm = items[i];
 
-                            var stops = "";
-                            var iLimitNoOfStops = 0;
-                            for (var j in itm.stops) {
-                                iLimitNoOfStops++;
-                                if (iLimitNoOfStops > 3)
-                                    break;
-                                var stop = itm.stops[j];
-                                var strTimeString = (Math.floor(stop.time) <= 0) ? "Now" : (Math.floor(stop.time) + ' Minute');
-                                var extra_icon = (Math.floor(stop.time) < 5) ? ' <span class="glyphicon glyphicon-time blinking" aria-hidden="true" style="color:#d30000;position: absolute;margin-left: -30px;margin-top: 15px;font-size: 20px;"></span>' : '';
-                                stops += extra_icon + '<div class="' + itm.transport_type + '-time-item">' + getWords(stop.name.replace("La Trobe Uni ", "").replace("La Trobe University", "")) + ' : <strong>' + strTimeString + '</strong></div>';
+                                var sHTML = $("#schema_bus").val();
+                                if (itm.transport_type == "tram")
+                                    sHTML = $("#schema_tram").val();
+
+                                var stops = "";
+                                var iLimitNoOfStops = 0;
+                                for (var j in itm.stops) {
+                                    iLimitNoOfStops++;
+                                    if (iLimitNoOfStops > 3)
+                                        break;
+                                    var stop = itm.stops[j];
+                                    var strTimeString = (Math.floor(stop.time) <= 0) ? "Now" : (Math.floor(stop.time) + ' Minute');
+                                    var extra_icon = (Math.floor(stop.time) < 5) ? ' <span class="glyphicon glyphicon-time blinking" aria-hidden="true" style="color:#d30000;position: absolute;margin-left: -30px;margin-top: 15px;font-size: 20px;"></span>' : '';
+                                    stops += extra_icon + '<div class="' + itm.transport_type + '-time-item">' + getWords(stop.name.replace("La Trobe Uni ", "").replace("La Trobe University", "")) + ' : <strong>' + strTimeString + '</strong></div>';
+                                }
+
+                                sHTML = sHTML.replace("{CODE}", (itm.dest_code));
+                                sHTML = sHTML.replace("{TITLE}", (itm.dest_name));
+                                sHTML = sHTML.replace("{INFO}", "");
+                                sHTML = sHTML.replace("{TIME}", stops);
+
+                                $(".time-table-parents .col-" + iColId).append(sHTML);
+                                if (iCounter >= 7) {
+                                    iCounter = 0;
+                                    iColId++;
+                                }
                             }
+                        },300);
 
-                            sHTML = sHTML.replace("{CODE}", (itm.dest_code));
-                            sHTML = sHTML.replace("{TITLE}", (itm.dest_name));
-                            sHTML = sHTML.replace("{INFO}", "");
-                            sHTML = sHTML.replace("{TIME}", stops);
-
-                            $(".time-table-parents .col-" + iColId).append(sHTML);
-                            if (iCounter >= 7) {
-                                iCounter = 0;
-                                iColId++;
-                            }
-                        }
+                        $(".time-table-parents .main-column").fadeIn();
                     }
                 });
 
@@ -85,7 +92,7 @@ define([
             updateData();
             setInterval(function () {
                 updateData();
-            }, 30000);
+            }, 10000);
 
 
 
