@@ -6,7 +6,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 <script src="static/js/vendors/bootstrap-toolkit.js"></script>
 	
-
+<!-- Script for changing the services -->
+<!-- Maybe change to a carousel instead -->
 <script>
 jQuery(document).ready(function()
 {
@@ -243,6 +244,7 @@ var mystickybar= new expstickybar({
 })(jQuery, ResponsiveBootstrapToolkit);
 </script>
 
+<!-- Styles -->
 <style>
 	body{
 		background: -moz-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / ff3.6+ /
@@ -336,18 +338,13 @@ var mystickybar= new expstickybar({
         <!-- /.container -->
     </nav>
 
-    <!-- Page Content -->
+    <!-- Bus Timetable Section -->
     <div class="container img-rounded" style = "background-color: #F5F2E3; padding: 5px;">
-
-	
-		
 		<div class="row">
 			<div class="container">
-				<div class= "center">
-					<h2 style = "padding: 10px; background-color: darkred; color: white;">Nearby Services</h2>
-				</div>
+					<h3 class = "img-rounded" style = "padding: 10px; background-color: #31281c; color: #FF9900;">NEARBY SERVICES</h3>
 				<div class = "kioskDisplay">
-				<!-- BUS TABLE -->
+					<!-- BUS TABLE -->
 					<div class = "bustable">
 						<div class = "col-lg-12 center" style = "border: 1px solid black; background: #31281c;">
 							<button class = "NSbtns BL" style = "float: left; border: none; padding-top: 20px; color: red;"><<</button>
@@ -362,14 +359,12 @@ var mystickybar= new expstickybar({
 								<div style ="width: 60%; float: left;">
 									<h2 class="trans_code"> - 301 </span></h2>
 								</div>
-								
 								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
 									<h4 class="trans_info">X Minute/s</h4>
 									<h4>Thomas Cherry</h4>
 								</div>
-							
 							</div>
-							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Resavior Station</u></a></b></p>
+							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Reservior Station</u></a></b></p>
 						</div>
 						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
 							<div class = "row">
@@ -379,12 +374,10 @@ var mystickybar= new expstickybar({
 								<div style ="width: 60%; float: left;">
 									<h2 class="trans_code"> - 350 </span></h2>
 								</div>
-								
 								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
 									<h4 class="trans_info">X Minute/s</h4>
 									<h4>Thomas Cherry</h4>
 								</div>
-							
 							</div>
 							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To City (Queen St)</u></a></b></p>
 						</div>
@@ -396,12 +389,10 @@ var mystickybar= new expstickybar({
 								<div style ="width: 60%; float: left;">
 									<h2 class="trans_code"> - 548 </span></h2>
 								</div>
-								
 								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
 									<h4 class="trans_info">X Minute/s</h4>
 									<h4>Thomas Cherry</h4>
 								</div>
-							
 							</div>
 							<p class="trans_title" align = "left"><b><a href = ""><u>To Kew (Cotham Rd)</u></a></b></p>
 						</div>
@@ -413,12 +404,10 @@ var mystickybar= new expstickybar({
 								<div style ="width: 60%; float: left;">
 									<h2 class="trans_code"> - 550 </span></h2>
 								</div>
-								
 								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
 									<h4 class="trans_info">X Minute/s</h4>
 									<h4>Thomas Cherry</h4>
 								</div>
-							
 							</div>
 							<p class="trans_title" align = "left"><b><a href = ""><u>To Northland Shopping Centre</u></a></b></p>
 						</div>
@@ -430,12 +419,10 @@ var mystickybar= new expstickybar({
 								<div style ="width: 60%; float: left;">
 									<h2 class="trans_code"> - 551 </span></h2>
 								</div>
-								
 								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
 									<h4 class="trans_info">X Minute/s</h4>
 									<h4>Thomas Cherry</h4>
 								</div>
-							
 							</div>
 							<p class="trans_title" align = "left"><b><a href = ""><u>To Heidelberg</u></a></b></p>
 						</div>
@@ -534,222 +521,176 @@ var mystickybar= new expstickybar({
 					</div>
 					
 					<!-- END OF TRAIN TABLE -->
-<script>	
-<!-- BUS LEFT AND RIGHT -->
-jQuery(function ($) {
-	$(function(){
-	$(".BL").click(function () {
-	$(".bustable").fadeOut(1, function(){
-		$(".tramtable").fadeIn();
-	});
-	$(".traintable").hide();
-   });
-})
-});
-
-jQuery(function ($) {
-	$(function(){
-	$(".BR").click(function () {
-	$(".bustable").fadeOut(1, function(){
-		$(".traintable").fadeIn();
-	});
-	$(".tramtable").hide();
-   });
-})
-});
-<!-- BUS LEFT AND RIGHT -->
-
-<!-- TRAM LEFT AND RIGHT -->
-jQuery(function ($) {
-	$(function(){
-	$(".TL").click(function () {
-	$(".tramtable").fadeOut(1, function(){
-		$(".traintable").fadeIn();
-	});
-	$(".bustable").hide();
-   });
-})
-});
-
-jQuery(function ($) {
-	$(function(){
-	$(".TR").click(function () {
-	$(".tramtable").fadeOut(1, function(){
-		$(".bustable").fadeIn();
-	});
-	$(".traintable").hide();
-   });
-})
-});
-<!-- TRAM LEFT AND RIGHT -->
-
-
-<!-- TRAIN LEFT AND RIGHT -->
-jQuery(function ($) {
-	$(function(){
-	$(".TRL").click(function () {
-	$(".traintable").fadeOut(1, function(){
-		$(".bustable").fadeIn();
-	});
-	$(".tramtable").hide();
-   });
-})
-});
-
-jQuery(function ($) {
-	$(function(){
-	$(".TRR").click(function () {
-	$(".traintable").fadeOut(1, function(){
-		$(".tramtable").fadeIn();
-	});
-	$(".bustable").hide();
-   });
-})
-});<!-- TRAIN LEFT AND RIGHT -->
-</script>
+					<script>	
+					<!-- BUS LEFT AND RIGHT -->
+					jQuery(function ($) {
+						$(function(){
+						$(".BL").click(function () {
+						$(".bustable").fadeOut(1, function(){
+							$(".tramtable").fadeIn();
+						});
+						$(".traintable").hide();
+					});
+					})
+					});
+					
+					jQuery(function ($) {
+						$(function(){
+						$(".BR").click(function () {
+						$(".bustable").fadeOut(1, function(){
+							$(".traintable").fadeIn();
+						});
+						$(".tramtable").hide();
+					});
+					})
+					});
+					<!-- BUS LEFT AND RIGHT -->
+					
+					<!-- TRAM LEFT AND RIGHT -->
+					jQuery(function ($) {
+						$(function(){
+						$(".TL").click(function () {
+						$(".tramtable").fadeOut(1, function(){
+							$(".traintable").fadeIn();
+						});
+						$(".bustable").hide();
+					});
+					})
+					});
+					
+					jQuery(function ($) {
+						$(function(){
+						$(".TR").click(function () {
+						$(".tramtable").fadeOut(1, function(){
+							$(".bustable").fadeIn();
+						});
+						$(".traintable").hide();
+					});
+					})
+					});
+					<!-- TRAM LEFT AND RIGHT -->
 					
 					
+					<!-- TRAIN LEFT AND RIGHT -->
+					jQuery(function ($) {
+						$(function(){
+						$(".TRL").click(function () {
+						$(".traintable").fadeOut(1, function(){
+							$(".bustable").fadeIn();
+						});
+						$(".tramtable").hide();
+					});
+					})
+					});
+					
+					jQuery(function ($) {
+						$(function(){
+						$(".TRR").click(function () {
+						$(".traintable").fadeOut(1, function(){
+							$(".tramtable").fadeIn();
+						});
+						$(".bustable").hide();
+					});
+					})
+					});<!-- TRAIN LEFT AND RIGHT -->
+					</script>
+					
+					<!-- Table Color Bottom -->
 					<div class = "col-lg-12 center" style = "border: 1px solid black; border-top: none; background: #31281c; height: 40px;">
 					</div>
 					<div class = "col-lg-12 spacer" style = "height: 20px;">
 					</div>
 				</div>
-				
-				<!-- MUST FIND A BETTER SOLUTION FOR THIS -->
-				
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				
-				<!-- ##### -->
-			
-				<div class = "JPContainer" style = "padding-top: 20px;">
-					<div class= "center">
-						<h2 style = "padding: 10px; background-color: darkred; color: white;">Journey Planner</h2>
-					</div>
-					<div class = "row">
-						<div class = "col-md-4">
-							<div class="form-group">
-							<button class = "btn-block campusTF JPbtns">Leaving From</button>
-								<br>
-								<br>
-								<input type="text" class="form-control" id="usr" placeholder = "Current Location">
-							</div>
-						</div>
-						
-						<div class = "col-md-4">
-							<button class = "btn-block campusTF JPbtns">Going To</button>
-							<br>
-							<br>
-							<div class="form-group">
-								<select class="form-control">
-									<option>La Trobe: Melbourne Campus</option>
-									<option>La Trobe: Wadonga Campus</option>
-									<option>La Trobe: Bendigo Campus</option>
-									<option>La Trobe: Bundoora Campus</option>
-									<option>La Trobe: Franklin St Campus</option>
-									<option>La Trobe: Mildura Campus</option>
-									<option>La Trobe: Shepparton Campus</option>
-									<option>La Trobe: Sydney Campus</option>
-								</select>
-							</div>
-						</div>
-						<div class = "col-md-4">
-							<a href="plan_journey" class="btn-block JPbtns" role="button">Plan a route</a>
-						</div>
-					</div>
-					<div class = "col-lg-12 spacer" style = "height: 50px;">
-					</div>
-				</div>	
-			
-			
-				
 			</div>
 		</div>
-	<script>	
-jQuery(function ($) {
-
-   $(function(){
-   $(".campusTF").click(function () {
-      $(".campusTF").text(function(i, text){
-          return text === "Going To" ? "Leaving From" : "Going To";
-      })
-   });
-})
-});
-</script>
-		
-		<br>
-		
-		<!--Comment Out for Footer -->
-		
-		<!-- FOOTER SPACER -->
-		<div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
-			<div class ="navbar-inverse" style="text-align:center; padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
-				<div class="row" style="margin-left:10px; margin-top:10px;">
-					<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-						<h4 style="color:#FF9900;">SERVICES</h4>
-							<ul style="list-style: none;">
-								<li><a href="/glider" style="color: white;">Next Glider</a></li>
-								<li><a href="/map" style="color: white;">Campus Map</a></li>
-								<li><a href="/kiosk2" style="color: white;">Kiosk</a></li>
-							</ul>
-						</div> 
-						
-					<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-						<h4 style="color:#FF9900;">INFORMATION</h4>
-						<ul style="list-style: none;">
-							<li><a href="/myki" style="color: white;">Myki for Students</a></li>
-							<li><a style="color: white;">LMS</a></li>
-						</ul>
+	</div>
+	<br>
+	<!-- Journey Planner Section -->
+	<div  class="container img-rounded" style = "background-color: #F5F2E3;">
+		<div class = "row">
+			<div class = "container">
+				<div class = "JPContainer">
+						<h3 class = "img-rounded" style = "padding: 10px; background-color: #31281c; color: #FF9900;">JOURNEY PLANNER</h3>
+					<div class = "row">
+						<div class = "col-md-4">
+							<div class="panel panel-default">
+								<div class="btn-group btn-group-justified" style= "background-image: none;">
+									<a href="#" class="btn JPbtns">Leaving From</a>
+									<a href="#" class="btn JPbtns">Going To</a>
+								</div>
+								<div class="panel-body">
+									<div class="form-group">
+										<input type="text" class="form-control" id="usr" placeholder = "Current Location">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class = "col-md-4">
+							<div class="panel panel-default">
+								<div class="btn-group btn-group-justified" style= "background-image: none;">
+									<a href="#" class="btn JPbtns" select>Leaving From</a>
+									<a href="#" class="btn JPbtns">Going To</a>
+								</div>
+								<div class="panel-body">
+									<div class="form-group">
+										<select class="form-control">
+											<option>La Trobe: Melbourne Campus</option>
+											<option>La Trobe: Wadonga Campus</option>
+											<option>La Trobe: Bendigo Campus</option>
+											<option>La Trobe: Bundoora Campus</option>
+											<option>La Trobe: Franklin St Campus</option>
+											<option>La Trobe: Mildura Campus</option>
+											<option>La Trobe: Shepparton Campus</option>
+											<option>La Trobe: Sydney Campus</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class = "col-md-4">
+							<div class="panel panel-default">
+								<a href="plan_journey" class="btn-block JPbtns img-rounded" role="button">Plan a route</a>
+							</div>
+						</div>
 					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
 		
-					<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-						<h4 style="color:#FF9900;">ABOUT</h4>
-						<ul style="list-style: none;">
-							<li><a href="/about" style="color:white;">About Us</a></li>
-							<li><a href="/contact" style="color:white;">Contact Us</a></li>
-						</ul>
-					</div>
-				</div> 
+	<!-- FOOTER SPACER -->
+	<div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
+		<div class ="navbar-inverse" style="text-align:center; padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
+		<div class="row" style="margin-left:10px; margin-top:10px;">
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">SERVICES</h4>
+				<ul style="list-style: none;">
+					<li><a href="/glider" style="color: white;">Next Glider</a></li>
+					<li><a href="/map" style="color: white;">Campus Map</a></li>
+					<li><a href="/kiosk2" style="color: white;">Kiosk</a></li>
+				</ul>
+			</div> 
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">INFORMATION</h4>
+				<ul style="list-style: none;">
+					<li><a href="/myki" style="color: white;">Myki for Students</a></li>
+					<li><a style="color: white;">LMS</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">ABOUT</h4>
+				<ul style="list-style: none;">
+					<li><a href="/about" style="color:white;">About Us</a></li>
+					<li><a href="/contact" style="color:white;">Contact Us</a></li>
+				</ul>
 			</div>
 		</div> 
-    </div>
-
-
-    
-
-	
+	</div> 
+	<div class = "col-lg-12 spacer" style = "height: 50px;">
+		<!-- Adds some space to the bottom of the page to make room for the footer -->
+	</div>
 
     <!-- Scripts-->
-	
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrzOfCzSnWmWbqGGdpM0p9FJAq152ORww&callback=iniMap" async defer></script>
     <script type="text/javascript" src="/static/js/config.js"></script>
     <script type="text/javascript" data-main="modules/map/init" src="/static/js/vendors/r.js"></script>
@@ -759,8 +700,6 @@ jQuery(function ($) {
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-	
 </body>
 
 </html>
