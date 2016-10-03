@@ -1,4 +1,20 @@
-<% include partials/header %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>La Trobe University</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/css?family=Oxygen|Muli" rel="stylesheet">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+  <link rel="shortcut icon" href="/favicon.ico?v2.1" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico?v2" type="image/x-icon">
+</head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- jQuery -->
@@ -6,17 +22,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 <script src="static/js/vendors/bootstrap-toolkit.js"></script>
 	
-<!-- Script for changing the services -->
-<!-- Maybe change to a carousel instead -->
-<script>
-jQuery(document).ready(function()
-{
-    jQuery('.campusSelect').click(function()
- {    
-     jQuery('#serviceColumns').css('display', 'none').fadeIn(350);
- })
-});
-</script>
 
 
 	<!-- STICKY BAR -->
@@ -245,6 +250,8 @@ var mystickybar= new expstickybar({
 </script>
 
 <!-- Styles -->
+<!-- NSbtns Nearby Services Buttons -->
+<!-- JPbtns Journey Planner Buttons -->
 <style>
 	body{
 		background: -moz-linear-gradient(90deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / ff3.6+ /
@@ -292,7 +299,7 @@ var mystickybar= new expstickybar({
 	
 	.JPbtns {
 		background-color: #31281c;
-		border: none;
+		border: 1px solid black;
 		color: #FF9900;
 		padding: 15px 32px;
 		text-align: center;
@@ -301,15 +308,66 @@ var mystickybar= new expstickybar({
 		font-size: 16px;
 	}
 	
+	.JPbtns:hover {
+		color: white;
+		text-decoration: none;
+	}
+	
+	.JPbtns:focus {
+		color: white;
+		text-decoration: none;
+	}
+	
+	
 	.NSbtns{
 		background-color: #31281c;
 		border: none;
 		color: #FF9900;
-		padding: 15px 32px;
+		padding: 20px 32px;
 		text-align: center;
 		text-decoration: none;
 		display: inline-block;
-		font-size: 16px;
+		font-size: 1.2em;
+	}
+	
+	.panel > .panel-heading {
+		background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%);
+		color: #FF9900;
+	}
+	
+	.panel > .panel-footer {
+		background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%);
+		color: #FF9900;
+	}
+	
+	.verticalLine {
+		border-left: 1px solid grey;
+	}
+	
+	.trans_code{
+		font-size: 1.9em;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	.trans_title{
+		font-size: 1em;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.trans_info{
+		font-size: 1em;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	.trans_time{
+		font-size: 1em;
+		font-weight: bold;
+		position: absolute;
+		right: 10%;
+		z-index: 10;
 	}
 </style>
 
@@ -331,292 +389,311 @@ var mystickybar= new expstickybar({
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <% include partials/menu %>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="#">Glider</a>
+        </li>
+        <li>
+            <a href="/map">Explore Latrobe</a>
+        </li>
+    </ul>
+</div>
 			
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
 
+	<!-- Script For Navigating The Panels -->
+	<script>
+	jQuery(function($) {
+		var tables = ['bustable', 'traintable', 'tramtable'],
+		headings = ['BUSES', 'TRAINS', 'TRAMS'],
+		current = 0;
+		
+		console.log(tables[current]); 
+		$(".NSHeading").html(headings[current]);
+		$('.BL').click(function () {
+			$('.BL').prop('disabled', true);
+			$("." + tables[current]).slideUp(500, 'linear', function() {
+				current = Math.abs(++current % tables.length); 
+				$(".NSHeading").html(headings[current]);
+				$("." + tables[current]).slideDown();
+				$('.BL').prop('disabled', false);
+			});
+			
+		});
+		
+	
+			
+		$(".BR").click(function () {
+		$('.BR').prop('disabled', true);
+			$("." + tables[current]).slideUp(500, 'linear', function() {
+				current = --current; 
+				if(current == -1){
+					current = 2;
+				}
+				$(".NSHeading").html(headings[current]);
+				$("." + tables[current]).slideDown();
+				$('.BR').prop('disabled', false);
+			});
+			 
+		});
+		
+	});
+	
+	</script>
+	
     <!-- Bus Timetable Section -->
-    <div class="container img-rounded" style = "background-color: #F5F2E3; padding: 5px;">
+    <div class="container img-rounded" style = "background-color: #F5F2E3;">
 		<div class="row">
 			<div class="container">
-					<h3 class = "img-rounded" style = "padding: 10px; background-color: #31281c; color: #FF9900;">NEARBY SERVICES</h3>
+				<h3 class = "img-rounded" style = "padding: 10px; background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%); color: #FF9900;">NEARBY SERVICES</h3>
 				<div class = "kioskDisplay">
-					<!-- BUS TABLE -->
+				
+				<!-- BUS TABLE 1  -->
+				
+				<div class="panel panel-default ">
+					<div class="panel-heading" style = "text-align: center;">
+					<!-- Click to change table -->
+						<button class = "NSbtns BL" style = "float: left; background: rgba(0,0,0,0); color: red;"><<</button>
+						<button class = "NSbtns BR" style = "float: right; background: rgba(0,0,0,0); color: red;">>></button>
+						<h3 class = "NSHeading" style = "float: center; color: #FF9900;">BUSES</h3>
+					</div>
+					<!-- BUS INFORMATION -->
 					<div class = "bustable">
-						<div class = "col-lg-12 center" style = "border: 1px solid black; background: #31281c;">
-							<button class = "NSbtns BL" style = "float: left; border: none; padding-top: 20px; color: red;"><<</button>
-							<button class = "NSbtns BR" style = "float: right; border: none; padding-top: 20px; color: red;">>></button>
-							<h3 style = "float: center; color: #FF9900;">BUSES</h3>
-						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/bus.png" style="width: 60px;">
-								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - 301 </span></h2>
-								</div>
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Thomas Cherry</h4>
-								</div>
-							</div>
-							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Reservior Station</u></a></b></p>
-						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/bus.png" style="width: 60px;">
-								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - 350 </span></h2>
-								</div>
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Thomas Cherry</h4>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/bus.png" style="width: 60px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code"> - 301</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Reservior Station</u></a></p>
+											<p class="trans_info">From Thomas Cherry</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To City (Queen St)</u></a></b></p>
 						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/bus.png" style="width: 60px;">
-								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - 548 </span></h2>
-								</div>
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Thomas Cherry</h4>
+					
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/bus.png" style="width: 60px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code"> - 350</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To City (Queen St)</u></a></p>
+											<p class="trans_info">From Thomas Cherry</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<p class="trans_title" align = "left"><b><a href = ""><u>To Kew (Cotham Rd)</u></a></b></p>
 						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/bus.png" style="width: 60px;">
-								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - 550 </span></h2>
-								</div>
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Thomas Cherry</h4>
+						
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/bus.png" style="width: 60px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code"> - 548</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Kew (Cotham Rd)</u></a></p>
+											<p class="trans_info">From Thomas Cherry</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<p class="trans_title" align = "left"><b><a href = ""><u>To Northland Shopping Centre</u></a></b></p>
 						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/bus.png" style="width: 60px;">
-								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - 551 </span></h2>
-								</div>
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Thomas Cherry</h4>
+						
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/bus.png" style="width: 60px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code"> - 550</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Northland Shopping Centre</u></a></p>
+											<p class="trans_info">From Thomas Cherry</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<p class="trans_title" align = "left"><b><a href = ""><u>To Heidelberg</u></a></b></p>
 						</div>
+						
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/bus.png" style="width: 60px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code"> - 551</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Heidelberg</u></a></p>
+											<p class="trans_info">From Thomas Cherry</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END OF BUS INFORMATION -->
+						
 					</div>
-					<!-- END OF BUS TABLE -->
-					
-					
-					<!-- TRAM TABLE -->
+					<!-- TRAM INFORMATION -->
 					<div class = "tramtable" hidden>
-						<div class = "col-lg-12 center" style = "border: 1px solid black; background: #31281c;">
-							<button class = "NSbtns TL" style = "float: left; border: none; padding-top: 20px; color: red;"><<</button>
-							<button class = "NSbtns TR" style = "float: right; border: none; padding-top: 20px; color: red;">>></button>
-							<h3 style = "float: center; color: #FF9900;">TRAMS</h3>
-						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/tram.png" style="width: 60px;">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/tram.png" style="width: 60px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code"> - 86</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Bundoora RMIT</u></a></p>
+											<p class="trans_info">From Plenty Rd</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - 86 </span></h2>
-								</div>
-								
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Plenty Rd</h4>
-								</div>
-							
 							</div>
-							<p class="trans_title" align = "left"><b><a href = ""><u>To Bundoora RMIT</u></a></b></p>
 						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/tram.png" style="width: 60px;">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/tram.png" style="width: 60px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code"> - 551</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Waterfront City Docklands</u></a></p>
+											<p class="trans_info">From Plenty Rd</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - 86 </span></h2>
-								</div>
-								
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Plenty Rd</h4>
-								</div>
-							
 							</div>
-							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To Waterfront City Docklands</u></a></b></p>
 						</div>
-						
-						
-						
 					</div>
-					<!-- END OF TRAM TABLE -->
+					<!-- END OF TRAM INFORMATION -->
 					
-					<!-- TRAIN TABLE -->
+					<!-- TRAIN INFORMATION -->
 					<div class = "traintable" hidden>
-						<div class = "col-lg-12 center" style = "border: 1px solid black; background: #31281c;">
-							<button class = "NSbtns TRL" style = "float: left; border: none; padding-top: 20px; color: red;"><<</button>
-							<button class = "NSbtns TRR" style = "float: right; border: none; padding-top: 20px; color: red;">>></button>
-							<h3 style = "float: center; color: #FF9900;">TRAINS</h3>
-						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/train.png" style="width: 56px;">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/train.png" style="width: 55px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code" style = "font-size:1em;"> - South Morang Line</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To South Morang</u></a></p>
+											<p class="trans_info">From Reservior Station</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - South Morang Line </span></h2>
-								</div>
-								
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Reservior Station</h4>
-								</div>
-							
 							</div>
-							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To South Morang</u></a></b></p>
 						</div>
-						<div class="col-lg-12" style = "border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; background: white;">
-							<div class = "row">
-								<div style = "width: 10%; float: left; padding: 10px;" align = "left">
-									<img src="static/img/train.png" style="width: 56px;">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-12 box-timetable-right big-box">
+									<div class="col-sm-12 display_table no-padding" style = "float: left;">
+										<div class="display_cell" style = "width: 80px;">
+											<img src="static/img/train.png" style="width: 55px;">
+										</div>
+										<div class="display_cell verticalLine" style = "padding-left: 10px;">
+											<p class="trans_code" style = "font-size:1em;"> - South Morang Line</p>
+											<p class="trans_title"><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To City</u></a></p>
+											<p class="trans_info">From Reservior Station</p>
+										</div>
+										<div class = "display_cell" style = "padding-left: 50px; float: right;">
+											<p class="trans_time">X Minute/s</p>
+										</div>
+									</div>
 								</div>
-								<div style ="width: 60%; float: left;">
-									<h2 class="trans_code"> - South Morang Line </span></h2>
-								</div>
-								
-								<div style = "width: 30%; float: right; padding: 10px;" align = "right" vertical-align = "middle">
-									<h4 class="trans_info">X Minute/s</h4>
-									<h4>Reservior Station</h4>
-								</div>
-							
 							</div>
-							<p class="trans_title" align = "left"><b><a href = "https://www.ptv.vic.gov.au/timetables/line/9978/"><u>To City</u></a></b></p>
 						</div>
 					</div>
-					
-					<!-- END OF TRAIN TABLE -->
-					<script>	
-					<!-- BUS LEFT AND RIGHT -->
-					jQuery(function ($) {
-						$(function(){
-						$(".BL").click(function () {
-						$(".bustable").fadeOut(1, function(){
-							$(".tramtable").fadeIn();
-						});
-						$(".traintable").hide();
-					});
-					})
-					});
-					
-					jQuery(function ($) {
-						$(function(){
-						$(".BR").click(function () {
-						$(".bustable").fadeOut(1, function(){
-							$(".traintable").fadeIn();
-						});
-						$(".tramtable").hide();
-					});
-					})
-					});
-					<!-- BUS LEFT AND RIGHT -->
-					
-					<!-- TRAM LEFT AND RIGHT -->
-					jQuery(function ($) {
-						$(function(){
-						$(".TL").click(function () {
-						$(".tramtable").fadeOut(1, function(){
-							$(".traintable").fadeIn();
-						});
-						$(".bustable").hide();
-					});
-					})
-					});
-					
-					jQuery(function ($) {
-						$(function(){
-						$(".TR").click(function () {
-						$(".tramtable").fadeOut(1, function(){
-							$(".bustable").fadeIn();
-						});
-						$(".traintable").hide();
-					});
-					})
-					});
-					<!-- TRAM LEFT AND RIGHT -->
-					
-					
-					<!-- TRAIN LEFT AND RIGHT -->
-					jQuery(function ($) {
-						$(function(){
-						$(".TRL").click(function () {
-						$(".traintable").fadeOut(1, function(){
-							$(".bustable").fadeIn();
-						});
-						$(".tramtable").hide();
-					});
-					})
-					});
-					
-					jQuery(function ($) {
-						$(function(){
-						$(".TRR").click(function () {
-						$(".traintable").fadeOut(1, function(){
-							$(".tramtable").fadeIn();
-						});
-						$(".bustable").hide();
-					});
-					})
-					});<!-- TRAIN LEFT AND RIGHT -->
-					</script>
-					
-					<!-- Table Color Bottom -->
-					<div class = "col-lg-12 center" style = "border: 1px solid black; border-top: none; background: #31281c; height: 40px;">
+					<!-- END OF TRAIN INFORMATION -->
+					<div class="panel-footer"></div>
 					</div>
-					<div class = "col-lg-12 spacer" style = "height: 20px;">
-					</div>
+					
+					<!-- END OF PANEL INFORMATION -->
 				</div>
 			</div>
 		</div>
 	</div>
 	<br>
+	
+	<script>
+jQuery(function ($) {
+	$(function(){
+	$(".leaving").click(function () {
+	$(".leaving").css("background-color", "#51422f"); <!-- Selected Button-->
+	$(".goingTo").css("background-color", "#31281c"); <!-- Deselected Button -->
+});
+})
+});
+</script>
+<script>
+jQuery(function ($) {
+	$(function(){
+	$(".goingTo").click(function () {
+	$(".leaving").css("background-color", "#31281c"); <!-- Deselected Button -->
+	$(".goingTo").css("background-color", "#51422f"); <!-- Selected Button-->
+});
+})
+});
+
+</script>
 	<!-- Journey Planner Section -->
 	<div  class="container img-rounded" style = "background-color: #F5F2E3;">
 		<div class = "row">
 			<div class = "container">
 				<div class = "JPContainer">
-						<h3 class = "img-rounded" style = "padding: 10px; background-color: #31281c; color: #FF9900;">JOURNEY PLANNER</h3>
+					<h3 class = "img-rounded" style = "padding: 10px; background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%); color: #FF9900;">JOURNEY PLANNER</h3>
 					<div class = "row">
+						<!-- Current Location Panel -->
 						<div class = "col-md-4">
 							<div class="panel panel-default">
 								<div class="btn-group btn-group-justified" style= "background-image: none;">
-									<a href="#" class="btn JPbtns">Leaving From</a>
-									<a href="#" class="btn JPbtns">Going To</a>
+									<a href="#/" class="btn JPbtns leaving">Leaving From</a>
+									<a href="#/" class="btn JPbtns goingTo">Going To</a>
 								</div>
 								<div class="panel-body">
 									<div class="form-group">
@@ -625,11 +702,13 @@ var mystickybar= new expstickybar({
 								</div>
 							</div>
 						</div>
+						<!-- End Of Current Location Section -->
+						<!-- Select A Campus Panel -->
 						<div class = "col-md-4">
 							<div class="panel panel-default">
 								<div class="btn-group btn-group-justified" style= "background-image: none;">
-									<a href="#" class="btn JPbtns" select>Leaving From</a>
-									<a href="#" class="btn JPbtns">Going To</a>
+									<a href="#/" class="btn JPbtns goingTo" >Leaving From</a>
+									<a href="#/" class="btn JPbtns leaving">Going To</a>
 								</div>
 								<div class="panel-body">
 									<div class="form-group">
@@ -647,9 +726,11 @@ var mystickybar= new expstickybar({
 								</div>
 							</div>
 						</div>
+						<!-- End Of Select A Campus Panel -->
+						<!-- Submit To Plan A Journey -->
 						<div class = "col-md-4">
 							<div class="panel panel-default">
-								<a href="plan_journey" class="btn-block JPbtns img-rounded" role="button">Plan a route</a>
+								<a href="plan_journey" class="btn-block JPbtns img-rounded" role="button">Plan Journey</a>
 							</div>
 						</div>
 					</div>
@@ -657,7 +738,8 @@ var mystickybar= new expstickybar({
 			</div>
 		</div>
 	</div>
-		
+	<!-- End Of Journey Planner Section -->
+
 	<!-- FOOTER SPACER -->
 	<div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
 		<div class ="navbar-inverse" style="text-align:center; padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
