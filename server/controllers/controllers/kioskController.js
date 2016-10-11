@@ -33,11 +33,13 @@ module.exports = function (api) {
     var pt = api.ptv.createClient({ devId: developerId, key: key });
     var result;
     var curDateTime;
+    var location_promises = [];
 
     var _getData = function (req, callback) {
         var promises = [];
         var i = 0;
         result = [];
+        location_promises = [];
         curDateTime = (new Date()).getTime();
 
         pt.stopsNearby(lat, lon, function (errStopsNearby, dataStopsNearby) {
@@ -56,69 +58,27 @@ module.exports = function (api) {
                 promises.push(broadNextDeparturesSync(api.ptv.mode.train, train_stop, 2));
             });
 
+            var iResolved = 0;
             return Promise.all(promises).then(function (allResult) {
                 // callback(mergeItems(allResult));
-                callback(result);
-            });
-        });
+                return Promise.all(location_promises);
+                
+            }).then(function(locations_to){
+                    for(var iLocation = 0; iLocation < locations_to.length ; iLocation++){
+                       var location_to = locations_to[iLocation][0];
+                       var dest_code = locations_to[iLocation][1];
+                       var dest_name = locations_to[iLocation][2];
 
-    };
-
-    var mergeItems = function (items) {
-        var newItems = [];
-        items.forEach(function (item) {
-            if (item) {
-                var found = false;
-
-                //  Search in the result, if found, try to add new stop
-                var i = 0;
-                newItems.forEach(function (foundItem) {
-                    if (foundItem.dest_name === item.dest_name &&
-                        foundItem.dest_code === item.dest_code) {
-                        found = true;
-
-                        var foundInStop = false;
-                        newItems[i].stops.forEach(function (stop) {
-                            if (stop.id === item.stop_id &&
-                                stop.name === item.location_name &&
-                                stop.time === item.depMin &&
-                                stop.dep === item.depTime) {
-                                foundInStop = true;
-                            }
-                        });
-                        if (!foundInStop) {
-                            newItems[i].stops.push({
-                                "id": item.stop_id,
-                                "name": item.location_name,
-                                "time": item.depMin,
-                                "now": new Date(),
-                                "dep": item.depTime
-                            });
-                        }
+                       for(var iResult = 0 ; iResult < result.length; iResult++){
+                           if(result[iResult].dest_code == dest_code && result[iResult].dest_name == dest_name){
+                                result[iLocation].location_to = location_to;
+                           }
+                       }
                     }
-                    i++;
+                    callback(result);
                 });
-
-                if (!found) {
-                    newItems.push({
-                        "dest_name": item.dest_name,
-                        "dest_code": item.dest_code,
-                        "transport_type": item.transport_type,
-                        "stops": [
-                            {
-                                "id": item.stop_id,
-                                "name": item.location_name,
-                                "time": item.depMin,
-                                "now": new Date(),
-                                "dep": item.depTime
-                            }
-                        ]
-                    });
-                }
-            }
         });
 
-        return newItems;
     };
 
     var broadNextDeparturesSync = function (type, topNearStop, limit) {
@@ -130,8 +90,27 @@ module.exports = function (api) {
         });
     };
 
+    var getLastStopLocation = function(route_type, line_id,destination_id, dest_code , dest_name){
+        return new Promise(function (resolve, reject) {
+            pt.stopsOnALine(route_type, line_id, function(errStopsOnALine, dataStopsOnALine){
+                var result = getStopsOnALineResult(dataStopsOnALine,destination_id);
+                resolve([result, dest_code , dest_name]);
+            });
+        });
+    };
+
+    var getStopsOnALineResult = function(dataStopsOnALine,destination_id){
+        dataStopsOnALine = dataStopsOnALine || [];
+        for(var iStop = 0 ; iStop < dataStopsOnALine.length ; iStop++){
+            if(dataStopsOnALine[iStop].stop_id == destination_id){
+                 return dataStopsOnALine[iStop].lat + "," + dataStopsOnALine[iStop].lon;
+            }
+        }
+    };
+
     var getResultArray = function (topNearStop, dataNextDeps) {
         var item = null;
+        dataNextDeps = dataNextDeps || [];
         dataNextDeps.forEach(function (dataNextDep) {
             var depDT = new Date(dataNextDep.time_realtime_utc || dataNextDep.time_timetable_utc);
             var depTime = depDT.getTime();
@@ -170,9 +149,13 @@ module.exports = function (api) {
                 });
 
                 if (!found) {
+                    location_promises.push(getLastStopLocation(dataNextDep.platform.stop.route_type, dataNextDep.platform.direction.line.line_id, dataNextDep.run.destination_id, dataNextDep.platform.direction.line.line_number, dataNextDep.platform.direction.direction_name));
+
                     result.push({
+                        "disruptions": dataNextDep.disruptions,
                         "dest_name": dataNextDep.platform.direction.direction_name,
                         "dest_code": dataNextDep.platform.direction.line.line_number,
+                        "location_from": dataNextDep.platform.stop.lat + "," + dataNextDep.platform.stop.lon,
                         "transport_type": topNearStop.transport_type,
                         "stops": [
                             {
@@ -199,21 +182,47 @@ module.exports = function (api) {
         return item;
     };
 
-    var testMethod = function (req, callback) {
+    var search = function (req, callback) {
         //"/v2/nearme/latitude/-37.817993/longitude/144.981916"
         var keyword = req.body.keyword; // $_POST["keyword"]
         var name = req.body.name; // $_POST["keyword"]
         pt.search(keyword, function (err, result) {
             if (err) {
-                throw err;
+              //  throw err;
+            }else{
+                callback(result);
             }
-            callback(result);
+        });
+    };
+
+    var getGliderLocation = function(req, cb){
+        var TWENTY_MIN = (20 * 60 * 1000);
+        var now = new Date();
+        now.setTime(parseInt(req.body.time) + (11 * 60 * 60 * 1000 ));
+        // console.log(req.body.time);
+        // console.log(now);
+        var gliderStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 30, 0);
+        while(gliderStartTime.getTime() + TWENTY_MIN < now.getTime()){
+            gliderStartTime.setTime(gliderStartTime.getTime() + TWENTY_MIN);
+        }
+
+        // Now glider time is greater now
+        var numOfStops = 10;
+        var minToCycle = 14;
+        var timeInEachStop = (minToCycle * 60 * 1000) / numOfStops;
+        var locationOfGlider = (now.getTime() - gliderStartTime.getTime());
+        var stopSeq = Math.ceil(locationOfGlider / timeInEachStop);
+        if(stopSeq > 10) 
+            stopSeq = 1;
+        cb({
+            stop: stopSeq
         });
     };
 
     return {
         getData: _getData,
-        testMethod: testMethod
+        search: search,
+        getGliderLocation: getGliderLocation
     };
 
 };

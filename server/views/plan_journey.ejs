@@ -1,317 +1,83 @@
 <% include partials/header %>
 
-<style>
-.border {
-    border: solid 0.01px #d4afaf;
-    background-color: cornsilk;
-    display:none;
-}
-</style>
-
-
-<body id="plan_journy">
-
-    <!-- Navigation -->
-    <% include partials/menu %>
-
-    <!-- Page Content -->
-    <div class="container">
-
-
-        <!-- Content Row -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h5>Enter your journey details</h5></div>
-                    <div class="panel-body">
-                        <h4>Leaving from</h4>
-                        <form>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio">Stops</label>
-                                <label><input type="radio" name="optradio">Addresses</label>
-                                <label><input type="radio" name="optradio">Landmarks</label>
-                            </div>
-                            <div class="form-group">
-                                <input list="departureDropdown" type="text" name="departure" class="form-control" placeholder="Station,stop,address">
-									 
-									<datalist id="departureDropdown">
-										<option value="small"/>
-										<option value="medium"/>
-										<option value="large"/>
-									</datalist>
-                            </div>
-                            <h4>Going to</h4>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio">Stops</label>
-                                <label><input type="radio" name="optradio">Addresses</label>
-                                <label><input type="radio" name="optradio">Landmarks</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="arrival" class="form-control" placeholder="Station,stop,address">
-                            </div>
-                            <!-- <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Depart
-                                <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">Arrive</a></li>
-                                <li><a href="#">Depart</a></li>
-                                </ul>
-
-                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Date
-                                <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">01</a></li>
-                                <li><a href="#">02</a></li>
-                                <li><a href="#">03</a></li>
-                                </ul>
-
-                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Month-Year
-                                <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">January-16</a></li>
-                                <li><a href="#">febraury-16</a></li>
-                                <li><a href="#">March-16</a></li>
-                                </ul>
-                            </div>-->
-                                <div class="form-group">
-                                    <input type="date"></input>
-                                </div>
-
-                                <button name="showJourney" type="button" class="btn btn-primary">Show journey</button>
-                        </form>
-                    </div>
-                </div> 
-            </div>
-
-
-
-            <!-- /.col-md-4 -->
-
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h5>Select your journey options</h5></div>
-                    <div class="panel-body">
-                        <h5>Leaving from :<span style="font-weight:bold" name="leavingFrom"></span></h5>
-                        <h5>Going to :<span style="font-weight:bold" name="goingTo"></span></h5>
-                        <h5>Departing after :</h5>
-                            <div name="journeyOptions">
-                                <!-- Start of bus block -->
-                                <div class="col-sm-12 box-timetable-right big-box border">
-                                    <div class="col-sm-7 no-padding ">
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.jpg" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.jpg" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.jpg" class="responsive vih-pic">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <BR>
-                                        10 Minutes
-                                    </div>
-                                </div>
-                                <!-- End of bus block -->
-
-                                <!-- Start of tram block -->
-                                <div class="col-sm-12  box-timetable-left big-box border">
-                                        
-                                    <div class="col-sm-7 no-padding ">
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/tram.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/iconWalk.png" class="responsive vih-pic">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-5 tram-time-button">
-                                        <BR>
-                                        13 Minutes
-                                    </div>
-                                </div>
-                                <!-- End of tram block -->
-                                  <!-- Start of tram block -->
-                                <div class="col-sm-12  box-timetable-left big-box border">
-                                        
-                                    <div class="col-sm-7 no-padding ">
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/tram.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.png" class="responsive vih-pic">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-sm-5 tram-time-button">
-                                        <BR>
-                                        14 Minutes
-                                    </div>
-                                </div>
-                                <!-- End of tram block -->
-                                  <!-- Start of tram block -->
-                                <div class="col-sm-12  box-timetable-left big-box border">
-                                        
-                                    <div class="col-sm-7 no-padding ">
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/tram.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/tram.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/bus.png" class="responsive vih-pic">
-                                        </div>
-                                        <div class="col-sm-3 no-padding">
-                                            <img src="static/img/iconWalk.png" class="responsive vih-pic">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-sm-5 tram-time-button">
-                                        <BR>
-                                        12 Minutes
-                                    </div>
-                                </div>
-                                <!-- End of tram block -->
-								
-                        </div>
-                    </div>
-                </div> 
-            </div>
-            <!-- /.col-md-4 -->
-
-                  <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h5>View your journey result</h5></div>
-                    <div class="panel-body">
-                    <h4><span class="label label-success">Option 3: 16min Zones: 1</span></h4
-                        <div class="list-group">
-                            <a href="#" class="list-group-item">First option</a>
-                            <a href="#" class="list-group-item">Second option</a>
-                            <a href="#" class="list-group-item">Third option</a>
-                        </div>
-
-
-                    </div>
-                </div> 
-            </div>
-
-        <!-- /.row -->
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12 center">
-                    <p>Copyright &copy; Travel La Trobe University 2016</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
-
-
-</body>
-
-</html>
-
-
-<script>
-var app={};
-
-app.constants={
-    inputDepart : $('[name="departure"]'),
-    inputArrival: $('[name="arrival"]'),
-    showJourneybtn :$('button[name="showJourney"]')
-}
-app.functions={
-    apiCalls:{
-        searchLoc:function(loc,direction)
-        {
-         var param = {"keyword" : loc};
-
-            $.post("/services/kiosk/testMethod", param, function(data){
-		        //console.log(data);
-                if(direction=='depart')
-                {
-                for(var i=0;i<$(data).length;i++)
-                {
-                
-                  if($(data)[i].result.transport_type=='tram')
-                  {
-                  console.log(i,$('datalist#departureDropdown'));
-                  $('datalist#departureDropdown').append('<option val="1">'+$(data)[i].result.location_name+'</option>');
-                  }
-                  else if($(data)[i].result.transport_type=='train') {
-                   console.log(i,$('datalist#departureDropdown'));
-                  $('datalist#departureDropdown').append('<option val="1">'+$(data)[i].result.line_name+'</option>');
-                  }
-                }
-                    //$('datalist[name="departureDropdown"]')
-                }
-                else{
-                    //$('datalist[name="departureDropdown"]')
-                }
-	        });
+    <style>
+        .border {
+            border: solid 0.01px #d4afaf;
+            background-color: cornsilk;
+            display: none;
         }
-    },
-    
-    bindingFunctions:{
-        departureload:function(){
-            $(app.constants.inputDepart).focusout(function(){
-             var val=$(this).val();
-             app.functions.apiCalls.searchLoc(val,'depart');
-            }); 
-        },
-        arrivalLoad:function(){
-            $(app.constants.inputArrival).focusout(function(){
-             var val=$(this).val();
-             app.functions.apiCalls.searchLoc(val,'arrival');
-            }); 
-        },
-        showJourneyclick:function(){
-            $(app.constants.showJourneybtn).click(function(){
-            var leavingfrom=$('input[name="departure"]').val();
-            var goingTo=$('input[name="arrival"]').val();
-               $('span[name="leavingFrom"]').html(leavingfrom);
-               $('span[name="goingTo"]').html(goingTo);
-               $('.border').show(); 
-            });
-        }   
-    }
-}
-
-$(document).ready(function(){
-
-app.functions.bindingFunctions.departureload();
-app.functions.bindingFunctions.arrivalLoad();
-app.functions.bindingFunctions.showJourneyclick();
+    </style>
 
 
+    <body id="plan_journy">
 
-/*
-    var param = {
-                    "keyword" : "north richmond"
-                };
-	$.post("/services/kiosk/testMethod", param, function(data){
+        <!-- Navigation -->
+        <% include partials/menu %>
 
-		console.log(data);
-	});
+            <!-- Page Content -->
+            <div class="container">
 
-*/
-});
 
-</script>
+                <!-- Content Row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5>Enter your journey details</h5>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group" id="startPanel">
+                                    <h4>Leaving from</h4>
+                                    <select class="form-control" id="start">
+                                            <option value="Thomas Cherry Building">Thomas Cherry Building</option>
+                                            <option value="Ablett Tower Moat">Ablett Tower Moat</option>
+                                            <option value="Medical Centre La Trobe University">Medical Centre</option>
+                                            <option value="Terminus La Trobe University">Terminus</option>
+                                        </select>
+                                </div>
+                                <div class="form-group" id="endPanel">
+                                    <h4>Going to</h4>
+                                    <input list="searchKeywordDropdown" type="text" id="end" name="end" class="searchKeyword form-control" placeholder="Station, stop, address">
+									 
+									<datalist id="searchKeywordDropdown"></datalist>
+                                </div>
+
+                                <button id="showJourney" type="button" class="btn btn-primary">Show journey</button>
+                                <button id="switchDirection" type="button" class="btn btn-primary">Switch</button>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger hide" id="error">
+                            <strong>No result found!</strong> No result found, please check your input.
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 center">
+                        <div id="mapContainer" style="align: right; margin-left: 50px; margin-right: 10px; height: 600px; margin: auto;"></div>
+                    </div>
+                </div>
+
+                <!-- /.row -->
+
+                <!-- Footer -->
+                <footer>
+                    <div class="row">
+                        <div class="col-lg-12 center">
+                            <p>Copyright &copy; Travel La Trobe University 2016</p>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+            <!-- /.container -->
+
+
+
+  <!-- Scripts-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq2IKcNbdT0gATARU38Dr0JFkSp5qJFVM"></script>
+  <script type="text/javascript" src="/static/js/config.js"></script>
+  <script type="text/javascript" data-main="modules/plan_journy/init" src="/static/js/vendors/r.js"></script>
+
+
+    </body>
+
+    </html>

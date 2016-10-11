@@ -1,0 +1,69 @@
+{
+  "//01": "***************** Database configurations *****************",
+  "db": {
+    "development": {
+      "username": "superuser",
+      "password": "password",
+      "database": "simor",
+      "port": "3307",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "underscored": true,
+      "timestamps": false,
+      "logging": false
+    },
+    "test": {
+      "username": "root",
+      "password": null,
+      "database": "database_test",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "root",
+      "password": null,
+      "database": "database_production",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
+  },
+
+
+  "//02": "***************** Email configurations *****************",
+  "mailer": {
+    "development": {
+      "server": "email-smtp.us-west-2.amazonaws.com",
+      "username": "AKIAIKCDAMDY3A4BZ5WA",
+      "password": "AkyIoRyETSG5VnOG+zrCPUSxnZmyy8jYMNA0OfUrColX",
+      "sender": "Simor.org <sender@simor.org>",
+      "port": 465,
+      "ssl": true
+    }
+  },
+
+
+  "//03": "***************** AWS configurations *****************",
+  "aws": {
+    "development": {
+      "accessKeyId": "AKIAIITBAL2MRDD4OZLA",
+      "secretAccessKey": "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",
+      "region": ""
+    }
+  },
+
+
+  "//04": "***************** FaceBook configurations *****************",
+  "facebook": {
+    "apiKey": "1613243788967660",
+    "apiSecret": "49525ab6225066f276536c815fcd324e",
+    "callbackUrl": "http://localhost:8888/auth/facebook/callback"
+  },
+
+
+  "//05": "***************** LinkedIn configurations *****************",
+  "linkedin": {
+    "apiKey": "75udkt18w062gw",
+    "apiSecret": "vLJ7ubbRPelaZkUH",
+    "callbackUrl": "http://localhost:8888/auth/linkedin/callback"
+  }
+}

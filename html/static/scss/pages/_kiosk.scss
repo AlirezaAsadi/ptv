@@ -1,20 +1,21 @@
 @mixin time-item{
     height: 40px;
-    padding: 10px;
+    padding: 10px 0px;
     border-radius: 4px;
     color: #fff;
-    margin: 5px;
+    margin: 5px 0px;
     text-align: center;
     width: 100%;
     float: right;
-	font-size:130%;
+	//font-size:130%;
 }
 
 $bus-color: #fd8203;
 $tram-color: #78b921;
+$train-color: #0172ce;
 
 body#kiosk{
-	overflow: hidden;
+	padding-top: 0px !important;
 
 	.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
 		padding: 0px;
@@ -24,25 +25,101 @@ body#kiosk{
 		margin: 0px;
 	}
 
+	&.has-distruption{
+		.disruptions{
+			display: block !important;
+		}
+	}
+	
+	i.disruption-icon{
+		color: #ffd357;
+	}
+
 	.header{
 		
+		.disruptions{
+			display: none;
+			background-color: #888;
+			height: 25px;
+			color: #fff;
+		}
+		
+		#switchJourneyKiosk{
+			position: absolute;
+			right: 10px;
+			margin-top: -8px;
+			width: 150px;
+		}
 
 		.banner{
 			background-color: #373737;
 			width: 100%;
 			height: 40px;
+			color: #fff;
+			padding: 10px 0px;
+			text-align: center;
+			font-weight: bold;
+			color: #ccc;
+
+			.clock{
+				span{
+					font-weight: bold;
+					color: #ccc;
+					margin-right: 50px;
+				}
+			}
+
+			.back{
+				float: left;
+				margin-left: 20px;
+				color: #fff;
+			}
 		}
 
 
 	}
 
+	.map-container{
+		width: 100%;
+	}
 	.main-content{
 
+		.add-to-fav{
+			position: absolute;
+			left: 10px;
+			color: #1c7bde;
+			z-index: 10;
+			
+		}
+
+		.responsive{
+			padding-top: 20px;
+			max-width: 80px;
+			width: 50px !important;
+			height: auto !important;
+		}
+
+		.time-table-parents{
+			background: #aaa;
+
+			a.gotoMap, a.gotoMap:hover{
+				text-decoration: none;
+				color: inherit;
+			}
+		}
+
 		.trans_code{
-			font-size: 1.8em;
+			font-size: 2.5em;
+			color: #555;
+			&.small{
+				font-size: 1.3em;
+				width: 70%;
+			}
 		}
 		.trans_title{
-			font-size: 1.2em;
+			font-size: 1em;
+			word-wrap: break-word;
+			width: 90%;
 		}
 		.box-timetable-left{
 			border-right: 1px solid #ccc;
@@ -60,16 +137,70 @@ body#kiosk{
 		    background-color: $bus-color;
 		    @include time-item;
 
+			&.warning{
+				border-left: 10px solid red;
+			}
+
 		}
 		.tram-time-item{
 
 		    background-color: $tram-color;
 		    @include time-item;
 
+			&.warning{
+				border-left: 10px solid red;
+			}
+		}
+		.train-time-item{
+
+		    background-color: $train-color;
+		    @include time-item;
+
+			&.warning{
+				border-left: 10px solid red;
+			}
+
+		}
+
+		.warning-icon{
+			color:#d30000;
+			position: absolute;
+			margin-left: -30px;
+			font-size: 20px;
 		}
 
 		.big-box{
-			height: 180px;
+			height: 111px;
+			overflow: hidden;
+			padding-top: 5px;
+
+
+			i.disruption-icon{
+				position: absolute;
+				margin-left: 5px;
+				font-size: 15px;
+			}
+
+			&.fav{
+				background-color: #ccc;
+				border-bottom: 1px solid #999;
+			}
+
+			&.train{
+				.trans_code{
+					font-size: 1.8em;
+					padding-right: 10px;
+					padding-top: 10px;
+				}
+				.trans_title{
+					display: none;
+				}
+			}
+		}
+
+		.time-table{
+			padding: 5px;
+			text-align: center;
 		}
 
 		.small-box{
@@ -82,29 +213,198 @@ body#kiosk{
 				width: 50%;
 				margin:auto;
 			}
+			.train-time-item{
+				width: 50%;
+				margin:auto;
+			}
 			.tram-time-button{
 				padding-top: 15px;
 			}
 		}
 	}
 
+	.glider-row{
+		padding-top: 5px;
+		position: fixed;
+		width: 100%;
+		bottom: 0px;
+		background-color: #333;
+		z-index: 12;
+		padding-bottom: 5px;
+		
+		div{
+			background-image: url('../img/glider_stop_off.png');
+			background-repeat: no-repeat;
+			background-size: 99% 40px;
+			width: 10%;
+			float: left; 
+			height: 40px;
+			text-align: center;
+			padding-top: 10px;
+			color: #fff;
+
+			&.active{
+				background-image: url('../img/glider_stop_on.png');
+			}
+		}
+	}
+
+	.plan_journy{
+		display: none;
+	}
+
     .footer-row{
+		display: none;
         position: fixed;
-        bottom:0px;
-        height: 60px;
-        
-        .footer{
-            .main-footer{
-                background-color: #373737;
-                width: 100%;
-                height: 58px;
-                position: fixed;
-            }
-            .footer-font{
-                color:#fff;
-                font-size: 18px;
-                padding-top: 14px;
-            }
-        }
+        bottom: 0px;
+        height: 50px;
+		background-color: #373737;
+		width: 100%;
+		z-index: 20;
+
+        ul {
+			padding: 0px;
+			margin: 0px;
+			display: flex;
+			width: 100%;
+			height: 50px;
+		}
+
+		ul li {
+			list-style: none;
+			width: 33.333%;
+			text-align: center;
+			line-height: 50px;
+			font-size: 20px;
+			border-right: 1px solid #fff;
+			height: 100%;
+			color: #cacaca;
+		}
+
+		ul li a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		ul li.active {
+			background-color: #949494;
+			color: #fff;
+		}
     }
+}
+
+
+
+
+
+/******************************************************************************************************************\
+ ************************************************ @media quries ***************************************************
+\******************************************************************************************************************/
+
+
+
+/* smartphone (landscape) -------------- */
+@media only screen and (max-width: 768px) {
+	body#kiosk{
+		.vih-pic{
+			width: 100px !important;
+			height: 95px !important;
+		}
+		.glider-row{
+			display: none;
+		}
+	}
+}
+
+
+@media only screen and (max-width: 767px) {
+	body#kiosk{
+
+		&.has-distruption{
+			.main-body{
+				margin-top: 25px;
+			}
+		}
+
+		.footer-row{
+			display: block;
+		}
+
+		.header{
+
+			#switchJourneyKiosk{
+				display: none;
+			}
+
+			position: fixed;
+			top: 0;
+			width: 100%;
+			z-index: 15;
+		}
+		.main-content{
+			margin-top: 40px;
+		}
+		.map-container{
+			margin-top: 40px;
+			width: 100%;
+		}
+
+		.time-table-parents{
+			background: #ccc !important;
+
+			.time-table{
+				text-align: left !important;
+			}
+
+		}
+		.add-to-fav{
+			font-size: 30px;
+			left: inherit !important;
+			right: 10px;
+			
+		}
+		.header .banner{
+			font-size: 13px;
+			.clock{
+				span{
+					margin-right: 20px;
+				}
+			}
+		}
+		.vih-pic{
+			width: 70px !important;
+			height: 75px !important;
+			padding-top: 10px;
+		}
+		.big-box{
+			height: auto !important;
+			border-bottom: 1px solid #999 !important;
+			&.fav{
+				background-color: #fff !important;
+			}
+		}
+
+		// Plan journy row
+		.plan_journy{
+			margin-top: 39px;
+		}
+
+		// Glider mobile
+		.row.glider-row{
+			background-color: #fff !important;
+			position: static !important;
+			padding-top: 0px !important;
+			margin-top: 45px;
+			div {
+				width: 100% !important;
+				margin-bottom: 6px;
+				background-color: #b2b2b2;
+				
+				&.active {
+					background-color: #c0303d !important;
+					font-weight: bold;
+				}
+			}
+		}
+	}
 }

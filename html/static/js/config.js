@@ -13,7 +13,8 @@ var require={
         ngRoute:              'vendors/angular-route.min',
         ngResource:           'vendors/angular-resource.min',
         underscore:           'vendors/underscore-min',
-        validator:            'vendors/jquery.validate.min'
+        validator:            'vendors/jquery.validate.min',
+        google:               '//maps.googleapis.com/maps/api/js?key=AIzaSyCq2IKcNbdT0gATARU38Dr0JFkSp5qJFVM'
 
     },
     shim: {

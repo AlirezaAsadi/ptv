@@ -1,12 +1,9 @@
 
 module.exports = function (app) {
 
+
     app.get('/kiosk', function (req, res) {
         res.render('kiosk');
-    });
-
-    app.get('/kiosk2', function (req, res) {
-        res.render('kiosk2');
     });
 
     app.get('/', function (req, res) {

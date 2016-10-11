@@ -11,14 +11,20 @@ module.exports = function (api) {
     });
 	
 	
-    api.app.post('/services/kiosk/testMethod', function (req, res) {
-        controller.testMethod(req, function (result) {
+    api.app.post('/services/kiosk/search', function (req, res) {
+        controller.search(req, function (result) {
             res.send(result);
         });
 
     });
 	
 	
+    api.app.post('/services/kiosk/getGliderLocation', function (req, res) {
+        controller.getGliderLocation(req, function (result) {
+            res.send(result);
+        });
+
+    });
 	
 	
 
