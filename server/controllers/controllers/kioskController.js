@@ -199,6 +199,13 @@ module.exports = function (api) {
                         });
                     }
                 }
+                if(resultAuto.length === 0){
+                    resultAuto.push({
+                        id: 0,
+                        label: 'Sorry, cannot find any result!',
+                        value: ''
+                    });
+                }
                 callback(resultAuto);
             }
         });

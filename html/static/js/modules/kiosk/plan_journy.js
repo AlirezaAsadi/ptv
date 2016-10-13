@@ -22,7 +22,8 @@ define([
         }
 
         var onChangeHandler = function () {
-            initMap();
+            if ($('.searchKeyword').val() !== '')
+                initMap();
         };
         if (document.getElementById('showJourney'))
             document.getElementById('showJourney').addEventListener('click', onChangeHandler);
@@ -106,8 +107,8 @@ define([
         }
 
         // Put the current location once user switch to plan a journey tab
-        $(document).on('switch:plan_journey', function(){
-            if(currentLocation.lat){
+        $(document).on('switch:plan_journey', function () {
+            if (currentLocation.lat) {
                 var lat = currentLocation.lat;
                 var lng = currentLocation.lng;
                 $('.searchKeyword').attr('data-location', lat + ',' + lng).val('Current location');
@@ -194,27 +195,40 @@ define([
         // });
 
         // Next implementation of auto complete
-        var bindAutocomplete = function(){
+        var bindAutocomplete = function () {
             $.ajaxSetup({ type: "post" });
             $(".searchKeyword").autocomplete({
                 source: "/services/kiosk/search",
                 minLength: 2,
-                select: function (event, ui) {
-                    var title = ui.item.value;
-                    var location = ui.item.value;
-                    if (title.indexOf(' - ') > -1 && title.indexOf(',') > -1) {
-                        title = title.substr(0, title.indexOf(' - '));
-                        location = location.substr(location.indexOf(' - ') + 3);
+                close: function () {
+                    if ($('.searchKeyword').attr('data-location') == '0') {
+                        $('.searchKeyword').val('');
+                        $('.searchKeyword').attr('data-location', '');
                     }
-                    $('.searchKeyword').val(title);
-                    $('.searchKeyword').attr('data-location', location);
+                },
+                select: function (event, ui) {
+                    var id = ui.item.id;
+                    if (id !== 0) {
+                        var title = ui.item.value;
+                        var location = ui.item.value;
+                        if (title.indexOf(' - ') > -1 && title.indexOf(',') > -1) {
+                            title = title.substr(0, title.indexOf(' - '));
+                            location = location.substr(location.indexOf(' - ') + 3);
+                        }
+                        $('.searchKeyword').val(title);
+                        $('.searchKeyword').attr('data-location', location);
+                    } else {
+                        $(this).val('');
+                        $(this).attr('data-location', '0');
+                    }
                 }
             });
-            $(".searchKeyword").on('focus', function(){
+            $(".searchKeyword").on('focus', function () {
                 $(this).val('');
+                $(this).attr('data-location', '');
             });
         };
-        
+
 
 
         return {
