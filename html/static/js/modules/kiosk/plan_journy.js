@@ -5,13 +5,10 @@ define([
 ) {
 
 
-        function init() {
-
-        }
-
+        var currentLocation = {};
         function initMap() {
 
-            $('#mapContainerJourny').removeClass('hidden').css('height', ($(window).height() - $('.header').height() - $('.footer-row').height()) + 'px').css('width', $(window).width() + 'px');
+            $('#mapContainerJourny').removeClass('hidden').css('height', ($(window).height() - $('.header').height() - $('.footer-row').height()) + 'px').css('width', $('.main-body').width() + 'px');
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;
             var map = new google.maps.Map(document.getElementById('mapContainerJourny'), {
@@ -26,8 +23,11 @@ define([
         var onChangeHandler = function () {
             initMap();
         };
-        document.getElementById('showJourney').addEventListener('click', onChangeHandler);
-        document.getElementById('switchDirection').addEventListener('click', onSwitchHandler);
+        if (document.getElementById('showJourney'))
+            document.getElementById('showJourney').addEventListener('click', onChangeHandler);
+
+        if (document.getElementById('switchDirection'))
+            document.getElementById('switchDirection').addEventListener('click', onSwitchHandler);
 
         $('.searchKeyword').bind('keypress', function (e) {
             if (e.keyCode == 13) {
@@ -40,6 +40,9 @@ define([
             return false;
         });
         var hideSearchForm = function () {
+            if($('body').hasClass('desktop-view')){
+                return false;
+            }
             $('#planJournyForm').hide();
             $('#mapContainerJourny').removeClass('hidden');
             $('.header .journy').removeClass('hidden');
@@ -80,6 +83,108 @@ define([
                     $('#error').removeClass('hide');
                 }
             });
+        }
+
+        function init() {
+            tryGeolocation();
+        }
+
+        var getCurrentGeoSuccess = function () {
+            $('.direct_button_item').removeClass('hidden');
+            var lat = currentLocation.lat;
+            var lng = currentLocation.lng;
+            $('.searchKeyword').attr('data-location', lat + ',' + lng).val('Current location');
+
+            $('datalist#searchKeywordDropdown').find('option').remove();
+            $('#loading').removeClass('hidden');
+            $.post("/services/kiosk/getNearBy", { lon: lng, lat: lat }, function (response) {
+                $('#loading').addClass('hidden');
+                if (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        var location = response[i];
+                        $('datalist#searchKeywordDropdown').append('<option data-location="' + location.lat + ',' + location.lon + '">' + location.location_name + ' - ' + location.lat + ',' + location.lon + '</option>');
+                    }
+                }
+            });
+        };
+
+        $('.direct_button_item a').click(function () {
+            $('.searchKeyword').attr('data-location', currentLocation.lat + ',' + currentLocation.lng).val('Current location');
+            if (!$('#start').hasClass('searchKeyword')) {
+                $('#switchDirection').click();
+            }
+            $('#showJourney').click();
+        });
+
+        var apiGeolocationSuccess = function (position) {
+
+            currentLocation.lat = position.coords.latitude;
+            currentLocation.lng = position.coords.longitude;
+            getCurrentGeoSuccess();
+            //alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+        };
+
+        var tryAPIGeolocation = function () {
+            $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCq2IKcNbdT0gATARU38Dr0JFkSp5qJFVM", function (success) {
+                apiGeolocationSuccess({ coords: { latitude: success.location.lat, longitude: success.location.lng } });
+            })
+                .fail(function (err) {
+                    currentLocation = null;
+                    alert("API Geolocation error! \n\n" + err);
+                });
+        };
+
+        var browserGeolocationSuccess = function (position) {
+            currentLocation.lat = position.coords.latitude;
+            currentLocation.lng = position.coords.longitude;
+            getCurrentGeoSuccess();
+            //alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+        };
+
+        var browserGeolocationFail = function (error) {
+            switch (error.code) {
+                case error.TIMEOUT:
+                    currentLocation = null;
+                    alert("Browser geolocation error !\n\nTimeout.");
+                    break;
+                case error.PERMISSION_DENIED:
+                    if (error.message.indexOf("Only secure origins are allowed") === 0) {
+                        tryAPIGeolocation();
+                    } else {
+                        currentLocation = null;
+                    }
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Browser geolocation error !\n\nPosition unavailable.");
+                    break;
+            }
+        };
+
+        var tryGeolocation = function (cb) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    browserGeolocationSuccess,
+                    browserGeolocationFail,
+                    { maximumAge: 50000, timeout: 20000, enableHighAccuracy: true });
+            }
+        };
+
+        function getLocation(cb) {
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    cb(position.coords.latitude, position.coords.longitude);
+                }, function (err) {
+                    alert('ERROR(' + err.code + '): ' + err.message);
+                }, options);
+            } else {
+                alert("Geo not supported");
+                cb();
+            }
         }
 
         var delay;

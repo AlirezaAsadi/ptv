@@ -62,21 +62,21 @@ module.exports = function (api) {
             return Promise.all(promises).then(function (allResult) {
                 // callback(mergeItems(allResult));
                 return Promise.all(location_promises);
-                
-            }).then(function(locations_to){
-                    for(var iLocation = 0; iLocation < locations_to.length ; iLocation++){
-                       var location_to = locations_to[iLocation][0];
-                       var dest_code = locations_to[iLocation][1];
-                       var dest_name = locations_to[iLocation][2];
 
-                       for(var iResult = 0 ; iResult < result.length; iResult++){
-                           if(result[iResult].dest_code == dest_code && result[iResult].dest_name == dest_name){
-                                result[iLocation].location_to = location_to;
-                           }
-                       }
+            }).then(function (locations_to) {
+                for (var iLocation = 0; iLocation < locations_to.length; iLocation++) {
+                    var location_to = locations_to[iLocation][0];
+                    var dest_code = locations_to[iLocation][1];
+                    var dest_name = locations_to[iLocation][2];
+
+                    for (var iResult = 0; iResult < result.length; iResult++) {
+                        if (result[iResult].dest_code == dest_code && result[iResult].dest_name == dest_name) {
+                            result[iLocation].location_to = location_to;
+                        }
                     }
-                    callback(result);
-                });
+                }
+                callback(result);
+            });
         });
 
     };
@@ -90,20 +90,20 @@ module.exports = function (api) {
         });
     };
 
-    var getLastStopLocation = function(route_type, line_id,destination_id, dest_code , dest_name){
+    var getLastStopLocation = function (route_type, line_id, destination_id, dest_code, dest_name) {
         return new Promise(function (resolve, reject) {
-            pt.stopsOnALine(route_type, line_id, function(errStopsOnALine, dataStopsOnALine){
-                var result = getStopsOnALineResult(dataStopsOnALine,destination_id);
-                resolve([result, dest_code , dest_name]);
+            pt.stopsOnALine(route_type, line_id, function (errStopsOnALine, dataStopsOnALine) {
+                var result = getStopsOnALineResult(dataStopsOnALine, destination_id);
+                resolve([result, dest_code, dest_name]);
             });
         });
     };
 
-    var getStopsOnALineResult = function(dataStopsOnALine,destination_id){
+    var getStopsOnALineResult = function (dataStopsOnALine, destination_id) {
         dataStopsOnALine = dataStopsOnALine || [];
-        for(var iStop = 0 ; iStop < dataStopsOnALine.length ; iStop++){
-            if(dataStopsOnALine[iStop].stop_id == destination_id){
-                 return dataStopsOnALine[iStop].lat + "," + dataStopsOnALine[iStop].lon;
+        for (var iStop = 0; iStop < dataStopsOnALine.length; iStop++) {
+            if (dataStopsOnALine[iStop].stop_id == destination_id) {
+                return dataStopsOnALine[iStop].lat + "," + dataStopsOnALine[iStop].lon;
             }
         }
     };
@@ -188,21 +188,21 @@ module.exports = function (api) {
         var name = req.body.name; // $_POST["keyword"]
         pt.search(keyword, function (err, result) {
             if (err) {
-              //  throw err;
-            }else{
+                //  throw err;
+            } else {
                 callback(result);
             }
         });
     };
 
-    var getGliderLocation = function(req, cb){
+    var getGliderLocation = function (req, cb) {
         var TWENTY_MIN = (20 * 60 * 1000);
         var now = new Date();
-        now.setTime(parseInt(req.body.time) + (11 * 60 * 60 * 1000 ));
+        now.setTime(parseInt(req.body.time) + (11 * 60 * 60 * 1000));
         // console.log(req.body.time);
         // console.log(now);
         var gliderStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 30, 0);
-        while(gliderStartTime.getTime() + TWENTY_MIN < now.getTime()){
+        while (gliderStartTime.getTime() + TWENTY_MIN < now.getTime()) {
             gliderStartTime.setTime(gliderStartTime.getTime() + TWENTY_MIN);
         }
 
@@ -212,17 +212,32 @@ module.exports = function (api) {
         var timeInEachStop = (minToCycle * 60 * 1000) / numOfStops;
         var locationOfGlider = (now.getTime() - gliderStartTime.getTime());
         var stopSeq = Math.ceil(locationOfGlider / timeInEachStop);
-        if(stopSeq > 10) 
+        if (stopSeq > 10)
             stopSeq = 1;
         cb({
             stop: stopSeq
         });
     };
 
+
+
+    var _getNearBy = function (req, callback) {
+        
+        var result = [];
+        var lat = req.body.lat;
+        var lon = req.body.lon;
+
+        pt.stopsNearby(lat, lon, function (errStopsNearby, dataStopsNearby) {
+            callback(dataStopsNearby || []);
+        });
+
+    };
+
     return {
         getData: _getData,
         search: search,
-        getGliderLocation: getGliderLocation
+        getGliderLocation: getGliderLocation,
+        getNearBy: _getNearBy
     };
 
 };

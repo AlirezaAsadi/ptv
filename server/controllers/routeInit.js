@@ -3,11 +3,17 @@ module.exports = function (app) {
 
 
     app.get('/kiosk', function (req, res) {
-        res.render('kiosk');
+        res.render('kiosk', {body_class: 'kiosk-view'});
     });
 
     app.get('/', function (req, res) {
-        res.render('home');
+        var MobileDetect = require('mobile-detect'),
+        md = new MobileDetect(req.headers['user-agent']);
+        if(md.mobile()){
+            res.render('kiosk', {body_class: 'mobile-view'});
+        }else{
+            res.render('home', {body_class: 'desktop-view'});
+        }
     });
 
     app.get('/next5', function (req, res) {
@@ -29,13 +35,13 @@ module.exports = function (app) {
     app.get('/about', function (req, res) {
         res.render('about');
     });
-    
+
     app.get('/contact', function (req, res) {
         res.render('contact');
     });
 
     app.get('/myki', function (req, res) {
-        res.render('myki');    
+        res.render('myki');
     });
 
 };

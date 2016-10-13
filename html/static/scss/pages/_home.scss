@@ -1,4 +1,118 @@
 body#home {
+		background: linear-gradient(0deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a170f', endColorstr='#ea6d22',GradientType=0 ); 
+		height: 100%;
+		margin: 0;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	
+	.campus li a{	
+		font-size: 1.20em;
+	}
+	
+	.campus li a:visited {
+	}
+	
+	.campus li a:hover{
+	}
+	
+	.service ul {
+		font-size:1.20em; 
+		list-style: none;
+	}
+	
+	.nServices h2{
+		width: 100%; 
+		height: 50px; 
+		color: #FF9900;
+		padding: 10px;
+	}
+	
+	.nServices h4{
+		background-color: #262626; 
+		width: 100%; 
+		color: #FF9900;
+		padding: 10px;
+		text-align:left;
+	}
+	
+	.JPbtns {
+		background-color: #31281c;
+		border: 1px solid black;
+		color: #FF9900;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+        width: 50%;
 
 
+
+        &.max{
+            width: 100%;
+        }
+	}
+	
+	.JPbtns:hover {
+		color: white;
+		text-decoration: none;
+	}
+	
+	.JPbtns:focus {
+		color: white;
+		text-decoration: none;
+	}
+	
+	
+	.NSbtns{
+		background-color: #31281c;
+		border: none;
+		color: #FF9900;
+		padding: 20px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 1.2em;
+	}
+	
+	.panel > .panel-heading {
+		background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%);
+		color: #FF9900;
+	}
+	
+	.panel > .panel-footer {
+		background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%);
+		color: #FF9900;
+	}
+	
+	.verticalLine {
+		border-left: 1px solid grey;
+	}
+	
+	.trans_code{
+		font-size: 1.9em;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	.trans_title{
+		font-size: 1em;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.trans_info{
+		font-size: 1em;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	.trans_time{
+		font-size: 1em;
+		font-weight: bold;
+		position: absolute;
+		right: 10%;
+		z-index: 10;
+	}
 }

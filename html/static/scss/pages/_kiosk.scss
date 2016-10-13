@@ -291,6 +291,86 @@ body#kiosk{
 			color: #fff;
 		}
     }
+
+	.add-to-fav{
+		display: none;
+	}
+	nav{
+		display: none;	
+	    height: 75px;
+	}
+	.heading{
+		display: none;
+		padding: 14px; 
+		background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%); 
+		color: #FF9900;
+		border-radius: 7px;
+		margin: 0px;
+		margin-bottom: 10px;
+	}
+	.glider-desktop{
+		display: block;
+	}
+
+	&.desktop-view{
+
+		background: linear-gradient(0deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a170f', endColorstr='#ea6d22',GradientType=0 ); 
+		.glider-desktop{
+			.glider-row {
+				position: static !important;
+				background-color: #f5f2e3 !important;
+				display: block !important;
+				padding-top: 0px !important;
+				margin-top: 0px;
+			}
+			.glider-row div {
+				font-size: 12px;
+				line-height: 22px;
+			}
+		}
+
+		nav{
+			display: block;
+		}
+		.heading{
+			display: block;
+			margin-top: 20px;
+		}
+		#switchJourneyKiosk{
+			display: none;
+		}
+		.plan_journy{
+			display: block;
+		}
+		.main-wrapper{
+			max-width: 1200px;
+			padding: 30px;
+			background-color: #f5f2e3;
+			margin: 20px auto;
+			border-radius: 10px;
+			margin-top: 100px;
+
+			.top-banner-row{
+				max-width: 1200px;
+				margin: auto;
+			}
+
+			.main-body{
+				.main-column {
+					width: 50% !important;
+				}
+
+				.glider-row{
+					display: none;
+				}
+				.add-to-fav{
+					display: block;
+				}
+			}
+		}
+
+	}
 }
 
 
@@ -311,6 +391,9 @@ body#kiosk{
 			height: 95px !important;
 		}
 		.glider-row{
+			display: none;
+		}
+		.glider-desktop{
 			display: none;
 		}
 	}
@@ -343,9 +426,10 @@ body#kiosk{
 		}
 		.main-content{
 			margin-top: 40px;
+			padding-bottom: 40px;
 		}
 		.map-container{
-			margin-top: 40px;
+			margin-top: 50px;
 			width: 100%;
 		}
 

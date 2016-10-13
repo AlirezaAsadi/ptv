@@ -1,10 +1,11 @@
 define([
     'jquery',
     'app',
-    'modules/kiosk/kiosk',
+    'modules/home/kiosk',
     'modules/kiosk/glider',
     'modules/kiosk/plan_journy',
-    'modules/kiosk/nav'
+    'modules/home/ui'
+
 ], function (
     $,
     app,
@@ -20,3 +21,4 @@ define([
         });
         
     });
+

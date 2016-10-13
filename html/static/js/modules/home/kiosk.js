@@ -132,10 +132,10 @@ define([
                     var itm = items[i];
 
                     // disruptions
-                    if(itm.disruptions){
-                        for(var iDistruption = 0; iDistruption < itm.disruptions.length; iDistruption++){
+                    if (itm.disruptions) {
+                        for (var iDistruption = 0; iDistruption < itm.disruptions.length; iDistruption++) {
                             $('body').addClass('has-distruption');
-                            if(disruptions.indexOf(itm.disruptions[iDistruption].title) === -1){
+                            if (disruptions.indexOf(itm.disruptions[iDistruption].title) === -1) {
                                 distuptionId++;
                                 disruptions += '<i class="fa fa-exclamation-circle disruption-icon" aria-hidden="true"></i> ' + distuptionId + '- ' + itm.disruptions[iDistruption].title + ". &nbsp;&nbsp;&nbsp;";
                             }
@@ -182,11 +182,13 @@ define([
                         sHTML = sHTML.replace("{FAV_ICON}", 'fa-star-o');
                     }
 
-                    $(".time-table-parents .col-" + iColId).append(sHTML);
-                    if (iCounter >= 7) {
-                        iCounter = 0;
-                        iColId++;
-                    }
+
+                    if (itm.transport_type == "tram")
+                        $('.tram-table').append(sHTML);
+                    else if (itm.transport_type == "train")
+                        $('.train-table').append(sHTML);
+                    else
+                        $('.bus-table').append(sHTML);
                 }
             }, 300);
 
@@ -203,6 +205,15 @@ define([
                     window.data = JSON.stringify(data);
                     bindData(window.data);
                 }
+            });
+
+
+            getLocation(function (lat, lng) {
+                $.post("/services/kiosk/getNearBy", { lon: lng, lat: lat }, function (data) {
+                    if (data) {
+                        console.log(data);
+                    }
+                });
             });
 
         };
@@ -302,6 +313,17 @@ define([
             //     }
             //  });
         };
+        function getLocation(cb) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    cb(position.coords.latitude, position.coords.longitude);
+                });
+            } else {
+                console.log("Geo not supported");
+                cb();
+            }
+        }
+
 
         return {
             init: init

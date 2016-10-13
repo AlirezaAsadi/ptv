@@ -1,7 +1,11 @@
 ﻿<% include partials/header %>
 
-	<body id="kiosk">
+<body id="kiosk" class="<%= body_class %>">
 
+    <!-- Navigation -->
+    <% include partials/menu %>
+
+	<div class="main-wrapper">
 		<textarea style="display:none" id="schema">
 
 	<!-- Start of bus block -->
@@ -33,9 +37,25 @@
 
 </textarea>
 
+		<div class="glider-desktop">
+			<h3 class="heading">GLIDER SERVICES</h3>
+			<div class="row glider-row" data-tab-item="glider">
+				<div>1- Plenty Road</div>
+				<div>2- Thomas Cherry</div>
+				<div>3- Union</div>
+				<div>4- Barnes Way</div>
+				<div>5- AgriBio</div>
+				<div>6- Terraces</div>
+				<div>7- Uni Lodge</div>
+				<div>8- Gresswell</div>
+				<div>9- Graduate House</div>
+				<div>10- Polaris</div>
+			</div>
+		</div>
 
+		<h3 class="heading">NEARBY SERVICES</h3>
 
-		<div class="row">
+		<div class="row top-banner-row">
 			<div class="col-sm-12 col-lg-12">
 
 				<div class="header">
@@ -78,6 +98,7 @@
 			</div>
 
 			<div class="row glider-row" data-tab-item="glider">
+				<h3 class="heading">GLIDER SERVICES</h3>
 				<div>1- Plenty Road</div>
 				<div>2- Thomas Cherry</div>
 				<div>3- Union</div>
@@ -89,42 +110,44 @@
 				<div>9- Graduate House</div>
 				<div>10- Polaris</div>
 			</div>
-
-
-			<div class="row plan_journy" data-tab-item="journy">
-				<div class="row">
-					<div class="panel panel-default" id="planJournyForm">
-						<div class="panel-body">
-							<div class="form-group" id="startPanel">
-								<h4>Leaving from</h4>
-								<select class="form-control" id="start">
-										<option value="Thomas Cherry Building">Thomas Cherry Building</option>
-										<option value="Ablett Tower Moat">Ablett Tower Moat</option>
-										<option value="Medical Centre La Trobe University">Medical Centre</option>
-										<option value="Terminus La Trobe University">Terminus</option>
-									</select>
-							</div>
-							<div class="form-group" id="endPanel">
-								<h4>Going to</h4>
-								<input list="searchKeywordDropdown" type="text" id="end" name="end" class="searchKeyword form-control" placeholder="Station, stop, address">
-
-								<datalist id="searchKeywordDropdown"></datalist>
-							</div>
-
-							<button id="showJourney" type="button" class="btn btn-primary">Show journey</button>
-							<button id="switchDirection" type="button" class="btn btn-primary">Switch</button>
-						</div>
-						<div class="alert alert-danger hide" id="error">
-							<strong>No result found!</strong> No result found, please check your input.
-						</div>
-					</div>
-
-					<div class="hidden" id="mapContainerJourny"></div>
-				</div>
-			</div>
-
 		</div>
 
+		<div class="row plan_journy" data-tab-item="journy">
+			<h3 class="heading">PLAN JOURNEY</h3>
+			<div class="row">
+				<div class="panel panel-default" id="planJournyForm">
+					<div class="panel-body">
+						<div class="form-group" id="startPanel">
+							<h4>Leaving from</h4>
+							<select class="form-control" id="start">
+									<option value="-37.7207743,145.0463056">Thomas Cherry Building</option>
+									<option value="-37.7223266,145.0485497">David Myers Building</option>
+									<option value="-37.7224836,145.0483953">Ablett Tower Moat</option>
+									<option value="-37.7186849,145.0447346">Medical Centre</option>
+									<option value="-37.7186849,145.0447346">Terminus</option>
+								</select>
+						</div>
+						<div class="form-group" id="endPanel">
+							<h4>Going to</h4>
+							<input list="searchKeywordDropdown" type="text" id="end" name="end" class="searchKeyword form-control" placeholder="Station, stop, address">
+
+							<datalist id="searchKeywordDropdown"></datalist>
+						</div>
+
+						<button id="showJourney" type="button" class="btn btn-primary">Show journey</button>
+						<button id="switchDirection" type="button" class="btn btn-primary">Switch</button>
+					</div>
+					<div class="hidden center" id="loading">
+						<img src="static/img/loading.gif" width="50">
+					</div>
+					<div class="alert alert-danger hide" id="error">
+						<strong>No result found!</strong> No result found, please check your input.
+					</div>
+				</div>
+
+				<div class="hidden" id="mapContainerJourny"></div>
+			</div>
+		</div>
 
 		<div class="row footer-row">
 
@@ -133,6 +156,7 @@
 					<li data-item="kiosk" class="active"><a href="#">Next</a></li>
 					<li data-item="glider"><a href="#">Glider</a></li>
 					<li data-item="journy"><a href="#">Journey</a></li>
+					<li class="direct_button_item hidden" data-item="journy"><a href="#">Get Uni</a></li>
 				</ul>
 			</div>
 
@@ -146,6 +170,6 @@
 		<script type="text/javascript" src="/static/js/config.js"></script>
 		<script type="text/javascript" data-main="modules/kiosk/init" src="/static/js/vendors/r.js"></script>
 
-	</body>
-
-	</html>
+	</div>
+</body>
+</html>

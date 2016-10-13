@@ -27,5 +27,11 @@ module.exports = function (api) {
     });
 	
 	
+    api.app.post('/services/kiosk/getNearBy', function (req, res) {
+        controller.getNearBy(req, function (result) {
+            res.send(result);
+        });
+
+    });
 
 };
