@@ -1,5 +1,6 @@
 define([
-    'jquery'
+    'jquery',
+    'jquery-ui'
 ], function (
     $
 ) {
@@ -40,7 +41,7 @@ define([
             return false;
         });
         var hideSearchForm = function () {
-            if($('body').hasClass('desktop-view')){
+            if ($('body').hasClass('desktop-view')) {
                 return false;
             }
             $('#planJournyForm').hide();
@@ -58,12 +59,21 @@ define([
         function onSwitchHandler() {
             var startContent = $('#startPanel').html();
             var endContent = $('#endPanel').html();
+            var startText = $('#startPanel h4').text();
+            var endText = $('#endPanel h4').text();
             var searchText = $('.searchKeyword').val();
             $('#startPanel').html(endContent);
             $('#endPanel').html(startContent);
+
+            // Keep the texts
+            $('#startPanel h4').html(startText);
+            $('#endPanel h4').html(endText);
+
             $('.searchKeyword').val(searchText);
             $("#start").attr("id", "end");
             $("#end").attr("id", "start");
+
+            bindAutocomplete();
         }
 
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -86,26 +96,42 @@ define([
         }
 
         function init() {
-            tryGeolocation();
+            getLocation(function (lat, lng) {
+                currentLocation.lat = lat;
+                currentLocation.lng = lng;
+                onCurrentGeoSuccess();
+            });
+
+            bindAutocomplete();
         }
 
-        var getCurrentGeoSuccess = function () {
+        // Put the current location once user switch to plan a journey tab
+        $(document).on('switch:plan_journey', function(){
+            if(currentLocation.lat){
+                var lat = currentLocation.lat;
+                var lng = currentLocation.lng;
+                $('.searchKeyword').attr('data-location', lat + ',' + lng).val('Current location');
+            }
+            init();
+        });
+
+        var onCurrentGeoSuccess = function () {
             $('.direct_button_item').removeClass('hidden');
             var lat = currentLocation.lat;
             var lng = currentLocation.lng;
             $('.searchKeyword').attr('data-location', lat + ',' + lng).val('Current location');
 
             $('datalist#searchKeywordDropdown').find('option').remove();
-            $('#loading').removeClass('hidden');
-            $.post("/services/kiosk/getNearBy", { lon: lng, lat: lat }, function (response) {
-                $('#loading').addClass('hidden');
-                if (response) {
-                    for (var i = 0; i < response.length; i++) {
-                        var location = response[i];
-                        $('datalist#searchKeywordDropdown').append('<option data-location="' + location.lat + ',' + location.lon + '">' + location.location_name + ' - ' + location.lat + ',' + location.lon + '</option>');
-                    }
-                }
-            });
+            //$('#loading').removeClass('hidden');
+            // $.post("/services/kiosk/getNearBy", { lon: lng, lat: lat }, function (response) {
+            //     $('#loading').addClass('hidden');
+            //     if (response) {
+            //         for (var i = 0; i < response.length; i++) {
+            //             var location = response[i];
+            //             $('datalist#searchKeywordDropdown').append('<option data-location="' + location.lat + ',' + location.lon + '">' + location.location_name + ' - ' + location.lat + ',' + location.lon + '</option>');
+            //         }
+            //     }
+            // });
         };
 
         $('.direct_button_item a').click(function () {
@@ -116,119 +142,79 @@ define([
             $('#showJourney').click();
         });
 
-        var apiGeolocationSuccess = function (position) {
-
-            currentLocation.lat = position.coords.latitude;
-            currentLocation.lng = position.coords.longitude;
-            getCurrentGeoSuccess();
-            //alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
-        };
-
-        var tryAPIGeolocation = function () {
-            $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCq2IKcNbdT0gATARU38Dr0JFkSp5qJFVM", function (success) {
-                apiGeolocationSuccess({ coords: { latitude: success.location.lat, longitude: success.location.lng } });
-            })
-                .fail(function (err) {
-                    currentLocation = null;
-                    alert("API Geolocation error! \n\n" + err);
-                });
-        };
-
-        var browserGeolocationSuccess = function (position) {
-            currentLocation.lat = position.coords.latitude;
-            currentLocation.lng = position.coords.longitude;
-            getCurrentGeoSuccess();
-            //alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
-        };
-
-        var browserGeolocationFail = function (error) {
-            switch (error.code) {
-                case error.TIMEOUT:
-                    currentLocation = null;
-                    alert("Browser geolocation error !\n\nTimeout.");
-                    break;
-                case error.PERMISSION_DENIED:
-                    if (error.message.indexOf("Only secure origins are allowed") === 0) {
-                        tryAPIGeolocation();
-                    } else {
-                        currentLocation = null;
-                    }
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    alert("Browser geolocation error !\n\nPosition unavailable.");
-                    break;
-            }
-        };
-
-        var tryGeolocation = function (cb) {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    browserGeolocationSuccess,
-                    browserGeolocationFail,
-                    { maximumAge: 50000, timeout: 20000, enableHighAccuracy: true });
-            }
-        };
 
         function getLocation(cb) {
             var options = {
                 enableHighAccuracy: true,
-                timeout: 5000,
+                timeout: 20000,
                 maximumAge: 0
             };
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     cb(position.coords.latitude, position.coords.longitude);
                 }, function (err) {
-                    alert('ERROR(' + err.code + '): ' + err.message);
+                    console.log('ERROR(' + err.code + '): ' + err.message);
                 }, options);
             } else {
-                alert("Geo not supported");
+                console.log("Geo not supported");
                 cb();
             }
         }
 
-        var delay;
-        var minTriggerTime = 100;
-        var isLoading = false;
-        var handleAutocomplete = function () {
-            if (delay > minTriggerTime) {
-                setTimeout(function () {
-                    delay -= minTriggerTime;
-                    handleAutocomplete();
-                }, minTriggerTime);
-            } else {
-                isLoading = false;
+        // Old implementation of auto complete
+        // var delay;
+        // var minTriggerTime = 100;
+        // var isLoading = false;
+        // var handleAutocomplete = function () {
+        //     if (delay > minTriggerTime) {
+        //         setTimeout(function () {
+        //             delay -= minTriggerTime;
+        //             handleAutocomplete();
+        //         }, minTriggerTime);
+        //     } else {
+        //         isLoading = false;
 
-                $('datalist#searchKeywordDropdown').find('option').remove();
-                var keyword = $('.searchKeyword').val();
-                $.post("/services/kiosk/search", { "keyword": keyword }, function (response) {
-                    //console.log(data);
-                    for (var i = 0; i < response.length; i++) {
-                        var location = response[i].result;
-                        $('datalist#searchKeywordDropdown').append('<option data-location="' + location.lat + ',' + location.lon + '">' + location.location_name + ' - ' + location.lat + ',' + location.lon + '</option>');
+        //         $('datalist#searchKeywordDropdown').find('option').remove();
+        //         var keyword = $('.searchKeyword').val();
+        //         $.post("/services/kiosk/search", { "keyword": keyword }, function (response) {
+        //             //console.log(data);
+        //             for (var i = 0; i < response.length; i++) {
+        //                 var location = response[i].result;
+        //                 $('datalist#searchKeywordDropdown').append('<option data-location="' + location.lat + ',' + location.lon + '">' + location.location_name + ' - ' + location.lat + ',' + location.lon + '</option>');
+        //             }
+        //         });
+        //     }
+        // };
+        // $('.searchKeyword').on('keydown', function (e) {
+        //     delay = 1000;
+        //     if (!isLoading) {
+        //         isLoading = true;
+        //         handleAutocomplete(e);
+        //     }
+        // });
+
+        // Next implementation of auto complete
+        var bindAutocomplete = function(){
+            $.ajaxSetup({ type: "post" });
+            $(".searchKeyword").autocomplete({
+                source: "/services/kiosk/search",
+                minLength: 2,
+                select: function (event, ui) {
+                    var title = ui.item.value;
+                    var location = ui.item.value;
+                    if (title.indexOf(' - ') > -1 && title.indexOf(',') > -1) {
+                        title = title.substr(0, title.indexOf(' - '));
+                        location = location.substr(location.indexOf(' - ') + 3);
                     }
-                });
-            }
+                    $('.searchKeyword').val(title);
+                    $('.searchKeyword').attr('data-location', location);
+                }
+            });
+            $(".searchKeyword").on('focus', function(){
+                $(this).val('');
+            });
         };
-
-        $('.searchKeyword').on('keydown', function (e) {
-            delay = 1000;
-            if (!isLoading) {
-                isLoading = true;
-                handleAutocomplete(e);
-            }
-        });
-
-        $('.searchKeyword').on('change', function () {
-            var title = $(this).val();
-            var location = title;
-            if (title.indexOf(' - ') > -1 && title.indexOf(',') > -1) {
-                title = title.substr(0, title.indexOf(' - '));
-                location = location.substr(location.indexOf(' - ') + 3);
-            }
-            $(this).val(title);
-            $(this).attr('data-location', location);
-        });
+        
 
 
         return {

@@ -1,15 +1,20 @@
-var server = require('http').createServer(),
+var fs = require('fs'),
+  https_option = { key: fs.readFileSync( 'config/server.key' ),cert: fs.readFileSync( 'config/server.crt' )},
   express = require('express'),
+  app = express(),
+  server_http = require('http').createServer(app),
+  server_https = require('https').createServer(https_option, app),
   session = require('express-session'),
   bodyParser = require('body-parser'),
 
-  app = express(),
-  port = 8181;
+  port = 8181,
+  port_http = port,
+  port_https = port;
 
 // Main configuration
 var sessionConfig = {
-  secret: "PTV_LATRO",
-  name: "PTV",
+  secret: "Travel_LATRO",
+  name: "TL",
   proxy: true,
   resave: true,
   saveUninitialized: true
@@ -27,5 +32,8 @@ app.use(express.static(__dirname + '/../html'));        // Static files
 require('./controllers/routeInit')(app);
 require('./controllers/serviceInit')(app);
 
-server.on('request', app);
-server.listen(port, function () { console.log('PTV is listening on ' + server.address().port); });
+// // Run HTTP server
+// server_http.listen(port_http, function () { console.log('TravelLaTrobe is listening on ' + port_http); });
+
+// Run HTTPS server
+server_https.listen(port_https, function () { console.log('TravelLaTrobe is listening on ' + port_https); });

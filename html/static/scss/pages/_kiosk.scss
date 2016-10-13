@@ -62,6 +62,8 @@ body#kiosk{
 			color: #ccc;
 
 			.clock{
+				font-size: 20px;
+				line-height: 20px;
 				span{
 					font-weight: bold;
 					color: #ccc;
@@ -395,6 +397,13 @@ body#kiosk{
 		}
 		.glider-desktop{
 			display: none;
+		}
+		.add-to-fav{
+			display: block !important;
+		}
+
+		.clock{
+			font-size: 12px !important;
 		}
 	}
 }

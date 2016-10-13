@@ -10,7 +10,7 @@
 
 	<!-- Start of bus block -->
 	<div class="col-sm-12 col-lg-12 box-timetable-right big-box {TRANS_TYPE} {FAV_CLASS}" data-full-from="{FULL_FROM}" data-full-to="{FULL_TO}">
-		<a href="#" class="add-to-fav" data-unique-name="{UNIQUE_NAME}"><i class="fa {FAV_ICON}" aria-hidden="true"></i></a>
+		<a href="#" onClick class="add-to-fav" data-unique-name="{UNIQUE_NAME}"><i class="fa {FAV_ICON}" aria-hidden="true"></i></a>
 		<div class="col-xs-12 col-sm-5 col-lg-5 no-padding ">
 
 			<div class="col-xs-2 col-sm-3 col-lg-3 no-padding">
@@ -61,7 +61,7 @@
 				<div class="header">
 					<div class="disruptions hidden"><marquee onmouseover="this.stop();" onmouseout="this.start();"></marquee></div>
 					<div class="banner">
-						<button id="switchJourneyKiosk" type="button" class="btn btn-primary">Plan journey</button>
+						<!--<button id="switchJourneyKiosk" type="button" class="btn btn-primary">Plan journey</button>-->
 						<div class="map hidden">
 							<a href="#" class="back">
 								< Back</a> <span></span>
@@ -129,13 +129,11 @@
 						</div>
 						<div class="form-group" id="endPanel">
 							<h4>Going to</h4>
-							<input list="searchKeywordDropdown" type="text" id="end" name="end" class="searchKeyword form-control" placeholder="Station, stop, address">
-
-							<datalist id="searchKeywordDropdown"></datalist>
+							<input type="text" id="end" name="end" class="searchKeyword form-control" placeholder="Station, stop, address">
 						</div>
 
-						<button id="showJourney" type="button" class="btn btn-primary">Show journey</button>
-						<button id="switchDirection" type="button" class="btn btn-primary">Switch</button>
+						<button onClick id="showJourney" type="button" class="btn btn-primary">Show journey</button>
+						<button onClick id="switchDirection" type="button" class="btn btn-primary">Switch</button>
 					</div>
 					<div class="hidden center" id="loading">
 						<img src="static/img/loading.gif" width="50">
@@ -156,7 +154,7 @@
 					<li data-item="kiosk" class="active"><a href="#">Next</a></li>
 					<li data-item="glider"><a href="#">Glider</a></li>
 					<li data-item="journy"><a href="#">Journey</a></li>
-					<li class="direct_button_item hidden" data-item="journy"><a href="#">Get Uni</a></li>
+					<li class="direct_button_item hidden" data-item="journy"><a href="#">To Uni</a></li>
 				</ul>
 			</div>
 

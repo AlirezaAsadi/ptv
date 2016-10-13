@@ -9,6 +9,7 @@ var require={
 
         angular:              'vendors/angular.min',
         jquery:               'vendors/jquery-2.1.1.min',
+        'jquery-ui':          'vendors/jquery-ui.min',
         ngSanitize:           'vendors/angular-sanitize.min',
         ngRoute:              'vendors/angular-route.min',
         ngResource:           'vendors/angular-resource.min',
@@ -18,6 +19,10 @@ var require={
 
     },
     shim: {
+        'jquery-ui': {
+            exports: '$',
+            deps: ['jquery']
+        },
         angular: {
                         deps: ['jquery'],
                         exports: 'angular'

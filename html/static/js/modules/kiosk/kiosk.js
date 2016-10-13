@@ -68,23 +68,23 @@ define([
                     }
                     if (itm.dest_code == "South Morang" && itm.dest_name == "City (Flinders Street)") {
                         itm.dest_code = "Reservoir Station";
-                        itm.dest_name = "City (Flinders Street)";
+                        itm.dest_name = "City (Flinders)";
                         for (var s = 0; s < itm.stops.length; s++) {
                             itm.stops[s].name = "to City (Flinders)";
                         }
                     }
                     if (itm.dest_code == "Hurstbridge" && itm.dest_name == "Hurstbridge") {
-                        itm.dest_code = "Macleod Railway";
+                        itm.dest_code = "Macleod Station";
                         itm.dest_name = "Hurstbridge";
                         for (var s = 0; s < itm.stops.length; s++) {
                             itm.stops[s].name = "to Hurstbridge";
                         }
                     }
                     if (itm.dest_code == "Hurstbridge" && itm.dest_name == "City (Flinders Street)") {
-                        itm.dest_code = "Macleod Railway";
+                        itm.dest_code = "Macleod Station";
                         itm.dest_name = "City (Flinders)";
                         for (var s = 0; s < itm.stops.length; s++) {
-                            itm.stops[s].name = "to City (Flinders Street)";
+                            itm.stops[s].name = "to City (Flinders)";
                         }
                     }
                     trains.push(itm);

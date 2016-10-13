@@ -184,13 +184,22 @@ module.exports = function (api) {
 
     var search = function (req, callback) {
         //"/v2/nearme/latitude/-37.817993/longitude/144.981916"
-        var keyword = req.body.keyword; // $_POST["keyword"]
-        var name = req.body.name; // $_POST["keyword"]
+        var keyword = req.body.term;
         pt.search(keyword, function (err, result) {
             if (err) {
                 //  throw err;
             } else {
-                callback(result);
+                var resultAuto = [];
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].result.location_name) {
+                        resultAuto.push({
+                            id: result[i].result.stop_id,
+                            label: result[i].result.location_name + ', ' + result[i].result.suburb,
+                            value: result[i].result.location_name + ' - ' + result[i].result.lat + ',' + result[i].result.lon
+                        });
+                    }
+                }
+                callback(resultAuto);
             }
         });
     };
@@ -198,7 +207,7 @@ module.exports = function (api) {
     var getGliderLocation = function (req, cb) {
         var TWENTY_MIN = (20 * 60 * 1000);
         var now = new Date();
-        now.setTime(parseInt(req.body.time) + (11 * 60 * 60 * 1000));
+        now.setTime(now.getTime() + (11 * 60 * 60 * 1000));
         // console.log(req.body.time);
         // console.log(now);
         var gliderStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 30, 0);
@@ -212,8 +221,9 @@ module.exports = function (api) {
         var timeInEachStop = (minToCycle * 60 * 1000) / numOfStops;
         var locationOfGlider = (now.getTime() - gliderStartTime.getTime());
         var stopSeq = Math.ceil(locationOfGlider / timeInEachStop);
-        if (stopSeq > 10)
+        if (stopSeq > 10 || stopSeq < 0)
             stopSeq = 1;
+
         cb({
             stop: stopSeq
         });
@@ -222,7 +232,7 @@ module.exports = function (api) {
 
 
     var _getNearBy = function (req, callback) {
-        
+
         var result = [];
         var lat = req.body.lat;
         var lon = req.body.lon;

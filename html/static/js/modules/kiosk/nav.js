@@ -16,6 +16,10 @@ define([
             
             $('[data-tab-item="' + selectedItem + '"]').show();
 
+            if(selectedItem == 'journy'){
+                $(document).trigger('switch:plan_journey');
+            }
+
             return false;
         });
 
