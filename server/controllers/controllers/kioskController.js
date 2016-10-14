@@ -1,11 +1,10 @@
-
+//seting up the kiosk
 module.exports = function (api) {
 
-    // Developer key and id for ptv website
+
     var key = "d4d21114-10d3-11e6-a65e-029db85e733b";
     var developerId = 1000755;
-
-    // Information of two train stops(Reservoir Station, Macleod Railway Station) near to Bundoora La Trobe Uni
+//get the resorvoir train station and the macleod train station from the data sent by server
     var train_stops = [
         {
             distance: 0.00000538514,
@@ -28,22 +27,15 @@ module.exports = function (api) {
             transport_type: "train",
         }
     ];
-
-    // Location of La Trobe University
+    //get stops near latrobe uni
     var lat = -37.720616;
     var lon = 145.046309;
-
-    // Public variables
     var max_stop_near_by = 6;
     var pt = api.ptv.createClient({ devId: developerId, key: key });
     var result;
     var curDateTime;
     var location_promises = [];
 
-    /*
-         Get the next departure services for the kiosk, and next departue page in mobile and desktop
-         @return array
-    */
     var _getData = function (req, callback) {
         var promises = [];
         var i = 0;
@@ -73,20 +65,14 @@ module.exports = function (api) {
                 return Promise.all(location_promises);
 
             }).then(function (locations_to) {
-                var waypoints = [];
                 for (var iLocation = 0; iLocation < locations_to.length; iLocation++) {
                     var location_to = locations_to[iLocation][0];
                     var dest_code = locations_to[iLocation][1];
                     var dest_name = locations_to[iLocation][2];
 
-                    // No waypoints needed yet
-                    if(waypoints.length < 0)
-                        waypoints.push({location: location_to, stopover: false});
-
                     for (var iResult = 0; iResult < result.length; iResult++) {
                         if (result[iResult].dest_code == dest_code && result[iResult].dest_name == dest_name) {
                             result[iLocation].location_to = location_to;
-                            result[iLocation].waypoints = waypoints;
                         }
                     }
                 }
@@ -95,11 +81,7 @@ module.exports = function (api) {
         });
 
     };
-
-    /*
-         Get the next departure synchronously
-         @return array
-    */
+//show next departurs of the service
     var broadNextDeparturesSync = function (type, topNearStop, limit) {
         return new Promise(function (resolve, reject) {
             pt.broadNextDepartures(type, topNearStop.stop_id, limit, null, function (errNextDep, dataNextDeps) {
@@ -108,11 +90,7 @@ module.exports = function (api) {
             });
         });
     };
-
-    /*
-         Get the last stop location to be used in the Google map
-         @return array
-    */
+//get the last stop location
     var getLastStopLocation = function (route_type, line_id, destination_id, dest_code, dest_name) {
         return new Promise(function (resolve, reject) {
             pt.stopsOnALine(route_type, line_id, function (errStopsOnALine, dataStopsOnALine) {
@@ -122,10 +100,6 @@ module.exports = function (api) {
         });
     };
 
-    /*
-         Get the list of stops in one line
-         @return array
-    */
     var getStopsOnALineResult = function (dataStopsOnALine, destination_id) {
         dataStopsOnALine = dataStopsOnALine || [];
         for (var iStop = 0; iStop < dataStopsOnALine.length; iStop++) {
@@ -135,10 +109,6 @@ module.exports = function (api) {
         }
     };
 
-    /*
-         Create the array of lines and merge them together
-         @return array
-    */
     var getResultArray = function (topNearStop, dataNextDeps) {
         var item = null;
         dataNextDeps = dataNextDeps || [];
@@ -213,10 +183,6 @@ module.exports = function (api) {
         return item;
     };
 
-    /*
-         Search the locations by keyword
-         @return array
-    */
     var search = function (req, callback) {
         //"/v2/nearme/latitude/-37.817993/longitude/144.981916"
         var keyword = req.body.term;
@@ -246,10 +212,7 @@ module.exports = function (api) {
         });
     };
 
-    /*
-         Calculate and return the location of glider at the current time
-         @return array
-    */
+//get the glider bus from the glider timetable
     var getGliderLocation = function (req, cb) {
         var TWENTY_MIN = (20 * 60 * 1000);
         var now = new Date();
@@ -276,10 +239,7 @@ module.exports = function (api) {
     };
 
 
-    /*
-         Get the nearBy stops at the first time when user load the plan a journey
-         @return array
-    */
+//get nearby stops
     var _getNearBy = function (req, callback) {
 
         var result = [];
@@ -292,9 +252,6 @@ module.exports = function (api) {
 
     };
 
-    /*
-         Return the public methods
-    */
     return {
         getData: _getData,
         search: search,
