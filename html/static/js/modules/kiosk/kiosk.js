@@ -3,7 +3,7 @@ define([
 ], function (
     $
 ) {
-
+        //initialize the kiosk
         var init = function () {
 
             setInterval(function () {
@@ -12,7 +12,9 @@ define([
 
 
             updateData();
+            //update the kiosk after every one minute
             setInterval(function () {
+
                 updateData();
             }, 60000);
 
@@ -42,7 +44,7 @@ define([
                 return 1;
             return 0;
         }
-
+        //getting the bus, train and tram services we need from the data provided by the server
         function bindData(data) {
             var items = JSON.parse(data);
 
@@ -52,13 +54,19 @@ define([
             var trains = [];
             for (var i = 0; i < items.length; i++) {
                 var itm = items[i];
+                //get the tram routes that we need
+
                 if (itm.transport_type == "tram") {
                     itm.dest_name = 'to ' + itm.dest_name;
                     trams.push(itm);
-                } else if (itm.transport_type == "bus") {
+                } 
+                //get the bus routes that we need
+                else if (itm.transport_type == "bus") {
                     itm.dest_name = 'to ' + itm.dest_name;
                     buses.push(itm);
-                } else if (itm.transport_type == "train") {
+                } 
+                //get south morang and hurstbridge line trains
+                else if (itm.transport_type == "train") {
                     if (itm.dest_code == "South Morang" && itm.dest_name == "South Morang") {
                         itm.dest_code = "Reservoir Station";
                         itm.dest_name = "South Morang";
@@ -142,7 +150,7 @@ define([
                         }
                     }
                     $('.header .disruptions marquee').html(disruptions);
-
+                    //get the tram, train and bus icons
                     var sHTML = $("#schema").val();
                     if (itm.transport_type == "tram")
                         sHTML = sHTML.replace('{PIC_NAME}', 'tram.png');
@@ -209,7 +217,7 @@ define([
 
         };
 
-
+        //fav route only for mobile
         var isFav = function (itm) {
             var favRoutes = JSON.parse(localStorage.getItem('fav-routes') || '[]');
             return (favRoutes.indexOf(itm.dest_code + '-' + itm.dest_name.replace('to ', '')) > -1);
@@ -245,6 +253,8 @@ define([
             switchToTable();
             return false;
         });
+
+        //show the route on a map(only for mobile)
         $(document).on('click', '.gotoMap', function () {
             var from = $(this).closest('.big-box').attr('data-full-from');
             var to = $(this).closest('.big-box').attr('data-full-to');
