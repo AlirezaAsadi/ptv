@@ -1,3 +1,4 @@
+//JavaScript to get the glider location according to the time table
 define([
     'jquery',
     'angular',
@@ -10,7 +11,7 @@ define([
     glider
 ) {
         var START_TIME = new Date();
-
+//This function initializes the js.
         var init = function () {
             getGliderLocation();
 
@@ -18,7 +19,7 @@ define([
                 getGliderLocation();
             }, 10 * 1000);
         };
-
+//this function returns the glider location
         var getGliderLocation = function(){
             $.post("/services/kiosk/getGliderLocation", {'time': (new Date()).getTime()}, function (data) {
                 if (data) {

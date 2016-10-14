@@ -1,3 +1,4 @@
+//this js program initializes the kiosk and the plan_journey for website
 define([
     'jquery',
     'app',

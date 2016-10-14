@@ -23,7 +23,7 @@ define([
             return false;
         });
 
-
+//to swith between the kiosk and the journey planner on the moble
         $('#switchJourneyKiosk').click(function(){
             $('.header .back:visible').click();
             if($('.main-content').is(':visible')){
