@@ -1,3 +1,4 @@
+//jouney planner js program
 define([
     'jquery',
     'jquery-ui'
@@ -5,7 +6,7 @@ define([
     $
 ) {
 
-
+        //show the map of the complete route using google Api
         var currentLocation = {};
         function initMap() {
 
@@ -20,7 +21,8 @@ define([
             calculateAndDisplayRoute(directionsService, directionsDisplay);
 
         }
-
+        
+        //to switch betweeen going from and going to 
         var onChangeHandler = function () {
             if ($('.searchKeyword').val() !== '')
                 initMap();
@@ -41,6 +43,8 @@ define([
             backToSearchForm();
             return false;
         });
+        
+        //hide the journey panner forn ony for desktop website
         var hideSearchForm = function () {
             if ($('body').hasClass('desktop-view')) {
                 return false;
@@ -50,6 +54,8 @@ define([
             $('.header .journy').removeClass('hidden');
             $('.header .clock').addClass('hidden');
         };
+
+        //switch back to the journey planner form
         var backToSearchForm = function () {
             $('#planJournyForm').show();
             $('#mapContainerJourny').addClass('hidden');
@@ -57,6 +63,7 @@ define([
             $('.header .clock').removeClass('hidden');
         };
 
+        //switch betwwen the entered destination and the starting point
         function onSwitchHandler() {
             var startContent = $('#startPanel').html();
             var endContent = $('#endPanel').html();
@@ -77,6 +84,7 @@ define([
             bindAutocomplete();
         }
 
+        //get the route using the google transit api and show on map
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
             $('#error').addClass('hide');
@@ -95,7 +103,8 @@ define([
                 }
             });
         }
-
+        
+        //initalize the journey planner
         function init() {
             getLocation(function (lat, lng) {
                 currentLocation.lat = lat;
@@ -143,7 +152,7 @@ define([
             $('#showJourney').click();
         });
 
-
+        // get current location only if the hardware supports it
         function getLocation(cb) {
             var options = {
                 enableHighAccuracy: true,
