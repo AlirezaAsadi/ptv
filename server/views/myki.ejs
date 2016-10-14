@@ -180,35 +180,38 @@ var mystickybar = new expstickybar({
 	
 </script>
 
+<style>
+body{
+		background: linear-gradient(0deg, rgba(234,109,34,1) 0%, rgba(154,23,15,1) 100%); / w3c /
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a170f', endColorstr='#ea6d22',GradientType=0 ); / ie6-9 /
+		height: 100%;
+		margin: 0;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+</style>
+
 <body id="home">
 	
     <!-- Navigation -->
     <% include partials/menu %>
-  
-<div class="container text-center">
-  <div class="row">
-    
-  </div>
-</div>
-<br/>
+
+ 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container img-rounded" style = "padding: 20px; background-color: #F5F2E3;">
       <div class="row">
         <div id="heading" class="col-xs-12 col-md-12">
-		<img width="98%" src="static/img/newBus.png" class="img-rounded img-responsive" alt="New Bus from Reservoir Station direct to La Trobe Bundoora Campus" />
-          <h2>Myki for Students</h2>
+		<img width="100%" src="static/img/newBus.png" class="img-rounded img-responsive" alt="New Bus from Reservoir Station direct to La Trobe Bundoora Campus" />
+          <h3 class = "img-rounded" style = "padding: 10px; background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%); color: #FF9900;">Myki for Students</h3>
 		    <p>
 		     When travelling on Melbourne's metropolitan public transport network, all travelers 
 			 are required to use a Myki card as their ticket to travel. These reusable cards are 
 			 to be topped-up to ensure sufficient funds are available, and touched-on and touched-off each time you travel.
 			 For full details about Myki please visit <a href="http://ptv.vic.gov.au/tickets/myki/">
 			 the official PTV webpage</a>.
-			 </p><br/>
-		</div>
-		<div class="col-xs-12 col-md-12">
-			 <p><button onclick="toggle_visibility('purchase')" style="padding: 10px; outline: 0px; border: currentColor; transition:0.4s; border-image: none; width: 98%; text-align: left; color: rgb(255, 255, 255); font-size: 15px; font-weight: bold; cursor: pointer; background-color: #303030;">Purchasing & Topping-Up<span id="purchaseIcon" style="font-size: 1.3em; float: right; display: block;">+</span></button></p>
-
-             <div id="purchaseInfo" style="overflow: hidden; display: none;">
+			 </p>
+			 
+			<h3 class = "img-rounded" style = "padding: 10px; background-image:  linear-gradient(to bottom, #31281c 0%, #51422f 100%); color: #FF9900;">Purchasing & Topping-Up</h3>
 			 <p>
 			 All travellers are able to purchase Myki cards at Myki machines, staffed train stations and selected top-up locations
              including 7-Eleven stores.
@@ -232,83 +235,33 @@ var mystickybar = new expstickybar({
 			 travel along these zones and last for 365 days. <a href="http://www.latrobe.edu.au/students/international/iusepass">Click here</a> to apply for 
 			 a La Trobe iUSEpass.
 			 </p>
-			 </div>
 		</div>
-		<div class="col-xs-12 col-md-12">
-			 <p><button id="locationBtn" onclick="toggle_visibility('locationFinder')" style="padding: 10px; outline: 0px; border: currentColor; transition:0.4s; border-image: none; width: 98%; text-align: left; color: rgb(255, 255, 255); font-size: 15px; font-weight: bold; cursor: pointer; background-color: #303030;">Find Your Nearest Myki Sales & Top-Up Location<span id="locationFinderIcon" style="font-size: 1.3em; float: right; display: block;">+</span></button></p>
-
-             <div id="locationFinderInfo" style="overflow: hidden; display: none; width:100%;">
-			 <iframe id="locationIFrame" src="" height="600px" width="98%" frameborder="0" scrolling="no" style="min-width: auto;">
-             <p>Your browser does not support this feature.</p></iframe>
-             </div>
-	    </div>
-		<div class="col-xs-12 col-md-12">
-			 <p><button onclick="toggle_visibility('campusFinder')" style="padding: 10px; outline: 0px; border: currentColor; transition:0.4s; border-image: none; width: 98%; text-align: left; color: rgb(255, 255, 255); font-size: 15px; font-weight: bold; cursor: pointer; background-color: #303030;">Myki on Campus<span id="campusFinderIcon" style="font-size: 1.3em; float: right; display: block;">+</span></button></p>
-
-             <div id="campusFinderInfo" style="overflow: hidden; display: none;">
-			 
-			 <nav class="navbar navbar-inverse" style="width:98%">
-			    <div class="container-fluid">
-				   <ul class="nav navbar-nav">
-				      <li id="campusMelb" class="active"><a href="#">Bundoora</a></li>
-					  <li id="campusCity"><a href="#">City</a></li>
-					  <li id="campusAlbury"><a href="#">Albury-Wodonga</a></li>
-					  <li id="campusSydney"><a href="#">Sydney</a></li>
-					  <li id="campusBendigo"><a href="#">Bendigo</a></li>
-				   </ul>
-				</div>
-			 </nav>
-			 <div style="min-width:auto;">
-			 <img id="campusPic" src="static/img/img1.jpg" alt="Myki locations on campus" />
-			 </div>
-		     </div>
-		</div>
+		
+		
 	  </div>
 	</div>
 <!-- FOOTER SPACER -->
 <div style="position:absolute;width:99.5%;height:4.5%;">
 &nbsp;
 </div>
+<div id="stickybar" style="position:fixed;color: white;right:0;left:0;visibility:hidden;background:#2D251A;z-index: 10000;width:auto;font-weight:bold;">
+		<div class ="navbar-inverse" style="text-align:center; padding:7.5px; background-color: #31281c;">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
+		<div class="row" style="margin-left:10px; margin-top:10px;">
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">SERVICES</h4>
+				<ul style="list-style: none;">
+					<li><a href="/glider" style="color: white;">Next Glider</a></li>
+				</ul>
+			</div> 
+			<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
+				<h4 style="color:#FF9900;">INFORMATION</h4>
+				<ul style="list-style: none;">
+					<li><a href="https://lms.latrobe.edu.au/login/index.php" style="color: white;">LMS</a></li>
+				</ul>
+			</div>
+			
+		</div> 
+	</div> 
 
-<div id="stickybar" style="position:fixed;color: white;padding: 5px;right:0;left:0;visibility:hidden;background: #303030;z-index: 10000;width:auto;font-weight:bold;">
-<div style="text-align:center;padding-top:3px">Copyright (c) 2016 <a href="http://www.latrobe.edu.au" style="color:white;text-decoration:underline;">La Trobe University</a></div>
-
-<div class="row" style="margin-left:10px;margin-top:10px">
-
-<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-	<b>Services</b>
-	<ul>
-	<li><a href="#" style="color:white;text-decoration:underline;">Plan Journey</a></li>
-	<li><a href="#" style="color:white;text-decoration:underline;">Next 5</a></li>
-	<li><a href="#" style="color:white;text-decoration:underline;">Next Glider</a></li>
-	<li><a href="#" style="color:white;text-decoration:underline;">Campus Map</a></li>
-	<li><a href="#" style="color:white;text-decoration:underline;">Kiosk</a></li>
-	</ul>
-</div>
-
-<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-	<b>Information</b>
-	<ul>
-	<li><a href="#" style="color:white;text-decoration:underline;">Myki for Students</a></li>
-	</ul>
-</div>
-
-<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-	<b>About</b>
-	<ul>
-	<li><a href="#" style="color:white;text-decoration:underline;">About Us</a></li>
-	<li><a href="#" style="color:white;text-decoration:underline;">Contact Us</a></li>
-	</ul>
-</div>
-
-<div class="col-xs-6 col-sm-3 col-md-3" style="float:left">
-	<ul><br/>
-	<li><a href="#" style="color:white;text-decoration:underline;">Admin</a></li>
-	</ul>
-</div>
-
-</div>
-
-</div>
 	</body>
 </html>
