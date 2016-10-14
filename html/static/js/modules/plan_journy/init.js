@@ -1,3 +1,4 @@
+//initalize the journey planer
 define([
     'jquery',
     'angular',
@@ -7,7 +8,7 @@ define([
     angular,
     app
 ) {
-
+//show journey using the google api journey planner
         $(document).ready(function () {
 
             function initMap() {
@@ -32,7 +33,7 @@ define([
                     $('#showJourney').click();
                 }
             });
-
+//switch between starting point and destination
             function onSwitchHandler() {
                 var startContent = $('#startPanel').html();
                 var endContent = $('#endPanel').html();
@@ -44,7 +45,7 @@ define([
                 $("#end").attr("id", "start");
                 $('#showJourney').click();
             }
-
+//calculate the route using google transit api and showing it on map
             function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 $('#error').addClass('hide');
                 directionsService.route({
