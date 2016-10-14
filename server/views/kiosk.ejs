@@ -5,11 +5,13 @@
     <!-- Navigation -->
     <% include partials/menu %>
 
+	<div class="splash"><div class="splash-wrapper"><img src="static/img/logo_big.png"><br><br> Loading...</div></div>
+	
 	<div class="main-wrapper">
 		<textarea style="display:none" id="schema">
 
 	<!-- Start of bus block -->
-	<div class="col-sm-12 col-lg-12 box-timetable-right big-box {TRANS_TYPE} {FAV_CLASS}" data-full-from="{FULL_FROM}" data-full-to="{FULL_TO}">
+	<div class="col-sm-12 col-lg-12 box-timetable-right big-box {TRANS_TYPE} {FAV_CLASS}" data-waypoints='{TRANS_WAYPOINTS}' data-mode="{TRANS_TYPE}" data-time="{TRANS_TIME}" data-full-from="{FULL_FROM}" data-full-to="{FULL_TO}">
 		<a href="#" onClick class="add-to-fav" data-unique-name="{UNIQUE_NAME}"><i class="fa {FAV_ICON}" aria-hidden="true"></i></a>
 		<div class="col-xs-12 col-sm-5 col-lg-5 no-padding ">
 
@@ -28,9 +30,7 @@
 		</div>
 
 		<div class="col-xs-12 col-sm-7 col-lg-7">
-			<a class="gotoMap" href="#">
 			{TIME}
-			</a>
 		</div>
 	</div>
 	<!-- End of bus block -->

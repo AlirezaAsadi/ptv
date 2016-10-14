@@ -132,10 +132,10 @@ define([
                     var itm = items[i];
 
                     // disruptions
-                    if(itm.disruptions){
-                        for(var iDistruption = 0; iDistruption < itm.disruptions.length; iDistruption++){
+                    if (itm.disruptions) {
+                        for (var iDistruption = 0; iDistruption < itm.disruptions.length; iDistruption++) {
                             $('body').addClass('has-distruption');
-                            if(disruptions.indexOf(itm.disruptions[iDistruption].title) === -1){
+                            if (disruptions.indexOf(itm.disruptions[iDistruption].title) === -1) {
                                 distuptionId++;
                                 disruptions += '<i class="fa fa-exclamation-circle disruption-icon" aria-hidden="true"></i> ' + distuptionId + '- ' + itm.disruptions[iDistruption].title + ". &nbsp;&nbsp;&nbsp;";
                             }
@@ -160,16 +160,17 @@ define([
                         var stop = itm.stops[j];
                         var strTimeString = (Math.floor(stop.time) <= 0) ? "Now" : (Math.floor(stop.time) + ' Mins');
                         var extra_icon = (Math.floor(stop.time) < 5) ? ' <span class="glyphicon glyphicon-time warning-icon" aria-hidden="true" ></span>' : '';
-                        stops += extra_icon + '<div class="' + itm.transport_type + '-time-item ' + ((extra_icon === '') ? '' : 'warning') + '">' + getWords(stop.name.replace("La Trobe Uni ", "").replace("La Trobe University", "")) + ' : <strong>' + strTimeString + '</strong></div>';
+                        stops += extra_icon + '<a class="gotoMap" href="#" data-time="' + stop.dep + '"><div class="' + itm.transport_type + '-time-item ' + ((extra_icon === '') ? '' : 'warning') + '">' + getWords(stop.name.replace("La Trobe Uni ", "").replace("La Trobe University", "")) + ' : <strong>' + strTimeString + '</strong></div></a>';
                     }
 
                     var disruption_text = itm.disruptions.length === 0 ? '' : '<i class="fa fa-exclamation-circle disruption-icon" aria-hidden="true"></i> ';
                     sHTML = sHTML.replace(/\{CODE\}/g, (itm.dest_code + disruption_text));
                     sHTML = sHTML.replace(/\{TITLE\}/g, (itm.dest_name));
+                    sHTML = sHTML.replace(/\{TRANS_TYPE\}/g, itm.transport_type);
                     sHTML = sHTML.replace("{INFO}", "");
                     sHTML = sHTML.replace("{TIME}", stops);
+                    sHTML = sHTML.replace("{TRANS_WAYPOINTS}", JSON.stringify(itm.waypoints));
                     sHTML = sHTML.replace("{UNIQUE_NAME}", (itm.dest_code + '-' + itm.dest_name.replace('to ', '')));
-                    sHTML = sHTML.replace("{TRANS_TYPE}", itm.transport_type);
 
                     sHTML = sHTML.replace("{FULL_FROM}", itm.location_from);
                     sHTML = sHTML.replace("{FULL_TO}", itm.location_to);
@@ -201,6 +202,7 @@ define([
             $.post("/services/kiosk/getData", "", function (data) {
                 if (data) {
                     window.data = JSON.stringify(data);
+                    $('.splash').hide();
                     bindData(window.data);
                 }
             });
@@ -246,10 +248,13 @@ define([
         $(document).on('click', '.gotoMap', function () {
             var from = $(this).closest('.big-box').attr('data-full-from');
             var to = $(this).closest('.big-box').attr('data-full-to');
+            var waypoints = JSON.parse($(this).closest('.big-box').attr('data-waypoints'));
+            var time = $(this).attr('data-time');
+            var mode = $(this).closest('.big-box').attr('data-mode');
             var trans_code = $(this).closest('.big-box').find('.trans_code').text();
             var trans_name = $(this).closest('.big-box').find('.trans_title').text();
             $('.header .map span').html(trans_code + " - " + trans_name);
-            switchToMap(from, to);
+            switchToMap(from, to, time, mode, waypoints);
         });
 
         var switchToTable = function () {
@@ -258,7 +263,7 @@ define([
             $('.header .map').addClass('hidden');
             $('.header .clock').removeClass('hidden');
         };
-        var switchToMap = function (origin, destination) {
+        var switchToMap = function (origin, destination, time, mode, waypoints) {
             $('.map-container').removeClass('hidden').css('height', ($(window).height() - $('.header').height() - $('.footer-row').height()) + 'px');
             $('.main-content').addClass('hidden');
             $('.header .map').removeClass('hidden');
@@ -272,11 +277,20 @@ define([
             });
             directionsDisplay.setMap(map);
             var waypts = [];
-
+            
             directionsService.route({
                 origin: origin,
                 destination: destination,
-                travelMode: 'TRANSIT'
+                travelMode: 'TRANSIT',
+                provideRouteAlternatives: true,
+                optimizeWaypoints: true,
+                transitOptions: {
+                    departureTime: new Date(parseInt(time) - (30 * 1000)),
+                    modes: [mode.toUpperCase()],
+                    routingPreference: 'LESS_WALKING'
+                },
+                waypoints: waypoints,
+                region: 'AU'
             }, function (response, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
